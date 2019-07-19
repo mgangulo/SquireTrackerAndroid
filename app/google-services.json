@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "456693379648",
+    "firebase_url": "https://mabinogi-squire-tracker.firebaseio.com",
+    "project_id": "mabinogi-squire-tracker",
+    "storage_bucket": "mabinogi-squire-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456693379648:android:b62ea4c7f1526bd0",
+        "android_client_info": {
+          "package_name": "com.mabinogifanmade.squiretracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456693379648-evuh4e1ren9cs7vstogmldpocc46rb3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpoBktYd_2t1KfXTrskavPQ24GVTaw868"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456693379648-evuh4e1ren9cs7vstogmldpocc46rb3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
