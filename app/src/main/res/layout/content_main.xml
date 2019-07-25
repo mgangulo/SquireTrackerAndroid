@@ -9,6 +9,8 @@
         tools:showIn="@layout/app_bar_main"
         tools:context=".MainActivity">
 
+    <include layout="@layout/mini_squire_item"></include>
+
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
