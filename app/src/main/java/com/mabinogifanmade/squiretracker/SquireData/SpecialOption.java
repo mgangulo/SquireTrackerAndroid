@@ -1,4 +1,4 @@
-package com.mabinogifanmade.squiretracker.Model;
+package com.mabinogifanmade.squiretracker.SquireData;
 
 public class SpecialOption {
     private String convoText;
