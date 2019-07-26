@@ -9,19 +9,19 @@ enum class Squire : SquireCommon {
         override val specialOptions: HashMap<Int, ArrayList<SpecialOption>> by lazy {
             hashMapOf(
                 2 to arrayListOf(
-                    SpecialOption("Playing","Awkward",2f),
-                    SpecialOption("Fashion","Serious",33.3f),
-                    SpecialOption("Dating","Fun",80f)
+                    SpecialOption(Conversation.PLAYING,Conversation.AWKWARD,2f),
+                    SpecialOption(Conversation.FASHION,Conversation.SERIOUS,33.3f),
+                    SpecialOption(Conversation.DATING,Conversation.FUN,80f)
                 ),
                 3 to arrayListOf(
-                    SpecialOption("Playing","Serious",15f),
-                    SpecialOption("Training","Awkward",50f),
-                    SpecialOption("Mission","Fun",80f)
+                    SpecialOption(Conversation.PLAYING,Conversation.SERIOUS,15f),
+                    SpecialOption(Conversation.TRAINING,Conversation.AWKWARD,50f),
+                    SpecialOption(Conversation.MISSION,Conversation.FUN,80f)
                 ),
                 4 to arrayListOf(
-                    SpecialOption("Training","Fun",15f),
-                    SpecialOption("Fashion","Serious",45f),
-                    SpecialOption("Dating","Serious",80f)
+                    SpecialOption(Conversation.TRAINING,Conversation.FUN,15f),
+                    SpecialOption(Conversation.FASHION,Conversation.SERIOUS,45f),
+                    SpecialOption(Conversation.DATING,Conversation.SERIOUS,80f)
                 )
             )
         }
@@ -47,24 +47,24 @@ enum class Squire : SquireCommon {
         override val specialOptions: HashMap<Int, ArrayList<SpecialOption>> by lazy {
             hashMapOf(
                 1 to arrayListOf(
-                    SpecialOption("Training","Playing",2.9f),
-                    SpecialOption("Dating","Mission",28.6f),
-                    SpecialOption("Training","Cooking",71.4f)
+                    SpecialOption(Conversation.TRAINING,Conversation.PLAYING,2.9f),
+                    SpecialOption(Conversation.DATING,Conversation.MISSION,28.6f),
+                    SpecialOption(Conversation.TRAINING,Conversation.COOKING,71.4f)
                 ),
                 2 to arrayListOf(
-                    SpecialOption("Fashion","Training",6.7f),
-                    SpecialOption("Training","Playing",33.3f),
-                    SpecialOption("Mission","Cooking",80f)
+                    SpecialOption(Conversation.FASHION,Conversation.TRAINING,6.7f),
+                    SpecialOption(Conversation.TRAINING,Conversation.PLAYING,33.3f),
+                    SpecialOption(Conversation.MISSION,Conversation.COOKING,80f)
                 ),
                 3 to arrayListOf(
-                    SpecialOption("Cooking","Mission",20f),
-                    SpecialOption("Cooking","Training",40f),
-                    SpecialOption("Playing","Mission",80f)
+                    SpecialOption(Conversation.COOKING,Conversation.MISSION,20f),
+                    SpecialOption(Conversation.COOKING,Conversation.TRAINING,40f),
+                    SpecialOption(Conversation.PLAYING,Conversation.MISSION,80f)
                 ),
                 4 to arrayListOf(
-                    SpecialOption("Dating","Playing",10f),
-                    SpecialOption("Cooking","Training",40f),
-                    SpecialOption("Training","Cooking",80f)
+                    SpecialOption(Conversation.DATING,Conversation.PLAYING,10f),
+                    SpecialOption(Conversation.COOKING,Conversation.TRAINING,40f),
+                    SpecialOption(Conversation.TRAINING,Conversation.COOKING,80f)
                 )
             )
         }
@@ -90,19 +90,19 @@ enum class Squire : SquireCommon {
         override val specialOptions: HashMap<Int, ArrayList<SpecialOption>> by lazy {
             hashMapOf(
                 2 to arrayListOf(
-                    SpecialOption("Training",0.7f),
-                    SpecialOption("Playing",46.7f),
-                    SpecialOption("Cooking",83.3f)
+                    SpecialOption(Conversation.TRAINING,0.7f),
+                    SpecialOption(Conversation.PLAYING,46.7f),
+                    SpecialOption(Conversation.COOKING,83.3f)
                 ),
                 3 to arrayListOf(
-                    SpecialOption("Dating",25f),
-                    SpecialOption("Training",50f),
-                    SpecialOption("Mission",80f)
+                    SpecialOption(Conversation.DATING,25f),
+                    SpecialOption(Conversation.TRAINING,50f),
+                    SpecialOption(Conversation.MISSION,80f)
                 ),
                 4 to arrayListOf(
-                    SpecialOption("Training",25.5f),
-                    SpecialOption("Playing",50f),
-                    SpecialOption("Cooking",80f)
+                    SpecialOption(Conversation.TRAINING,25.5f),
+                    SpecialOption(Conversation.PLAYING,50f),
+                    SpecialOption(Conversation.COOKING,80f)
                 )
             )
         }
@@ -126,19 +126,19 @@ enum class Squire : SquireCommon {
         override val specialOptions: HashMap<Int, ArrayList<SpecialOption>> by lazy {
             hashMapOf(
                 2 to arrayListOf(
-                    SpecialOption("Training",0.7f),
-                    SpecialOption("Playing",53.3f),
-                    SpecialOption("Mission",90f)
+                    SpecialOption(Conversation.TRAINING,0.7f),
+                    SpecialOption(Conversation.PLAYING,53.3f),
+                    SpecialOption(Conversation.MISSION,90f)
                 ),
                 3 to arrayListOf(
-                    SpecialOption("Training",15f),
-                    SpecialOption("Training",40f),
-                    SpecialOption("Mission",90f)
+                    SpecialOption(Conversation.TRAINING,15f),
+                    SpecialOption(Conversation.TRAINING,40f),
+                    SpecialOption(Conversation.MISSION,90f)
                 ),
                 4 to arrayListOf(
-                    SpecialOption("Dating",10f),
-                    SpecialOption("Training",56.7f),
-                    SpecialOption("Playing",93.3f)
+                    SpecialOption(Conversation.DATING,10f),
+                    SpecialOption(Conversation.TRAINING,56.7f),
+                    SpecialOption(Conversation.PLAYING,93.3f)
                 )
             )
         }
