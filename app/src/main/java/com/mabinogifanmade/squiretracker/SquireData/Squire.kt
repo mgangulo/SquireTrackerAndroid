@@ -4,22 +4,21 @@ enum class Squire : SquireCommon {
 
     DAI {
         override val squireName: String
-            get() ="Dai"
+            get() = "Dai"
 
         override val sequenceHint: String
-            get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+            get() = "SGSGASSASASAAGAGSSSASSSSGSSSAGSSAASGASGASGSGGGAGASSGGSSGAAAASASAASASASAGSAAAGSSAGGASSGSSGAGSAGASG"
 
-        override fun hasHints(): Boolean {
-            return true
-        }
+        override val hasHint: Boolean
+            get() = true
 
-        override fun sequenceConvo(): String {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
 
-        override fun imageSquire(): Int {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override val sequenceConvo: String
+            get()="PDPFTPPPPCPTPDMDFPPCFPPFFCFPCMDPCPFFCPFTPFPDMDPDPFCFFPFTTPPPPPFTCFPFPFPTPMCPTPFPMDTDFMFDFMFCPFCDF"
+
+        override val imageSquire: Int
+            get()=0
+
     },
 
     EIRLYS {
@@ -27,19 +26,17 @@ enum class Squire : SquireCommon {
             get() = "Eirlys"
 
         override val sequenceHint: String
-            get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+            get() = "FFFMTCDFPPPMDCFFPTPPMPCFPMDDTTCCFMDPPTTCPTCMPDTTPDFCPCCPMFMFMMFCFCFDFCDFMFDDMTMCFCMDTTDDMDDDPDFCT"
 
-        override fun hasHints(): Boolean {
-            return true;
-        }
+        override val hasHint: Boolean
+            get() = true
 
-        override fun sequenceConvo(): String {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
 
-        override fun imageSquire(): Int {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override val sequenceConvo: String
+            get()="MPCPMTMMTMTFTTCDTFMTDFDDCTCPFFMMMTTTMCMMCPPTCPCCMCTMMTTDDMTCPFTTCMTMMMPTTPTMTMTFMTCMFPTTCCMTCMMDC"
+
+        override val imageSquire: Int
+            get()=0
 
     },
 
@@ -48,19 +45,17 @@ enum class Squire : SquireCommon {
             get() = "Elsie"
 
         override val sequenceHint: String
-            get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+            get() = ""
 
-        override fun hasHints(): Boolean {
-            return false
-        }
+        override val hasHint: Boolean
+            get() = false
 
-        override fun sequenceConvo(): String {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
 
-        override fun imageSquire(): Int {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override val sequenceConvo: String
+            get()="CPFDFPDDPMTPDPTPMCPPPDPCPDMFPPPDCDTDPCMTPPMDCDCPPDPTDPMPPPFDPPMTDDPPPFPTCPFPFDMPPDTPPFDMMFFFFDPPM"
+
+        override val imageSquire: Int
+            get()=0
     },
 
     KAOUR {
@@ -68,19 +63,17 @@ enum class Squire : SquireCommon {
             get() = "Kaour"
 
         override val sequenceHint: String
-            get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+            get() = ""
 
-        override fun hasHints(): Boolean {
-            return false
-        }
+        override val hasHint: Boolean
+            get() = false
 
-        override fun sequenceConvo(): String {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
 
-        override fun imageSquire(): Int {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override val sequenceConvo: String
+            get()="PPTCPDTCDCMMFDCFDMMMFDMFPMFTDMMPDMFMTTTPTDFCTPFDPDCMPFCCCFFPPTFTMTCDFTPFDTMMCMMFCCTFCDMFDCDFDTMCT"
+
+        override val imageSquire: Int
+            get()=0
 
     }
 }
