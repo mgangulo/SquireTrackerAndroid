@@ -11,6 +11,9 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import androidx.recyclerview.widget.RecyclerView
+import com.mabinogifanmade.squiretracker.adapters.MiniSquireAdapter
+import com.mabinogifanmade.squiretracker.squiredata.Squire
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,11 +24,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
@@ -35,6 +33,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+        val squireList:ArrayList<Squire> = arrayListOf(Squire.DAI,Squire.EIRLYS,Squire.ELSIE,Squire.KAOUR)
+        val recyclerView: RecyclerView = findViewById(R.id.squireRecyclerView)
+        recyclerView.adapter = MiniSquireAdapter(squireList,this)
     }
 
     override fun onBackPressed() {
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+        //menuInflater.inflate(R.menu.main, menu)
         return true
     }
 

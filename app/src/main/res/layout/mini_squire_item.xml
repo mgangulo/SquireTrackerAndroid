@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/side_margin"
-    android:layout_marginEnd="@dimen/side_margin">
+    android:layout_marginEnd="@dimen/side_margin"
+    android:layout_marginTop="@dimen/top_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -85,14 +86,16 @@
             android:id="@+id/sequenceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="aaa"/>
+            android:text="aaa"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:id="@+id/hintText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="aaa"
-            android:layout_below="@id/sequenceText"/>
+            android:layout_below="@id/sequenceText"
+            android:layout_centerHorizontal="true"/>
         </RelativeLayout>
 
         <ImageButton

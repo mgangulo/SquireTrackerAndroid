@@ -14,7 +14,7 @@ import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context) :
     RecyclerView.Adapter<MiniViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MiniViewHolder {
-        return MiniViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.mini_squire_item, parent));
+        return MiniViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.mini_squire_item, parent,false));
     }
 
     override fun getItemCount(): Int {
@@ -23,7 +23,7 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context)
 
     override fun onBindViewHolder(holder: MiniViewHolder, position: Int) {
         val squire: Squire = squireList[position]
-        holder.nameSquire.text = squire.name
+        holder.nameSquire.text = squire.squireName
         holder.sequence.text = context.getString(
             R.string.number_sequence,
             1, ConversationUtils.translateAbv(squire.sequenceConvo[0]))
