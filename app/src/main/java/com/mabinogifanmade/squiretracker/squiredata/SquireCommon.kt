@@ -1,4 +1,4 @@
-package com.mabinogifanmade.squiretracker.SquireData
+package com.mabinogifanmade.squiretracker.squiredata
 
 interface SquireCommon {
     val squireName: String

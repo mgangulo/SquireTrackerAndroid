@@ -1,4 +1,4 @@
-package com.mabinogifanmade.squiretracker.SquireData
+package com.mabinogifanmade.squiretracker.squiredata
 
 class Conversation {
     companion object{
