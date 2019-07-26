@@ -8,4 +8,6 @@
     <dimen name="side_margin">15dp</dimen>
     <dimen name="top_margin">18dp</dimen>
     <dimen name="squire_item_height">120dp</dimen>
+    <dimen name="padding_button">8dp</dimen>
+
 </resources>
