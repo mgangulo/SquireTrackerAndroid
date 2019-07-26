@@ -1,7 +1,9 @@
 package com.mabinogifanmade.squiretracker.SquireData
 
-class SpecialOption {
-    var convoText: String? = null
-    var hint: String? = null
-    var percent: Float = 0.toFloat()
+class SpecialOption(convoText: String, hint: String, percent: Float) {
+    var convoText: String? = convoText
+    var hint: String? = hint
+    var percent: Float = percent
+
+    constructor(convoText: String, percent: Float):this(convoText,"",percent){}
 }
