@@ -40,7 +40,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:text="aaa"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:background="@color/black_transparent"
+                android:textColor="@color/gray"/>
         </FrameLayout>
 
         <ImageButton
@@ -92,6 +94,7 @@
             android:text="aaa"
             android:layout_below="@id/sequenceText"/>
         </RelativeLayout>
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
