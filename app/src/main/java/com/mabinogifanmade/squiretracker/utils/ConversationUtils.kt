@@ -4,7 +4,7 @@ import com.mabinogifanmade.squiretracker.squiredata.Conversation
 
 class ConversationUtils {
     companion object {
-        fun translateAbv(key: String): String {
+        fun translateAbv(key: Char): String {
             when (key) {
                 Conversation.AWKWARD_ABV -> return Conversation.AWKWARD
 
@@ -27,7 +27,7 @@ class ConversationUtils {
             return ""
         }
 
-        fun translateOption(key: String): String {
+        fun translateOption(key: String): Char {
             when (key) {
                 Conversation.AWKWARD -> return Conversation.AWKWARD_ABV
 
@@ -47,7 +47,7 @@ class ConversationUtils {
 
                 Conversation.FUN -> return Conversation.FUN_ABV
             }
-            return ""
+            return '-'
         }
     }
 }

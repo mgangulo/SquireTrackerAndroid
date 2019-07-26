@@ -13,4 +13,6 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="number_sequence">%1$d. %2$s</string>
+    <string name="hint">Hint: %1$s</string>
 </resources>
