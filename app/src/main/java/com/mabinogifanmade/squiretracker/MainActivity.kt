@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         daiToggle.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
                 if (!squireList.contains(Squire.DAI)){
-                   squireList.add(0,Squire.DAI);
+                   squireList.add(Squire.DAI);
                    recyclerView?.adapter?.notifyDataSetChanged()
                 }
             } else {
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         eirlysToggle.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
                 if (!squireList.contains(Squire.EIRLYS)){
-                    squireList.add(1,Squire.EIRLYS);
+                    squireList.add(Squire.EIRLYS);
                     recyclerView?.adapter?.notifyDataSetChanged()
                 }
             } else {
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         elsieToggle.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
                 if (!squireList.contains(Squire.ELSIE)){
-                    squireList.add(2,Squire.ELSIE);
+                    squireList.add(Squire.ELSIE)
                     recyclerView?.adapter?.notifyDataSetChanged()
                 }
             } else {
@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         kaourToggle.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
                 if (!squireList.contains(Squire.KAOUR)){
-                    squireList.add(3,Squire.KAOUR);
+                    squireList.add(Squire.KAOUR);
                     recyclerView?.adapter?.notifyDataSetChanged()
                 }
             } else {
