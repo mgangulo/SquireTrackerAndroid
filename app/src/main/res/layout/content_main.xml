@@ -9,17 +9,85 @@
         tools:showIn="@layout/app_bar_main"
         tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_marginTop="@dimen/side_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/listOption"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintBottom_toTopOf="@id/squireRecyclerView"
+        android:layout_marginStart="@dimen/side_margin"
+        android:id="@+id/squireCheckGroup">
+
+        <me.rishabhkhanna.customtogglebutton.CustomToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textOn="Dai"
+            android:textOff="Dai"
+            app:radius="0dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            app:uncheckedColor= "@color/darker_gray"
+            app:checkedColor= "@color/darker_gray"
+            android:checked="true"
+            ></me.rishabhkhanna.customtogglebutton.CustomToggleButton>
+        <me.rishabhkhanna.customtogglebutton.CustomToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textOn="Eirlys"
+            android:textOff="Eirlys"
+            app:radius="0dp"
+            android:minHeight="0dp" android:minWidth="0dp"
+            app:uncheckedColor= "@color/darker_gray"
+            app:checkedColor= "@color/darker_gray"
+            android:checked="true"
+            android:layout_marginStart="-2dp"
+            ></me.rishabhkhanna.customtogglebutton.CustomToggleButton>
+        <me.rishabhkhanna.customtogglebutton.CustomToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textOn="Elsie"
+            android:textOff="Elsie"
+            app:radius="0dp"
+            android:minHeight="0dp" android:minWidth="0dp"
+            app:uncheckedColor= "@color/darker_gray"
+            app:checkedColor= "@color/darker_gray"
+            android:checked="true"
+            android:layout_marginStart="-2dp"
+            ></me.rishabhkhanna.customtogglebutton.CustomToggleButton>
+        <me.rishabhkhanna.customtogglebutton.CustomToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textOn="Kaour"
+            android:textOff="Kaour"
+            app:radius="0dp"
+            android:minHeight="0dp" android:minWidth="0dp"
+            app:uncheckedColor= "@color/darker_gray"
+            app:checkedColor= "@color/darker_gray"
+            android:checked="true"
+            android:layout_marginStart="-2dp"
+            ></me.rishabhkhanna.customtogglebutton.CustomToggleButton>
+    </LinearLayout>
+
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/squireRecyclerView"
         app:layout_constraintHorizontal_bias="1"
-        android:layout_marginEnd="@dimen/side_margin"
         android:orientation="horizontal"
         android:id="@+id/listOption"
-        android:layout_marginTop="@dimen/side_margin">
+        android:layout_marginTop="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/padding_button">
 
         <RadioButton
             android:id="@+id/gridRadioOption"
