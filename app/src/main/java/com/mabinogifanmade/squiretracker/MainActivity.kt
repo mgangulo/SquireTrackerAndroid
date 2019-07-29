@@ -11,9 +11,13 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.widget.RadioGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.adapters.MiniSquireAdapter
 import com.mabinogifanmade.squiretracker.squiredata.Squire
+import androidx.recyclerview.widget.GridLayoutManager
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,7 +39,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
         val squireList:ArrayList<Squire> = arrayListOf(Squire.DAI,Squire.EIRLYS,Squire.ELSIE,Squire.KAOUR)
         val recyclerView: RecyclerView = findViewById(R.id.squireRecyclerView)
-        recyclerView.adapter = MiniSquireAdapter(squireList,this)
+        recyclerView.adapter = MiniSquireAdapter(squireList,this,true)
+        val radioList: RadioGroup = findViewById(R.id.listOption)
+        radioList.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == R.id.gridRadioOption){
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                layoutManager.setSpanCount(2)
+                (recyclerView.adapter as MiniSquireAdapter).setViewType(true)
+            } else {
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                layoutManager.setSpanCount(1)
+                (recyclerView.adapter as MiniSquireAdapter).setViewType(false)
+            }
+        }
     }
 
     override fun onBackPressed() {
