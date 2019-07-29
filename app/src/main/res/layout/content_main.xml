@@ -9,14 +9,54 @@
         tools:showIn="@layout/app_bar_main"
         tools:context=".MainActivity">
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:orientation="horizontal"
+        android:id="@+id/linearListOption"
+        android:layout_marginTop="@dimen/side_margin">
+
+        <RadioButton
+            android:id="@+id/radio0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radio_grid"
+            android:checked="true"
+            android:padding="@dimen/padding_button"
+            android:text=""
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radio_list"
+            android:checked="false"
+            android:padding="@dimen/padding_button"
+            android:text=""
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+
+    </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:id="@+id/squireRecyclerView"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
-        android:layout_marginStart="@dimen/side_margin">
+        android:layout_marginStart="@dimen/side_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearListOption">
 
     </androidx.recyclerview.widget.RecyclerView>
 
