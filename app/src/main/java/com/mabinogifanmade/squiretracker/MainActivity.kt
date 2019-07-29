@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.adapters.MiniSquireAdapter
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import androidx.recyclerview.widget.GridLayoutManager
-
+import me.rishabhkhanna.customtogglebutton.CustomToggleButton
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -50,6 +50,62 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val layoutManager = recyclerView.layoutManager as GridLayoutManager
                 layoutManager.setSpanCount(1)
                 (recyclerView.adapter as MiniSquireAdapter).setViewType(false)
+            }
+        }
+        val daiToggle: CustomToggleButton = findViewById(R.id.toggleDai)
+        val eirlysToggle: CustomToggleButton = findViewById(R.id.toggleEirlys)
+        val elsieToggle: CustomToggleButton = findViewById(R.id.toggleElsie)
+        val kaourToggle: CustomToggleButton = findViewById(R.id.toggleKaour)
+        daiToggle.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                if (!squireList.contains(Squire.DAI)){
+                   squireList.add(0,Squire.DAI);
+                   recyclerView?.adapter?.notifyDataSetChanged()
+                }
+            } else {
+                if (squireList.contains(Squire.DAI)){
+                    squireList.remove(Squire.DAI);
+                    recyclerView?.adapter?.notifyDataSetChanged()
+                }
+            }
+        }
+        eirlysToggle.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                if (!squireList.contains(Squire.EIRLYS)){
+                    squireList.add(1,Squire.EIRLYS);
+                    recyclerView?.adapter?.notifyDataSetChanged()
+                }
+            } else {
+                if (squireList.contains(Squire.EIRLYS)){
+                    squireList.remove(Squire.EIRLYS);
+                    recyclerView?.adapter?.notifyDataSetChanged()
+                }
+            }
+        }
+        elsieToggle.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                if (!squireList.contains(Squire.ELSIE)){
+                    squireList.add(2,Squire.ELSIE);
+                    recyclerView?.adapter?.notifyDataSetChanged()
+                }
+            } else {
+                if (squireList.contains(Squire.ELSIE)){
+                    squireList.remove(Squire.ELSIE);
+                    recyclerView?.adapter?.notifyDataSetChanged()
+                }
+            }
+        }
+        kaourToggle.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                if (!squireList.contains(Squire.KAOUR)){
+                    squireList.add(3,Squire.KAOUR);
+                    recyclerView?.adapter?.notifyDataSetChanged()
+                }
+            } else {
+                if (squireList.contains(Squire.KAOUR)){
+                    squireList.remove(Squire.KAOUR);
+                    recyclerView?.adapter?.notifyDataSetChanged()
+                }
             }
         }
     }
