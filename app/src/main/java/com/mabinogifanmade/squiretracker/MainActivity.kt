@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
         val squireList:ArrayList<Squire> = arrayListOf(Squire.DAI,Squire.EIRLYS,Squire.ELSIE,Squire.KAOUR)
         val recyclerView: RecyclerView = findViewById(R.id.squireRecyclerView)
-        recyclerView.adapter = MiniSquireAdapter(squireList,this,true)
+        recyclerView.adapter = MiniSquireAdapter(squireList,this,false)
         val radioList: RadioGroup = findViewById(R.id.listOption)
         radioList.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId == R.id.gridRadioOption){

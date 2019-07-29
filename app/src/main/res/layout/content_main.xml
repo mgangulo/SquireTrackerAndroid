@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:button="@drawable/radio_grid"
-            android:checked="true"
+            android:checked="false"
             android:gravity="center"
             android:padding="@dimen/padding_button"
             android:text="" />
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:button="@drawable/radio_list"
-            android:checked="false"
+            android:checked="true"
             android:gravity="center"
             android:padding="@dimen/padding_button"
             android:text="" />
@@ -131,7 +131,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/listOption"
-        app:spanCount="2">
+        app:spanCount="1">
 
     </androidx.recyclerview.widget.RecyclerView>
 
