@@ -9,5 +9,6 @@
     <dimen name="top_margin">18dp</dimen>
     <dimen name="squire_item_height">120dp</dimen>
     <dimen name="padding_button">8dp</dimen>
+    <dimen name="grid_squire_item_height">170dp</dimen>
 
 </resources>
