@@ -35,5 +35,10 @@ class ShrdPrfsUtils {
             else
                 return null
         }
+
+        fun userDataExist(context:Context):Boolean{
+            val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            return prefs.contains(USER_DATA_KEY)
+        }
     }
 }
