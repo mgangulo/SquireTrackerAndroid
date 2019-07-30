@@ -12,19 +12,27 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.widget.CompoundButton
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.adapters.MiniSquireAdapter
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import androidx.recyclerview.widget.GridLayoutManager
+import com.mabinogifanmade.squiretracker.userdata.Character
+import com.mabinogifanmade.squiretracker.userdata.UserGeneral
+import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import me.rishabhkhanna.customtogglebutton.CustomToggleButton
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    var recyclerView:RecyclerView?=null
-    val squireList:ArrayList<Squire> = arrayListOf(Squire.DAI,Squire.EIRLYS,Squire.ELSIE,Squire.KAOUR)
+    var recyclerView: RecyclerView? = null
+    val squireList: ArrayList<Squire> = arrayListOf(Squire.DAI, Squire.EIRLYS, Squire.ELSIE, Squire.KAOUR)
+    var daiToggle: CustomToggleButton? = null
+    var eirlysToggle: CustomToggleButton? = null
+    var elsieToggle: CustomToggleButton? = null
+    var kaourToggle: CustomToggleButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,31 +49,71 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
-
         recyclerView = findViewById(R.id.squireRecyclerView)
-        recyclerView?.adapter = MiniSquireAdapter(squireList,this,false)
+        recyclerView?.adapter = MiniSquireAdapter(squireList, this, false)
+
         val radioList: RadioGroup = findViewById(R.id.listOption)
         radioList.setOnCheckedChangeListener { group, checkedId ->
-            if (checkedId == R.id.gridRadioOption){
-                val layoutManager = recyclerView?.layoutManager as GridLayoutManager
-                layoutManager?.setSpanCount(2)
-                (recyclerView?.adapter as MiniSquireAdapter).setViewType(true)
-            } else {
-                val layoutManager = recyclerView?.layoutManager as GridLayoutManager
-                layoutManager.setSpanCount(1)
-                (recyclerView?.adapter as MiniSquireAdapter).setViewType(false)
+            setRecyclerViewType(
+                when (checkedId) {
+                    R.id.gridRadioOption -> true
+                    else -> false
+                }
+            )
+        }
+        daiToggle = findViewById(R.id.toggleDai)
+        eirlysToggle = findViewById(R.id.toggleEirlys)
+        elsieToggle = findViewById(R.id.toggleElsie)
+        kaourToggle = findViewById(R.id.toggleKaour)
+
+        daiToggle?.setOnCheckedChangeListener(getSquireToggleListener(Squire.DAI))
+        eirlysToggle?.setOnCheckedChangeListener(getSquireToggleListener(Squire.EIRLYS))
+        elsieToggle?.setOnCheckedChangeListener(getSquireToggleListener(Squire.ELSIE))
+        kaourToggle?.setOnCheckedChangeListener(getSquireToggleListener(Squire.KAOUR))
+    }
+
+    fun setUserDataOnView() {
+        setDummyData()
+        val user: UserGeneral? = ShrdPrfsUtils.getUserData(this)
+        if (user != null) {
+            val currentChar: Character = user.characters.get(0)
+            val gridRadio: RadioButton = findViewById(R.id.gridRadioOption)
+            gridRadio.isChecked = user.prefersGrid
+            val listRadio: RadioButton = findViewById(R.id.listRadioOption)
+            listRadio.isChecked = !user.prefersGrid
+            for (i in (squireList.size-1) downTo 0) {
+                val squire:Squire = squireList.get(i)
+                if (!currentChar.squiresActive.contains(squire.id)) {
+                    squireList.remove(squire)
+                    if (squire.equals(Squire.DAI)){
+                        daiToggle?.isChecked = false
+                    }
+                    if (squire.equals(Squire.EIRLYS)){
+                        eirlysToggle?.isChecked = false
+                    }
+                    if (squire.equals(Squire.ELSIE)){
+                        elsieToggle?.isChecked = false
+                    }
+                    if (squire.equals(Squire.KAOUR)){
+                        kaourToggle?.isChecked = false
+                    }
+                }
             }
         }
+    }
 
-        val daiToggle: CustomToggleButton = findViewById(R.id.toggleDai)
-        val eirlysToggle: CustomToggleButton = findViewById(R.id.toggleEirlys)
-        val elsieToggle: CustomToggleButton = findViewById(R.id.toggleElsie)
-        val kaourToggle: CustomToggleButton = findViewById(R.id.toggleKaour)
+    fun setDummyData() {
+            val user: UserGeneral = UserGeneral(Character("Alaguesia", "Alexina"))
+            val currentChar: Character = user.characters.get(0)
+            currentChar.squiresActive.remove(1)
+            currentChar.squiresActive.remove(3)
+            user.prefersGrid = true
+            ShrdPrfsUtils.saveUserData(this, user)
+    }
 
-        daiToggle.setOnCheckedChangeListener(getSquireToggleListener(Squire.DAI))
-        eirlysToggle.setOnCheckedChangeListener(getSquireToggleListener(Squire.EIRLYS))
-        elsieToggle.setOnCheckedChangeListener(getSquireToggleListener(Squire.ELSIE))
-        kaourToggle.setOnCheckedChangeListener(getSquireToggleListener(Squire.KAOUR))
+    override fun onStart() {
+        super.onStart()
+        setUserDataOnView()
     }
 
     override fun onBackPressed() {
@@ -120,7 +168,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    private fun getSquireToggleListener(squire:Squire):CompoundButton.OnCheckedChangeListener{
+    private fun getSquireToggleListener(squire: Squire): CompoundButton.OnCheckedChangeListener {
         return CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 if (!squireList.contains(squire)) {
@@ -135,5 +183,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
             }
         }
+    }
+
+    private fun setRecyclerViewType(isGrid: Boolean) {
+        val layoutManager = recyclerView?.layoutManager as GridLayoutManager
+        layoutManager?.setSpanCount(
+            when (isGrid) {
+                true -> 2
+                false -> 1
+            }
+        )
+        (recyclerView?.adapter as MiniSquireAdapter).setViewType(isGrid)
     }
 }
