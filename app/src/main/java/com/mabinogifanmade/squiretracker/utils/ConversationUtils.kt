@@ -1,6 +1,9 @@
 package com.mabinogifanmade.squiretracker.utils
 
+import android.content.Context
 import com.mabinogifanmade.squiretracker.squiredata.Conversation
+import com.mabinogifanmade.squiretracker.squiredata.Squire
+import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 
 class ConversationUtils {
     companion object {
@@ -48,6 +51,36 @@ class ConversationUtils {
                 Conversation.FUN -> return Conversation.FUN_ABV
             }
             return '-'
+        }
+
+        fun translateCurrentAbv(squire: Squire, isHint: Boolean, currentProgress:Int): String {
+            return translateAbvWithOffset(squire, isHint, currentProgress,0)
+        }
+
+        fun translateNextAbv(squire: Squire, isHint: Boolean, currentProgress:Int): String {
+            return translateAbvWithOffset(squire, isHint, currentProgress,1)
+        }
+
+        fun translatePreviousAbv(squire: Squire, isHint: Boolean, currentProgress:Int): String {
+            return translateAbvWithOffset(squire, isHint, currentProgress,-1)
+        }
+
+        fun translateAbvWithOffset(squire: Squire, isHint: Boolean,currentProgress:Int,
+                                   offset: Int): String {
+            val progress: Int = currentProgress + offset
+            val currentSequence: String =
+                when (isHint) {
+                    true -> squire.sequenceHint
+                    false -> squire.sequenceConvo
+                }
+            if (progress < currentSequence.length && progress >= 0) {
+                return translateAbv(currentSequence[progress])
+            } else if (progress<0){
+                return translateAbv(currentSequence[currentSequence.length-1])
+            } else{
+                return translateAbv(currentSequence[0])
+            }
+
         }
     }
 }

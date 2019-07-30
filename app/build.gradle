@@ -37,5 +37,7 @@ dependencies {
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'me.rishabhkhanna:CustomToggle:1.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.daimajia.easing:library:2.0@aar'
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
 }
 apply plugin: 'com.google.gms.google-services'

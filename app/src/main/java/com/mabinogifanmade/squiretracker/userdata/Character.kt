@@ -1,9 +1,20 @@
 package com.mabinogifanmade.squiretracker.userdata
 
+import com.mabinogifanmade.squiretracker.squiredata.Squire
+
 class Character(val charName: String, val server: String) {
-    var daiProgress: Int = 0
-    var eirlysProgress: Int = 0
-    var elsieProgress: Int = 0
-    var kaourProgress: Int = 0
-    val squiresActive: HashSet<Int> = hashSetOf(0,1,2,3)
+    val squireProgress: HashMap<Int,Int> =
+        hashMapOf(
+            Squire.DAI.id to 0,
+            Squire.EIRLYS.id to 0,
+            Squire.ELSIE.id to 0,
+            Squire.KAOUR.id to 0
+        )
+    val squiresActive: HashSet<Int> =
+        hashSetOf(
+            Squire.DAI.id,
+            Squire.EIRLYS.id,
+            Squire.ELSIE.id,
+            Squire.KAOUR.id
+        )
 }

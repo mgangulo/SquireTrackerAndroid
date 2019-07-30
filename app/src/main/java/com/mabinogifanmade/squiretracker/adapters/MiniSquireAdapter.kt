@@ -11,8 +11,9 @@ import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 
-class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var isGrid: Boolean) :
-    RecyclerView.Adapter<MiniViewHolder>() {
+class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var isGrid: Boolean,
+                        val squireProgressPreview: HashMap<Int, Int>) :
+    RecyclerView.Adapter<MiniSquireAdapter.MiniViewHolder>() {
     val GRID_TYPE: Int = 1;
     val LIST_TYPE: Int = 2;
 
@@ -45,15 +46,23 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context,
     override fun onBindViewHolder(holder: MiniViewHolder, position: Int) {
         val squire: Squire = squireList[position]
         holder.nameSquire.text = squire.squireName
+        setSquireText(holder,squire,squireProgressPreview.get(squire.id)!!)
+    }
+
+    private fun setSquireText(holder: MiniSquireAdapter.MiniViewHolder, squire: Squire,progress:Int) {
         holder.sequence.text = context.getString(
             R.string.number_sequence,
-            1, ConversationUtils.translateAbv(squire.sequenceConvo[0])
+            when (progress<squire.sequenceHint.length){
+                true -> progress+1
+                false -> 1
+            }
+            , ConversationUtils.translateCurrentAbv(squire,false,progress)
         )
         if (squire.hasHint) {
             holder.hint.visibility = View.VISIBLE
             holder.hint.text = context.getString(
                 R.string.hint,
-                ConversationUtils.translateAbv(squire.sequenceHint[0])
+                ConversationUtils.translateCurrentAbv(squire,true,progress)
             )
         } else {
             holder.hint.visibility = View.GONE
@@ -65,13 +74,24 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context,
         notifyDataSetChanged()
     }
 
+    inner class MiniViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val image: ImageView = itemView.findViewById(R.id.squireImage);
+        val nameSquire: TextView = itemView.findViewById(R.id.squireName);
+        val sequence: TextView = itemView.findViewById(R.id.sequenceText);
+        val hint: TextView = itemView.findViewById(R.id.hintText);
+        val next: ImageView = itemView.findViewById(R.id.next);
+        val previous: ImageView = itemView.findViewById(R.id.previous);
+
+        init {
+            next.setOnClickListener(View.OnClickListener {
+                val squire: Squire = squireList.get(adapterPosition)
+                setSquireText(this,squire,squireProgressPreview.get(squire.id)!!+1)
+
+            })
+        }
+
+    }
+
 }
 
 
-class MiniViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val image: ImageView = itemView.findViewById(R.id.squireImage);
-    val nameSquire: TextView = itemView.findViewById(R.id.squireName);
-    val sequence: TextView = itemView.findViewById(R.id.sequenceText);
-    val hint: TextView = itemView.findViewById(R.id.hintText);
-
-}

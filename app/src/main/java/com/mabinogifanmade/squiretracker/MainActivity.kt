@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+
         recyclerView = findViewById(R.id.squireRecyclerView)
-        recyclerView?.adapter = MiniSquireAdapter(squireList, this, false)
 
         val radioList: RadioGroup = findViewById(R.id.listOption)
         radioList.setOnCheckedChangeListener { group, checkedId ->
@@ -76,6 +76,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setDummyData()
         val user: UserGeneral? = ShrdPrfsUtils.getUserData(this)
         if (user != null) {
+            recyclerView?.adapter = MiniSquireAdapter(squireList, this, false,
+                user.getCurrentCharacter().squireProgress)
+
             val currentChar: Character = user.characters.get(0)
             val gridRadio: RadioButton = findViewById(R.id.gridRadioOption)
             gridRadio.isChecked = user.prefersGrid
@@ -103,14 +106,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun setDummyData() {
-        if (!ShrdPrfsUtils.userDataExist(this)) {
+        //if (!ShrdPrfsUtils.userDataExist(this)) {
             val user: UserGeneral = UserGeneral(Character("Alaguesia", "Alexina"))
             val currentChar: Character = user.characters.get(0)
             currentChar.squiresActive.remove(1)
             currentChar.squiresActive.remove(3)
             user.prefersGrid = true
             ShrdPrfsUtils.saveUserData(this, user)
-        }
+        //}
     }
 
     override fun onStart() {
