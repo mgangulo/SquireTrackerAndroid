@@ -81,20 +81,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             gridRadio.isChecked = user.prefersGrid
             val listRadio: RadioButton = findViewById(R.id.listRadioOption)
             listRadio.isChecked = !user.prefersGrid
-            for (i in (squireList.size-1) downTo 0) {
-                val squire:Squire = squireList.get(i)
+            for (i in (squireList.size - 1) downTo 0) {
+                val squire: Squire = squireList.get(i)
                 if (!currentChar.squiresActive.contains(squire.id)) {
                     squireList.remove(squire)
-                    if (squire.equals(Squire.DAI)){
+                    if (squire.equals(Squire.DAI)) {
                         daiToggle?.isChecked = false
                     }
-                    if (squire.equals(Squire.EIRLYS)){
+                    if (squire.equals(Squire.EIRLYS)) {
                         eirlysToggle?.isChecked = false
                     }
-                    if (squire.equals(Squire.ELSIE)){
+                    if (squire.equals(Squire.ELSIE)) {
                         elsieToggle?.isChecked = false
                     }
-                    if (squire.equals(Squire.KAOUR)){
+                    if (squire.equals(Squire.KAOUR)) {
                         kaourToggle?.isChecked = false
                     }
                 }
@@ -103,12 +103,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun setDummyData() {
+        if (!ShrdPrfsUtils.userDataExist(this)) {
             val user: UserGeneral = UserGeneral(Character("Alaguesia", "Alexina"))
             val currentChar: Character = user.characters.get(0)
             currentChar.squiresActive.remove(1)
             currentChar.squiresActive.remove(3)
             user.prefersGrid = true
             ShrdPrfsUtils.saveUserData(this, user)
+        }
     }
 
     override fun onStart() {
@@ -170,18 +172,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun getSquireToggleListener(squire: Squire): CompoundButton.OnCheckedChangeListener {
         return CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            val user: UserGeneral = ShrdPrfsUtils.getUserData(this)!!
             if (isChecked) {
                 if (!squireList.contains(squire)) {
                     squireList.add(squire)
+                    user.getCurrentCharacter().squiresActive.add(squire.id)
                     Collections.sort(squireList)
                     recyclerView?.adapter?.notifyDataSetChanged()
                 }
             } else {
                 if (squireList.contains(squire)) {
                     squireList.remove(squire)
+                    user.getCurrentCharacter().squiresActive.remove(squire.id)
                     recyclerView?.adapter?.notifyDataSetChanged()
                 }
             }
+            ShrdPrfsUtils.saveUserData(buttonView.context,user)
         }
     }
 
@@ -194,5 +200,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         )
         (recyclerView?.adapter as MiniSquireAdapter).setViewType(isGrid)
+        val user:UserGeneral? = ShrdPrfsUtils.getUserData(this)
+        user?.prefersGrid = isGrid
+        ShrdPrfsUtils.saveUserData(this,user!!)
     }
 }
