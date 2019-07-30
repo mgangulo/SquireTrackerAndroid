@@ -6,6 +6,9 @@ import kotlin.collections.HashMap
 enum class Squire : SquireCommon {
 
     DAI {
+        override val id: Int
+            get() = 0
+
         override val specialOptions: HashMap<Int, ArrayList<SpecialOption>> by lazy {
             hashMapOf(
                 2 to arrayListOf(
@@ -44,6 +47,9 @@ enum class Squire : SquireCommon {
     },
 
     EIRLYS {
+        override val id: Int
+            get() = 1
+
         override val specialOptions: HashMap<Int, ArrayList<SpecialOption>> by lazy {
             hashMapOf(
                 1 to arrayListOf(
@@ -87,6 +93,9 @@ enum class Squire : SquireCommon {
     },
 
     ELSIE {
+        override val id: Int
+            get() = 2
+
         override val specialOptions: HashMap<Int, ArrayList<SpecialOption>> by lazy {
             hashMapOf(
                 2 to arrayListOf(
@@ -123,6 +132,9 @@ enum class Squire : SquireCommon {
     },
 
     KAOUR {
+        override val id: Int
+            get() = 3
+
         override val specialOptions: HashMap<Int, ArrayList<SpecialOption>> by lazy {
             hashMapOf(
                 2 to arrayListOf(
