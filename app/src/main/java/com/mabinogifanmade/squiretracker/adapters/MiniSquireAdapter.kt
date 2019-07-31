@@ -9,7 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.squiredata.Squire
+import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
+import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 
 class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var isGrid: Boolean,
                         val squireProgressPreview: HashMap<Int, Int>) :
@@ -80,6 +82,7 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context,
         val hint: TextView = itemView.findViewById(R.id.hintText);
         val next: ImageView = itemView.findViewById(R.id.next);
         val previous: ImageView = itemView.findViewById(R.id.previous);
+        val nextAccept: ImageView = itemView.findViewById(R.id.nextAccept);
 
         init {
             next.setOnClickListener(View.OnClickListener {
@@ -91,6 +94,14 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context,
                 val squire: Squire = squireList.get(adapterPosition)
                 setSquireText(this,squire,squireProgressPreview.get(squire.id)!!-1)
 
+            })
+            nextAccept.setOnClickListener(View.OnClickListener {
+                val squire: Squire = squireList.get(adapterPosition)
+                val user:UserGeneral? = ShrdPrfsUtils.getUserData(context)
+                user?.getCurrentCharacter()?.incSquireProgress(squire)
+                ShrdPrfsUtils.saveUserData(context,user!!)
+                setSquireText(this,squire,
+                    user.getCurrentCharacter().squireProgress.get(squire.id)!!)
             })
         }
 

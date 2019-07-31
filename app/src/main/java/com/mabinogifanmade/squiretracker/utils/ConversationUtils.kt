@@ -80,9 +80,8 @@ class ConversationUtils {
 
         fun getNumberInSequence(progress: Int, lenght: Int): Int {
             return when {
-                (progress < lenght && progress > 0) -> progress
+                (progress in 1..(lenght - 1)) -> progress
                 (progress < 0) -> (lenght - 1)
-                (progress >= lenght) -> 0
                 else -> 0
             }
         }

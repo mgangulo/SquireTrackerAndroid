@@ -57,20 +57,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggleEirlys?.setOnCheckedChangeListener(getSquireToggleListener(Squire.EIRLYS))
         toggleElsie?.setOnCheckedChangeListener(getSquireToggleListener(Squire.ELSIE))
         toggleKaour?.setOnCheckedChangeListener(getSquireToggleListener(Squire.KAOUR))
+
+        user = ShrdPrfsUtils.getUserData(this)
+        squireRecyclerView?.adapter = MiniSquireAdapter(squireList, this, false,
+            user!!.getCurrentCharacter().squireProgress)
+
     }
 
     fun setUserDataOnView() {
-        setDummyData()
-        val user: UserGeneral? = ShrdPrfsUtils.getUserData(this)
+        //setDummyData()
         if (user != null) {
-            squireRecyclerView?.adapter = MiniSquireAdapter(squireList, this, false,
-                user.getCurrentCharacter().squireProgress)
 
-            val currentChar: Character = user.characters.get(0)
+            val currentChar: Character = user!!.characters.get(0)
             val gridRadio: RadioButton = findViewById(R.id.gridRadioOption)
-            gridRadio.isChecked = user.prefersGrid
+            gridRadio.isChecked = user!!.prefersGrid
             val listRadio: RadioButton = findViewById(R.id.listRadioOption)
-            listRadio.isChecked = !user.prefersGrid
+            listRadio.isChecked = !user!!.prefersGrid
             for (i in (squireList.size - 1) downTo 0) {
                 val squire: Squire = squireList.get(i)
                 if (!currentChar.squiresActive.contains(squire.id)) {
