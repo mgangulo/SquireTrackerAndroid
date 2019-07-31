@@ -1,8 +1,6 @@
 package com.mabinogifanmade.squiretracker
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -14,25 +12,19 @@ import android.view.Menu
 import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.adapters.MiniSquireAdapter
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mabinogifanmade.squiretracker.userdata.Character
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
-import me.rishabhkhanna.customtogglebutton.CustomToggleButton
+import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    var recyclerView: RecyclerView? = null
     val squireList: ArrayList<Squire> = arrayListOf(Squire.DAI, Squire.EIRLYS, Squire.ELSIE, Squire.KAOUR)
-    var daiToggle: CustomToggleButton? = null
-    var eirlysToggle: CustomToggleButton? = null
-    var elsieToggle: CustomToggleButton? = null
-    var kaourToggle: CustomToggleButton? = null
     var user:UserGeneral? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,8 +43,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navView.setNavigationItemSelectedListener(this)
 
-        recyclerView = findViewById(R.id.squireRecyclerView)
-
         val radioList: RadioGroup = findViewById(R.id.listOption)
         radioList.setOnCheckedChangeListener { group, checkedId ->
             setRecyclerViewType(
@@ -62,22 +52,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
             )
         }
-        daiToggle = findViewById(R.id.toggleDai)
-        eirlysToggle = findViewById(R.id.toggleEirlys)
-        elsieToggle = findViewById(R.id.toggleElsie)
-        kaourToggle = findViewById(R.id.toggleKaour)
 
-        daiToggle?.setOnCheckedChangeListener(getSquireToggleListener(Squire.DAI))
-        eirlysToggle?.setOnCheckedChangeListener(getSquireToggleListener(Squire.EIRLYS))
-        elsieToggle?.setOnCheckedChangeListener(getSquireToggleListener(Squire.ELSIE))
-        kaourToggle?.setOnCheckedChangeListener(getSquireToggleListener(Squire.KAOUR))
+        toggleDai?.setOnCheckedChangeListener(getSquireToggleListener(Squire.DAI))
+        toggleEirlys?.setOnCheckedChangeListener(getSquireToggleListener(Squire.EIRLYS))
+        toggleElsie?.setOnCheckedChangeListener(getSquireToggleListener(Squire.ELSIE))
+        toggleKaour?.setOnCheckedChangeListener(getSquireToggleListener(Squire.KAOUR))
     }
 
     fun setUserDataOnView() {
         setDummyData()
         val user: UserGeneral? = ShrdPrfsUtils.getUserData(this)
         if (user != null) {
-            recyclerView?.adapter = MiniSquireAdapter(squireList, this, false,
+            squireRecyclerView?.adapter = MiniSquireAdapter(squireList, this, false,
                 user.getCurrentCharacter().squireProgress)
 
             val currentChar: Character = user.characters.get(0)
@@ -90,16 +76,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 if (!currentChar.squiresActive.contains(squire.id)) {
                     squireList.remove(squire)
                     if (squire.equals(Squire.DAI)) {
-                        daiToggle?.isChecked = false
+                        toggleDai?.isChecked = false
                     }
                     if (squire.equals(Squire.EIRLYS)) {
-                        eirlysToggle?.isChecked = false
+                        toggleEirlys?.isChecked = false
                     }
                     if (squire.equals(Squire.ELSIE)) {
-                        elsieToggle?.isChecked = false
+                        toggleElsie?.isChecked = false
                     }
                     if (squire.equals(Squire.KAOUR)) {
-                        kaourToggle?.isChecked = false
+                        toggleKaour?.isChecked = false
                     }
                 }
             }
@@ -182,13 +168,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     squireList.add(squire)
                     user.getCurrentCharacter().squiresActive.add(squire.id)
                     Collections.sort(squireList)
-                    recyclerView?.adapter?.notifyDataSetChanged()
+                    squireRecyclerView?.adapter?.notifyDataSetChanged()
                 }
             } else {
                 if (squireList.contains(squire)) {
                     squireList.remove(squire)
                     user.getCurrentCharacter().squiresActive.remove(squire.id)
-                    recyclerView?.adapter?.notifyDataSetChanged()
+                    squireRecyclerView?.adapter?.notifyDataSetChanged()
                 }
             }
             ShrdPrfsUtils.saveUserData(buttonView.context,user)
@@ -196,14 +182,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setRecyclerViewType(isGrid: Boolean) {
-        val layoutManager = recyclerView?.layoutManager as GridLayoutManager
+        val layoutManager = squireRecyclerView?.layoutManager as GridLayoutManager
         layoutManager?.setSpanCount(
             when (isGrid) {
                 true -> 2
                 false -> 1
             }
         )
-        (recyclerView?.adapter as MiniSquireAdapter).setViewType(isGrid)
+        (squireRecyclerView?.adapter as MiniSquireAdapter).setViewType(isGrid)
         val user:UserGeneral? = ShrdPrfsUtils.getUserData(this)
         user?.prefersGrid = isGrid
         ShrdPrfsUtils.saveUserData(this,user!!)
