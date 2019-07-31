@@ -50,14 +50,13 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context,
     }
 
     private fun setSquireText(holder: MiniSquireAdapter.MiniViewHolder, squire: Squire,progress:Int) {
+        val index:Int = ConversationUtils.getNumberInSequence(progress,squire.sequenceConvo.length)
         holder.sequence.text = context.getString(
             R.string.number_sequence,
-            when (progress<squire.sequenceHint.length){
-                true -> progress+1
-                false -> 1
-            }
-            , ConversationUtils.translateCurrentAbv(squire,false,progress)
+            (index+1),
+            ConversationUtils.translateCurrentAbv(squire,false,progress)
         )
+        squireProgressPreview.put(squire.id,index)
         if (squire.hasHint) {
             holder.hint.visibility = View.VISIBLE
             holder.hint.text = context.getString(
@@ -86,6 +85,11 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context,
             next.setOnClickListener(View.OnClickListener {
                 val squire: Squire = squireList.get(adapterPosition)
                 setSquireText(this,squire,squireProgressPreview.get(squire.id)!!+1)
+
+            })
+            previous.setOnClickListener(View.OnClickListener {
+                val squire: Squire = squireList.get(adapterPosition)
+                setSquireText(this,squire,squireProgressPreview.get(squire.id)!!-1)
 
             })
         }

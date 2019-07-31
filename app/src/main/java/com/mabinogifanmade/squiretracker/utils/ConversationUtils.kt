@@ -53,34 +53,39 @@ class ConversationUtils {
             return '-'
         }
 
-        fun translateCurrentAbv(squire: Squire, isHint: Boolean, currentProgress:Int): String {
-            return translateAbvWithOffset(squire, isHint, currentProgress,0)
+        fun translateCurrentAbv(squire: Squire, isHint: Boolean, currentProgress: Int): String {
+            return translateAbvWithOffset(squire, isHint, currentProgress, 0)
         }
 
-        fun translateNextAbv(squire: Squire, isHint: Boolean, currentProgress:Int): String {
-            return translateAbvWithOffset(squire, isHint, currentProgress,1)
+        fun translateNextAbv(squire: Squire, isHint: Boolean, currentProgress: Int): String {
+            return translateAbvWithOffset(squire, isHint, currentProgress, 1)
         }
 
-        fun translatePreviousAbv(squire: Squire, isHint: Boolean, currentProgress:Int): String {
-            return translateAbvWithOffset(squire, isHint, currentProgress,-1)
+        fun translatePreviousAbv(squire: Squire, isHint: Boolean, currentProgress: Int): String {
+            return translateAbvWithOffset(squire, isHint, currentProgress, -1)
         }
 
-        fun translateAbvWithOffset(squire: Squire, isHint: Boolean,currentProgress:Int,
-                                   offset: Int): String {
+        fun translateAbvWithOffset(
+            squire: Squire, isHint: Boolean, currentProgress: Int,
+            offset: Int
+        ): String {
             val progress: Int = currentProgress + offset
             val currentSequence: String =
                 when (isHint) {
                     true -> squire.sequenceHint
                     false -> squire.sequenceConvo
                 }
-            if (progress < currentSequence.length && progress >= 0) {
-                return translateAbv(currentSequence[progress])
-            } else if (progress<0){
-                return translateAbv(currentSequence[currentSequence.length-1])
-            } else{
-                return translateAbv(currentSequence[0])
-            }
+            return translateAbv(currentSequence[getNumberInSequence(progress,currentSequence.length)])
+        }
 
+        fun getNumberInSequence(progress: Int, lenght: Int): Int {
+            return when {
+                (progress < lenght && progress > 0) -> progress
+                (progress < 0) -> (lenght - 1)
+                (progress >= lenght) -> 0
+                else -> 0
+            }
         }
     }
+
 }

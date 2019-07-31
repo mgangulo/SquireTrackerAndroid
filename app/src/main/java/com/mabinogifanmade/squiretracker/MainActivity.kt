@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var eirlysToggle: CustomToggleButton? = null
     var elsieToggle: CustomToggleButton? = null
     var kaourToggle: CustomToggleButton? = null
+    var user:UserGeneral? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
