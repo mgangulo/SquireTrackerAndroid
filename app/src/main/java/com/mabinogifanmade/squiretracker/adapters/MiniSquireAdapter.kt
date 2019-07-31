@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
@@ -83,6 +86,7 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context,
         val next: ImageView = itemView.findViewById(R.id.next);
         val previous: ImageView = itemView.findViewById(R.id.previous);
         val nextAccept: ImageView = itemView.findViewById(R.id.nextAccept);
+        val seqRelative: RelativeLayout = itemView.findViewById(R.id.sequenceRelative);
 
         init {
             next.setOnClickListener(View.OnClickListener {
@@ -100,6 +104,9 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context,
                 val user:UserGeneral? = ShrdPrfsUtils.getUserData(context)
                 user?.getCurrentCharacter()?.incSquireProgress(squire)
                 ShrdPrfsUtils.saveUserData(context,user!!)
+                YoYo.with(Techniques.FadeInRight)
+                    .duration(700)
+                    .playOn(seqRelative);
                 setSquireText(this,squire,
                     user.getCurrentCharacter().squireProgress.get(squire.id)!!)
             })
