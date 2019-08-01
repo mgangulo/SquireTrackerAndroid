@@ -12,6 +12,8 @@ import android.view.Menu
 import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.mabinogifanmade.squiretracker.adapters.MiniSquireAdapter
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import androidx.recyclerview.widget.GridLayoutManager
@@ -41,8 +43,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navView.setNavigationItemSelectedListener(this)
 
-        //TODO: Figure how navigation components work and replace this :D
-        supportFragmentManager.beginTransaction().replace(R.id.contentFragment,FragmentMain()).commit()
+        val navController = Navigation.findNavController(this,R.id.nav_host)
+        navView?.let { NavigationUI.setupWithNavController(it,navController) }
     }
 
     override fun onStart() {
