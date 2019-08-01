@@ -76,9 +76,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    override fun onSupportNavigateUp(): Boolean {
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val navController = Navigation.findNavController(this,R.id.nav_host)
+        return NavigationUI.navigateUp(navController,drawerLayout)
+    }
+
+     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
-        when (item.itemId) {
+        /*when (item.itemId) {
             R.id.nav_home -> {
                 // Handle the camera action
             }
@@ -99,7 +105,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        drawerLayout.closeDrawer(GravityCompat.START)
+        drawerLayout.closeDrawer(GravityCompat.START)*/
         return true
     }
+
+
 }

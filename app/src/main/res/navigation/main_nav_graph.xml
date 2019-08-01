@@ -7,5 +7,14 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.mabinogifanmade.squiretracker.FragmentMain"
-        android:label="FragmentMain" />
+        android:label="FragmentMain" >
+        <action
+            android:id="@+id/action_nav_home_to_charactersFragment"
+            app:destination="@id/nav_characters" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_characters"
+        android:name="com.mabinogifanmade.squiretracker.CharactersFragment"
+        android:label="fragment_characters"
+        tools:layout="@layout/fragment_characters" />
 </navigation>
