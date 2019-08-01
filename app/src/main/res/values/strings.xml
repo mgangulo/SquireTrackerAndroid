@@ -15,4 +15,7 @@
     <string name="menu_send">Send</string>
     <string name="number_sequence">%1$d. %2$s</string>
     <string name="hint">Hint: %1$s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
