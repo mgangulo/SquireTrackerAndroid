@@ -25,7 +25,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.setNavigationItemSelectedListener(this)
 
         val navController = Navigation.findNavController(this,R.id.nav_host)
         navView?.let { NavigationUI.setupWithNavController(it,navController) }
@@ -76,38 +75,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
+   /* override fun onSupportNavigateUp(): Boolean {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navController = Navigation.findNavController(this,R.id.nav_host)
         return NavigationUI.navigateUp(navController,drawerLayout)
     }
-
-     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        /*when (item.itemId) {
-            R.id.nav_home -> {
-                // Handle the camera action
-            }
-            R.id.nav_characters -> {
-
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_tools -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }
-        }
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        drawerLayout.closeDrawer(GravityCompat.START)*/
-        return true
-    }
+*/
 
 
 }

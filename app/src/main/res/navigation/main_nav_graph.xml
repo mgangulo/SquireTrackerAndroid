@@ -10,11 +10,23 @@
         android:label="FragmentMain" >
         <action
             android:id="@+id/action_nav_home_to_charactersFragment"
-            app:destination="@id/nav_characters" />
+            app:destination="@id/nav_characters"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right"
+            app:popEnterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_left" />
     </fragment>
     <fragment
         android:id="@+id/nav_characters"
         android:name="com.mabinogifanmade.squiretracker.CharactersFragment"
         android:label="fragment_characters"
-        tools:layout="@layout/fragment_characters" />
+        tools:layout="@layout/fragment_characters" >
+        <action
+            android:id="@+id/action_nav_characters_to_nav_home"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/exit_to_right"
+            app:popExitAnim="@anim/enter_from_left"
+            app:popUpTo="@id/nav_home" />
+    </fragment>
 </navigation>
