@@ -41,9 +41,9 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-
         val navController = Navigation.findNavController(this,R.id.nav_host)
         navView?.let { NavigationUI.setupWithNavController(it,navController) }
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
     }
 
     override fun onStart() {
@@ -75,12 +75,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-   /* override fun onSupportNavigateUp(): Boolean {
+    override fun onSupportNavigateUp(): Boolean {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navController = Navigation.findNavController(this,R.id.nav_host)
         return NavigationUI.navigateUp(navController,drawerLayout)
     }
-*/
+
 
 
 }
