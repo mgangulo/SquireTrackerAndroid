@@ -1,31 +1,23 @@
 package com.mabinogifanmade.squiretracker
 
 import android.os.Bundle
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.view.Menu
 import android.view.MenuItem
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.Menu
-import android.widget.CompoundButton
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
-import com.mabinogifanmade.squiretracker.adapters.MiniSquireAdapter
-import com.mabinogifanmade.squiretracker.squiredata.Squire
-import androidx.recyclerview.widget.GridLayoutManager
-import com.mabinogifanmade.squiretracker.userdata.Character
-import com.mabinogifanmade.squiretracker.userdata.UserGeneral
-import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
-import kotlinx.android.synthetic.main.content_main.*
-import java.util.*
-import kotlin.collections.ArrayList
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +34,10 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         val navController = Navigation.findNavController(this,R.id.nav_host)
-        navView?.let { NavigationUI.setupWithNavController(it,navController) }
-        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+        appBarConfiguration = AppBarConfiguration(navController.graph,drawerLayout)
+        navView.setupWithNavController(navController)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onStart() {
@@ -75,12 +69,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navController = Navigation.findNavController(this,R.id.nav_host)
-        return NavigationUI.navigateUp(navController,drawerLayout)
-    }
-
-
+   /* override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }*/
 
 }
