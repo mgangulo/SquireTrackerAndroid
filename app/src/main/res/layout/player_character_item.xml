@@ -64,7 +64,7 @@
                 android:src="@drawable/ic_edit"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/padding_button"
-                android:layout_marginEnd="@dimen/padding_button"/>
+                android:layout_marginEnd="@dimen/side_margin"/>
 
             <ImageButton
                 android:id="@+id/deleteButton"
@@ -75,7 +75,7 @@
                 android:layout_toEndOf="@id/editButton"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/padding_button"
-                android:layout_marginEnd="@dimen/padding_button"/>
+                android:layout_marginEnd="@dimen/side_margin"/>
 
             <Button
                 android:layout_width="wrap_content"
