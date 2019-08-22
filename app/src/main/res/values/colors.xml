@@ -6,4 +6,7 @@
     <color name="black_transparent">#B3000000</color>
     <color name="gray">#e0e0e0</color>
     <color name="darker_gray">#4C4B44</color>
+    <color name="accept_green">#2AD684</color>
+    <color name="cancel_red">#AA252B</color>
+    <color name="white">#FFFFFF</color>
 </resources>
