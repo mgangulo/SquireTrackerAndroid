@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.recyclerview.widget.GridLayoutManager
-import com.mabinogifanmade.squiretracker.adapters.MiniSquireAdapter
+import com.mabinogifanmade.squiretracker.adapters.SquireAdapter
 import com.mabinogifanmade.squiretracker.squiredata.Squire
-import com.mabinogifanmade.squiretracker.userdata.Character
+import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -47,7 +47,7 @@ class FragmentMain : Fragment() {
         toggleKaour?.setOnCheckedChangeListener(getSquireToggleListener(Squire.KAOUR))
 
         user = ShrdPrfsUtils.getUserData(context!!)
-        squireRecyclerView?.adapter = MiniSquireAdapter(squireList, context!!, false,
+        squireRecyclerView?.adapter = SquireAdapter(squireList, context!!, false,
             user!!.getCurrentCharacter().squireProgress)
         setUserDataOnView()
     }
@@ -55,7 +55,7 @@ class FragmentMain : Fragment() {
     fun setUserDataOnView() {
         if (user != null) {
 
-            val currentChar: Character = user!!.characters.get(0)
+            val currentChar: PlayerChar = user!!.playerChars.get(0)
             gridRadioOption.isChecked = user!!.prefersGrid
             listRadioOption.isChecked = !user!!.prefersGrid
             for (i in (squireList.size - 1) downTo 0) {
@@ -79,16 +79,7 @@ class FragmentMain : Fragment() {
         }
     }
 
-    fun setDummyData() {
-        //if (!ShrdPrfsUtils.userDataExist(this)) {
-        val user: UserGeneral = UserGeneral(Character("Alaguesia", "Alexina"))
-        val currentChar: Character = user.characters.get(0)
-        currentChar.squiresActive.remove(1)
-        currentChar.squiresActive.remove(3)
-        user.prefersGrid = true
-        ShrdPrfsUtils.saveUserData(context!!, user)
-        //}
-    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -149,7 +140,7 @@ class FragmentMain : Fragment() {
                 false -> 1
             }
         )
-        (squireRecyclerView?.adapter as MiniSquireAdapter).setViewType(isGrid)
+        (squireRecyclerView?.adapter as SquireAdapter).setViewType(isGrid)
         val user:UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
         user?.prefersGrid = isGrid
         ShrdPrfsUtils.saveUserData(context!!,user!!)

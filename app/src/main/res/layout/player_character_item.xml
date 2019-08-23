@@ -26,9 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/buttonRelative"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/characterAvatar"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.1">
 
             <TextView
                 android:id="@+id/charName"
@@ -50,11 +51,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/charInfoRelative"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/buttonRelative"
-            app:layout_constraintHorizontal_bias="1">
+            app:layout_constraintHorizontal_bias="1"
+            >
 
             <ImageButton
                 android:id="@+id/editButton"

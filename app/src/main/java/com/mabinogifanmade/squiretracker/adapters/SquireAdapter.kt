@@ -16,9 +16,9 @@ import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 
-class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var isGrid: Boolean,
-                        val squireProgressPreview: HashMap<Int, Int>) :
-    RecyclerView.Adapter<MiniSquireAdapter.MiniViewHolder>() {
+class SquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var isGrid: Boolean,
+                    val squireProgressPreview: HashMap<Int, Int>) :
+    RecyclerView.Adapter<SquireAdapter.MiniViewHolder>() {
     val GRID_TYPE: Int = 1;
     val LIST_TYPE: Int = 2;
 
@@ -54,7 +54,7 @@ class MiniSquireAdapter(val squireList: ArrayList<Squire>, val context: Context,
         setSquireText(holder,squire,squireProgressPreview.get(squire.id)!!)
     }
 
-    private fun setSquireText(holder: MiniSquireAdapter.MiniViewHolder, squire: Squire,progress:Int) {
+    private fun setSquireText(holder: SquireAdapter.MiniViewHolder, squire: Squire, progress:Int) {
         val index:Int = ConversationUtils.getNumberInSequence(progress,squire.sequenceConvo.length)
         holder.sequence.text = context.getString(
             R.string.number_sequence,

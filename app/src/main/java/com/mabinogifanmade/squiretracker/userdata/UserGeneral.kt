@@ -1,13 +1,13 @@
 package com.mabinogifanmade.squiretracker.userdata
 
-class UserGeneral(character: Character) {
-    val characters: ArrayList<Character> = arrayListOf(character)
+class UserGeneral(playerChar: PlayerChar) {
+    val playerChars: ArrayList<PlayerChar> = arrayListOf(playerChar)
     var currentCharacter: Int = 0
     var prefersGrid: Boolean = false;
 
-    fun getCurrentCharacter(): Character {
-        if (currentCharacter >= characters.size)
+    fun getCurrentCharacter(): PlayerChar {
+        if (currentCharacter >= playerChars.size)
             currentCharacter = 0
-        return characters.get(currentCharacter)
+        return playerChars.get(currentCharacter)
     }
 }

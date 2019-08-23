@@ -3,7 +3,7 @@ package com.mabinogifanmade.squiretracker.userdata
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 
-class Character(val charName: String, val server: String) {
+class PlayerChar(val charName: String, val server: String) {
     val squireProgress: HashMap<Int, Int> =
         hashMapOf(
             Squire.DAI.id to 0,

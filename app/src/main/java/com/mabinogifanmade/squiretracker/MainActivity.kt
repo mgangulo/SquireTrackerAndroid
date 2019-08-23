@@ -13,6 +13,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.mabinogifanmade.squiretracker.userdata.PlayerChar
+import com.mabinogifanmade.squiretracker.userdata.UserGeneral
+import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+       // setDummyData()
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -42,6 +46,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+    }
+
+    fun setDummyData() {
+        if (!ShrdPrfsUtils.userDataExist(this)) {
+            val user: UserGeneral = UserGeneral(PlayerChar("Alaguesia", "Alexina"))
+            val currentChar: PlayerChar = user.playerChars.get(0)
+            currentChar.squiresActive.remove(1)
+            currentChar.squiresActive.remove(3)
+            user.prefersGrid = true
+            ShrdPrfsUtils.saveUserData(this, user)
+        }
     }
 
     override fun onBackPressed() {
