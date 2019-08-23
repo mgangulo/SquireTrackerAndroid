@@ -7,29 +7,23 @@
     android:layout_marginTop="@dimen/top_margin"
     android:layout_marginEnd="@dimen/side_margin">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/characterAvatar"
             android:layout_width="@dimen/player_avatar_dimens"
             android:layout_height="@dimen/player_avatar_dimens"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"/>
 
         <RelativeLayout
             android:id="@+id/charInfoRelative"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/characterAvatar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.1">
+            android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/charName"
@@ -50,12 +44,8 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/charInfoRelative"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/buttonRelative"
-            app:layout_constraintHorizontal_bias="1"
+            android:layout_gravity="center"
             >
 
             <ImageButton
@@ -92,6 +82,6 @@
         </RelativeLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

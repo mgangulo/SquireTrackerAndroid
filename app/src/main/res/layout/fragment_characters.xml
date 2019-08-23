@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginEnd="@dimen/side_margin"
         android:layout_marginTop="@dimen/side_margin">
 
         <ImageButton
@@ -21,7 +19,9 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="@dimen/padding_button"
             android:id="@+id/nextAccept"
-            android:layout_gravity="end"/>
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginEnd="@dimen/side_margin"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -29,6 +29,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/side_margin"
+            android:layout_marginStart="@dimen/side_margin"
             android:id="@+id/charRecycler">
 
         </androidx.recyclerview.widget.RecyclerView>
