@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/newPlayerCharFragment"
-        android:name="com.mabinogifanmade.squiretracker.NewPlayerCharFragment"
+        android:name="com.mabinogifanmade.squiretracker.PlayerCharDetailsFragment"
         android:label="fragment_new_player_char"
-        tools:layout="@layout/fragment_new_player_char" />
+        tools:layout="@layout/fragment_char_details" />
 </navigation>

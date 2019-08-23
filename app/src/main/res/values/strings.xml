@@ -24,4 +24,17 @@
     <string name="dai">Dai</string>
     <string name="switch_button">Switch</string>
     <string name="character_name">Character Name</string>
+    <string name="server">Server</string>
+    <string name="save_button">Save</string>
+    <string name="avatar_label">Avatar</string>
+    <string-array name="servers_array">
+        <item>Alexina</item>
+        <item>Nao</item>
+    </string-array>
+    <string name="player_progress_known_label">Fill these if you know your progress with the particular Squire, leave it blank if you dont:</string>
+
+    <string name="kaours_progress">Kaour\'s Progress</string>
+    <string name="elsies_progress">Elsie\'s Progress</string>
+    <string name="eirlyss_progress">Eirlys\'s Progress</string>
+    <string name="dais_progress">Dai\'s Progress</string>
 </resources>
