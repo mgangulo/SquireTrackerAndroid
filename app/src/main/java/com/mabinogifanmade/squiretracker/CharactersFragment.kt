@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.mabinogifanmade.squiretracker.adapters.PlayerAdapter
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
@@ -41,6 +42,8 @@ class CharactersFragment : Fragment() {
                 context!!
             )
             charRecycler.adapter = adapter
+            addChar.setOnClickListener(
+                Navigation.createNavigateOnClickListener(R.id.action_nav_characters_to_newPlayerCharFragment, null))
         }
     }
 }

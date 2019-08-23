@@ -28,10 +28,10 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:Playe
         val character: PlayerChar = playerChars.get(position)
         holder.characterName.setText(character.charName)
         holder.characterServer.setText(character.server)
-        /*holder.switchButton.visibility = when (character.equals(currentChar)){
+        holder.switchButton.visibility = when (character.equals(currentChar)){
             true -> View.INVISIBLE
             else -> View.VISIBLE
-        }*/
+        }
     }
 
 
@@ -43,6 +43,9 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:Playe
         val characterServer: TextView = itemView.findViewById(R.id.charServer)
         val charAvatar: ImageView = itemView.findViewById(R.id.characterAvatar)
 
+        /*init{
+
+        }*/
     }
 
 }

@@ -24,11 +24,17 @@
         android:label="fragment_characters"
         tools:layout="@layout/fragment_characters" >
         <action
-            android:id="@+id/action_nav_characters_to_nav_home"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out"
-            app:launchSingleTop="true" />
+            android:id="@+id/action_nav_characters_to_newPlayerCharFragment"
+            app:destination="@id/newPlayerCharFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
+    <fragment
+        android:id="@+id/newPlayerCharFragment"
+        android:name="com.mabinogifanmade.squiretracker.NewPlayerCharFragment"
+        android:label="fragment_new_player_char"
+        tools:layout="@layout/fragment_new_player_char" />
 </navigation>
