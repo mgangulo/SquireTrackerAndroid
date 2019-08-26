@@ -38,4 +38,12 @@ class PlayerChar(var charName: String,
                 squire.sequenceConvo.length)
         )
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (other!=null && other is PlayerChar){
+            return other.charName.equals(this@PlayerChar.charName)
+                    && other.server.equals(this@PlayerChar.server)
+        }
+        return false
+    }
 }

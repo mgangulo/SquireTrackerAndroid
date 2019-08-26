@@ -2,17 +2,17 @@ package com.mabinogifanmade.squiretracker
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.textfield.TextInputLayout
+import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
-import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.GeneralUtils
-import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_char_details.*
 import kotlinx.android.synthetic.main.include_player_info.view.*
@@ -44,7 +44,7 @@ class PlayerCharDetailsFragment : Fragment() {
             charPos = args.charPos
             var playerChar: PlayerChar? = null
             if (editMode) {
-                playerChar = UserUtils.getCharPlayerAt(context!!,charPos)
+                playerChar = UserUtils.getCharPlayerAt(context!!, charPos)
             }
             ArrayAdapter.createFromResource(
                 context!!,
@@ -87,7 +87,7 @@ class PlayerCharDetailsFragment : Fragment() {
         }
         val server: String = playerInfo.serverSpinner.selectedItem.toString()
         if (context != null) {
-            UserUtils.editPlayerAt(context!!,charPos,playerName,server)
+            UserUtils.editPlayerAt(context!!, charPos, playerName, server)
             findNavController().popBackStack()
         }
     }
@@ -102,21 +102,37 @@ class PlayerCharDetailsFragment : Fragment() {
             playerInfo.charNameInputLayout.setError(null)
         }
         val server: String = playerInfo.serverSpinner.selectedItem.toString()
-        val daiProgressString = squireProgress.daiProgressEdit.getText().toString()
-        val eirlysProgressString = squireProgress.eirlysProgressEdir.getText().toString()
-        val elsieProgressString = squireProgress.elsieProgressEdit.getText().toString()
-        val kaourProgressString = squireProgress.kaourProgressEdit.getText().toString()
 
-        val newPlayer = PlayerChar(
-            playerName, server,
-            GeneralUtils.textToNumber(daiProgressString),
-            GeneralUtils.textToNumber(eirlysProgressString),
-            GeneralUtils.textToNumber(elsieProgressString),
-            GeneralUtils.textToNumber(kaourProgressString)
-        )
-        if (context != null) {
-            UserUtils.saveNewPlayer(context!!,newPlayer)
-            findNavController().popBackStack()
+        val daiProgress = GeneralUtils.textToProgress(squireProgress.daiProgressEdit.getText().toString())
+        val eirlysProgress = GeneralUtils.textToProgress(squireProgress.eirlysProgressEdit.getText().toString())
+        val elsieProgress = GeneralUtils.textToProgress(squireProgress.elsieProgressEdit.getText().toString())
+        val kaourProgress = GeneralUtils.textToProgress(squireProgress.kaourProgressEdit.getText().toString())
+        if (checkValidSquireProgress(daiProgress, squireProgress.daiProgressLayout, Squire.DAI) and
+            checkValidSquireProgress(eirlysProgress, squireProgress.eirlysProgressLayout, Squire.EIRLYS) and
+            checkValidSquireProgress(elsieProgress, squireProgress.elsieProgressLayout, Squire.ELSIE) and
+            checkValidSquireProgress(kaourProgress, squireProgress.kaourProgressLayout, Squire.KAOUR)
+        ) {
+            val newPlayer = PlayerChar(
+                playerName, server,
+                daiProgress-1,
+                eirlysProgress-1,
+                elsieProgress-1,
+                kaourProgress-1
+            )
+            if (context != null) {
+                UserUtils.saveNewPlayer(context!!, newPlayer)
+                findNavController().popBackStack()
+            }
+        }
+    }
+
+    fun checkValidSquireProgress(progress: Int, layout: TextInputLayout, squire: Squire): Boolean {
+        if (progress>=1 && progress<=squire.sequenceConvo.length) {
+            layout.setError(null)
+            return true
+        } else {
+            layout.setError(getString(R.string.progress_error_msg,squire.sequenceConvo.length))
+            return false
         }
     }
 }

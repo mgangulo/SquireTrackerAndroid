@@ -9,7 +9,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top_btwn_elements">
+        android:layout_marginTop="@dimen/margin_top_btwn_elements"
+        android:id="@+id/daiProgressLayout">
 
         <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
             android:layout_width="match_parent"
@@ -24,14 +25,15 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top_btwn_elements">
+        android:layout_marginTop="@dimen/margin_top_btwn_elements"
+        android:id="@+id/eirlysProgressLayout">
 
         <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/eirlyss_progress"
             android:maxLength="20"
-            android:id="@+id/eirlysProgressEdir"
+            android:id="@+id/eirlysProgressEdit"
             android:inputType="number"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -39,7 +41,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top_btwn_elements">
+        android:layout_marginTop="@dimen/margin_top_btwn_elements"
+        android:id="@+id/elsieProgressLayout">
 
         <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
             android:layout_width="match_parent"
@@ -54,7 +57,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top_btwn_elements">
+        android:layout_marginTop="@dimen/margin_top_btwn_elements"
+        android:id="@+id/kaourProgressLayout">
 
         <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
             android:layout_width="match_parent"
@@ -62,7 +66,8 @@
             android:hint="@string/kaours_progress"
             android:maxLength="20"
             android:id="@+id/kaourProgressEdit"
-            android:inputType="number"/>
+            android:inputType="number"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
