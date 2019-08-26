@@ -37,4 +37,5 @@
     <string name="elsies_progress">Elsie\'s Progress</string>
     <string name="eirlyss_progress">Eirlys\'s Progress</string>
     <string name="dais_progress">Dai\'s Progress</string>
+    <string name="name_empty_error">You need to enter a name</string>
 </resources>

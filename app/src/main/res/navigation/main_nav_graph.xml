@@ -30,7 +30,8 @@
             app:exitAnim="@anim/exit_to_left"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@+id/nav_characters" />
     </fragment>
     <fragment
         android:id="@+id/newPlayerCharFragment"

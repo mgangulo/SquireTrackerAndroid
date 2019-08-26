@@ -7,8 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
+import com.mabinogifanmade.squiretracker.userdata.PlayerChar
+import com.mabinogifanmade.squiretracker.userdata.UserGeneral
+import com.mabinogifanmade.squiretracker.utils.GeneralUtils
+import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import kotlinx.android.synthetic.main.fragment_char_details.*
 import kotlinx.android.synthetic.main.include_player_info.view.*
+import kotlinx.android.synthetic.main.include_squire_progress.view.*
 
 
 /**
@@ -27,7 +33,7 @@ class PlayerCharDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (context!=null) {
+        if (context != null) {
             ArrayAdapter.createFromResource(
                 context!!,
                 R.array.servers_array,
@@ -38,6 +44,39 @@ class PlayerCharDetailsFragment : Fragment() {
                 // Apply the adapter to the spinner
                 playerInfo.serverSpinner.adapter = adapter
             }
+            saveButton.setOnClickListener {
+                save()
+            }
+        }
+    }
+
+
+    fun save() {
+        val playerName: String = playerInfo.charNameEdit.getText().toString()
+        if (playerName.isNullOrEmpty()) {
+            playerInfo.charNameInputLayout.setError(getString(R.string.name_empty_error))
+            return
+        } else {
+            playerInfo.charNameInputLayout.setError(null)
+        }
+        val server: String = playerInfo.serverSpinner.selectedItem.toString()
+        val daiProgressString = squireProgress.daiProgressEdit.getText().toString()
+        val eirlysProgressString = squireProgress.eirlysProgressEdir.getText().toString()
+        val elsieProgressString = squireProgress.elsieProgressEdit.getText().toString()
+        val kaourProgressString = squireProgress.kaourProgressEdit.getText().toString()
+
+        val newPlayer = PlayerChar(
+            playerName, server,
+            GeneralUtils.textToNumber(daiProgressString),
+            GeneralUtils.textToNumber(eirlysProgressString),
+            GeneralUtils.textToNumber(elsieProgressString),
+            GeneralUtils.textToNumber(kaourProgressString)
+        )
+        if (context!=null) {
+            val user: UserGeneral?=ShrdPrfsUtils.getUserData(context!!)
+            user?.playerChars?.add(newPlayer)
+            ShrdPrfsUtils.saveUserData(context!!,user!!)
+            findNavController().popBackStack()
         }
     }
 }

@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/kaours_progress"
             android:maxLength="20"
-            android:id="@+id/kaourProgressEdir"
+            android:id="@+id/kaourProgressEdit"
             android:inputType="number"/>
 
     </com.google.android.material.textfield.TextInputLayout>
