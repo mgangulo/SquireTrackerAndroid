@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.fragment_char_details.*
+import kotlinx.android.synthetic.main.include_player_info.view.*
 
 
 /**
@@ -35,7 +36,7 @@ class PlayerCharDetailsFragment : Fragment() {
                 // Specify the layout to use when the list of choices appears
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 // Apply the adapter to the spinner
-                serverSpinner.adapter = adapter
+                playerInfo.serverSpinner.adapter = adapter
             }
         }
     }

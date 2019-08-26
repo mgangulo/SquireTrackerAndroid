@@ -18,103 +18,14 @@
             android:layout_marginEnd="@dimen/side_margin"
             android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
+        <include layout="@layout/include_player_info"
+            android:id="@+id/playerInfo"/>
+
+            <include layout="@layout/include_squire_progress"
+                android:id="@+id/squireProgress"
+                android:layout_marginTop="@dimen/margin_top_btwn_elements"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/character_name"
-                    android:maxLength="20"
-                    android:id="@+id/charNameEdit"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/server"
-                style="@style/InputLabel"
-                android:layout_marginTop="@dimen/margin_top_btwn_elements"/>
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/serverSpinner"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/avatar_label"
-                style="@style/InputLabel"
-                android:layout_marginTop="@dimen/margin_top_btwn_elements"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/player_progress_known_label"
-                android:layout_marginTop="@dimen/margin_top_btwn_elements"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top_btwn_elements">
-
-                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/dais_progress"
-                    android:maxLength="20"
-                    android:id="@+id/daiProgressEdit"
-                    android:inputType="number"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top_btwn_elements">
-
-                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/eirlyss_progress"
-                    android:maxLength="20"
-                    android:id="@+id/eirlysProgressEdir"
-                    android:inputType="number"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top_btwn_elements">
-
-                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/elsies_progress"
-                    android:maxLength="20"
-                    android:id="@+id/elsieProgressEdit"
-                    android:inputType="number"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top_btwn_elements">
-
-                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/kaours_progress"
-                    android:maxLength="20"
-                    android:id="@+id/kaourProgressEdir"
-                    android:inputType="number"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
+                android:layout_height="wrap_content"/>
 
 
             <androidx.appcompat.widget.AppCompatButton
