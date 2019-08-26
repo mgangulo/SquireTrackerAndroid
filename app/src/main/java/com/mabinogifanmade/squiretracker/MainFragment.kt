@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class FragmentMain : Fragment() {
+class MainFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private val squireList: ArrayList<Squire> = arrayListOf(Squire.DAI, Squire.EIRLYS, Squire.ELSIE, Squire.KAOUR)
     private var user: UserGeneral? = null

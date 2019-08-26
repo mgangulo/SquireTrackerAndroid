@@ -3,8 +3,8 @@ package com.mabinogifanmade.squiretracker.userdata
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 
-class PlayerChar(val charName: String,
-                 val server: String,
+class PlayerChar(var charName: String,
+                 var server: String,
                  val daiProgress: Int,
                  val eirlysProgress: Int,
                  val elsieProgress: Int,

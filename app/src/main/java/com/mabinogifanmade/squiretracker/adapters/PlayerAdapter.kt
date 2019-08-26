@@ -9,7 +9,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.mabinogifanmade.squiretracker.CharactersFragmentDirections
 import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 
@@ -43,9 +45,14 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:Playe
         val characterServer: TextView = itemView.findViewById(R.id.charServer)
         val charAvatar: ImageView = itemView.findViewById(R.id.characterAvatar)
 
-        /*init{
+        init{
+            editButton.setOnClickListener {
+                val action =
+                CharactersFragmentDirections.actionNavCharactersToNewPlayerCharFragment(true,adapterPosition)
+                Navigation.findNavController(it).navigate(action)
+            }
 
-        }*/
+        }
     }
 
 }

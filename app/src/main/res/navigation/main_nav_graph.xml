@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.mabinogifanmade.squiretracker.FragmentMain"
+        android:name="com.mabinogifanmade.squiretracker.MainFragment"
         android:label="FragmentMain" >
         <action
             android:id="@+id/action_nav_home_to_charactersFragment"
@@ -37,5 +37,14 @@
         android:id="@+id/newPlayerCharFragment"
         android:name="com.mabinogifanmade.squiretracker.PlayerCharDetailsFragment"
         android:label="fragment_new_player_char"
-        tools:layout="@layout/fragment_char_details" />
+        tools:layout="@layout/fragment_char_details" >
+        <argument
+            android:name="isEditMode"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="charPos"
+            app:argType="integer"
+            android:defaultValue="0"/>
+    </fragment>
 </navigation>

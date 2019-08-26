@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.GeneralUtils
@@ -22,6 +23,10 @@ import kotlinx.android.synthetic.main.include_squire_progress.view.*
  *
  */
 class PlayerCharDetailsFragment : Fragment() {
+    val args: PlayerCharDetailsFragmentArgs by navArgs()
+    var editMode: Boolean = false
+    var charPos: Int = -1
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +39,13 @@ class PlayerCharDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (context != null) {
+            editMode = args.isEditMode
+            charPos = args.charPos
+            var playerChar: PlayerChar? = null
+            if (editMode) {
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                playerChar = user?.playerChars?.get(charPos)
+            }
             ArrayAdapter.createFromResource(
                 context!!,
                 R.array.servers_array,
@@ -43,15 +55,48 @@ class PlayerCharDetailsFragment : Fragment() {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 // Apply the adapter to the spinner
                 playerInfo.serverSpinner.adapter = adapter
+                if (editMode) {
+                    playerInfo.serverSpinner.setSelection(
+                        when (playerChar!!.server) {
+                            "Alexina" -> 0
+                            else -> 1
+                        }
+                    )
+                }
+            }
+            if (editMode) {
+                playerInfo.charNameEdit.setText(playerChar!!.charName)
+                squireProgress.visibility = View.GONE
             }
             saveButton.setOnClickListener {
-                save()
+                if (!editMode)
+                    saveNew()
+                else
+                    saveEdit()
             }
         }
     }
 
+    private fun saveEdit() {
+        val playerName: String = playerInfo.charNameEdit.getText().toString()
+        if (playerName.isNullOrEmpty()) {
+            playerInfo.charNameInputLayout.setError(getString(R.string.name_empty_error))
+            return
+        } else {
+            playerInfo.charNameInputLayout.setError(null)
+        }
+        val server: String = playerInfo.serverSpinner.selectedItem.toString()
+        if (context != null) {
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+            user?.playerChars?.get(charPos)?.charName = playerName
+            user?.playerChars?.get(charPos)?.server = server
+            ShrdPrfsUtils.saveUserData(context!!, user!!)
+            findNavController().popBackStack()
+        }
+    }
 
-    fun save() {
+
+    fun saveNew() {
         val playerName: String = playerInfo.charNameEdit.getText().toString()
         if (playerName.isNullOrEmpty()) {
             playerInfo.charNameInputLayout.setError(getString(R.string.name_empty_error))
@@ -72,10 +117,10 @@ class PlayerCharDetailsFragment : Fragment() {
             GeneralUtils.textToNumber(elsieProgressString),
             GeneralUtils.textToNumber(kaourProgressString)
         )
-        if (context!=null) {
-            val user: UserGeneral?=ShrdPrfsUtils.getUserData(context!!)
+        if (context != null) {
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
             user?.playerChars?.add(newPlayer)
-            ShrdPrfsUtils.saveUserData(context!!,user!!)
+            ShrdPrfsUtils.saveUserData(context!!, user!!)
             findNavController().popBackStack()
         }
     }
