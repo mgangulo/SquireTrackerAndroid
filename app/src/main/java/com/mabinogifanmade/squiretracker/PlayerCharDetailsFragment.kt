@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -87,8 +88,12 @@ class PlayerCharDetailsFragment : Fragment() {
         }
         val server: String = playerInfo.serverSpinner.selectedItem.toString()
         if (context != null) {
-            UserUtils.editPlayerAt(context!!, charPos, playerName, server)
-            findNavController().popBackStack()
+            if (!UserUtils.characterExist(context!!, charPos, playerName, server)) {
+                UserUtils.editPlayerAt(context!!, charPos, playerName, server)
+                findNavController().popBackStack()
+            } else {
+                Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -114,24 +119,28 @@ class PlayerCharDetailsFragment : Fragment() {
         ) {
             val newPlayer = PlayerChar(
                 playerName, server,
-                daiProgress-1,
-                eirlysProgress-1,
-                elsieProgress-1,
-                kaourProgress-1
+                daiProgress - 1,
+                eirlysProgress - 1,
+                elsieProgress - 1,
+                kaourProgress - 1
             )
             if (context != null) {
-                UserUtils.saveNewPlayer(context!!, newPlayer)
-                findNavController().popBackStack()
+                if (!UserUtils.characterExist(context!!, newPlayer)) {
+                    UserUtils.saveNewPlayer(context!!, newPlayer)
+                    findNavController().popBackStack()
+                } else {
+                    Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
 
     fun checkValidSquireProgress(progress: Int, layout: TextInputLayout, squire: Squire): Boolean {
-        if (progress>=1 && progress<=squire.sequenceConvo.length) {
+        if (progress >= 1 && progress <= squire.sequenceConvo.length) {
             layout.setError(null)
             return true
         } else {
-            layout.setError(getString(R.string.progress_error_msg,squire.sequenceConvo.length))
+            layout.setError(getString(R.string.progress_error_msg, squire.sequenceConvo.length))
             return false
         }
     }

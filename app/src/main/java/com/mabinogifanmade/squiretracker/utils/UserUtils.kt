@@ -12,6 +12,21 @@ class UserUtils {
             ShrdPrfsUtils.saveUserData(context!!, user!!)
         }
 
+        fun characterExist(context:Context, newPlayer:PlayerChar):Boolean{
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+            return user!!.playerChars.contains(newPlayer)
+        }
+
+
+        fun characterExist(context: Context, charPos: Int, playerName: String, server: String): Boolean {
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+            val player:PlayerChar = user!!.playerChars.get(charPos)
+            player.charName = playerName
+            player.server = server
+            user?.playerChars?.removeAt(charPos)
+            return user!!.playerChars.contains(player)
+        }
+
         fun removePlayerAt(context: Context?, pos: Int) {
             val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
             user?.playerChars?.removeAt(pos)
