@@ -3,6 +3,7 @@ package com.mabinogifanmade.squiretracker
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -16,13 +17,16 @@ import com.google.android.material.navigation.NavigationView
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
+import com.mabinogifanmade.squiretracker.utils.UserUtils
+import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+MainFragment.OnFragmentInteractionListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
        // setDummyData()
         setContentView(R.layout.activity_main)
@@ -36,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
         val navController = Navigation.findNavController(this,R.id.nav_host)
         appBarConfiguration = AppBarConfiguration(navController.graph,drawerLayout)
         navView.setupWithNavController(navController)
@@ -84,6 +87,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun updateInfoOnNav() {
+        val headerView = nav_view.getHeaderView(0)
+        headerView.findViewById<TextView>(R.id.navHeaderTitle)
+            .setText(UserUtils.getCurrentCharPlayer(this).charName)
+        headerView.findViewById<TextView>(R.id.navHeaderSubtitle).setText(UserUtils.getCurrentCharPlayer(this).server)
+    }
    /* override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
