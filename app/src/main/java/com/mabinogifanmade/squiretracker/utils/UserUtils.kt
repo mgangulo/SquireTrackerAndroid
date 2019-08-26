@@ -34,5 +34,18 @@ class UserUtils {
             val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
             return user!!.getCurrentCharacter()
         }
+
+        fun getCurrentCharPlayerPos(context: Context): Int {
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
+            return user!!.currentCharacter
+        }
+
+        fun switchPlayerCharacter(context: Context,pos:Int) {
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
+            if (pos>=0 && pos<user!!.playerChars.size){
+                user?.currentCharacter = pos
+            }
+            ShrdPrfsUtils.saveUserData(context, user!!)
+        }
     }
 }

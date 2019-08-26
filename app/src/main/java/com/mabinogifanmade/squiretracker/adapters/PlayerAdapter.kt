@@ -17,7 +17,7 @@ import com.mabinogifanmade.squiretracker.utils.DialogUtils
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
 
-class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:PlayerChar, val context: Context)
+class PlayerAdapter(val playerChars: ArrayList<PlayerChar>, val context: Context)
     : RecyclerView.Adapter<PlayerAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,7 +32,7 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:Playe
         val character: PlayerChar = playerChars.get(position)
         holder.characterName.setText(character.charName)
         holder.characterServer.setText(character.server)
-        holder.switchButton.visibility = when (character.equals(currentChar)){
+        holder.switchButton.visibility = when (position == UserUtils.getCurrentCharPlayerPos(context)){
             true -> View.INVISIBLE
             else -> View.VISIBLE
         }
@@ -77,7 +77,10 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:Playe
                     Toast.makeText(it.context,R.string.delete_with_one_char,Toast.LENGTH_LONG).show()
                 }
             }
-
+            switchButton.setOnClickListener {
+                UserUtils.switchPlayerCharacter(it.context,adapterPosition)
+                notifyDataSetChanged()
+            }
         }
     }
 

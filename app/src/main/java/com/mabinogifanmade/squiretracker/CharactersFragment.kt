@@ -38,7 +38,6 @@ class CharactersFragment : Fragment() {
             val user: UserGeneral = ShrdPrfsUtils.getUserData(context!!)!!
             val adapter: PlayerAdapter = PlayerAdapter(
                 user.playerChars,
-                user.getCurrentCharacter(),
                 context!!
             )
             charRecycler.adapter = adapter
