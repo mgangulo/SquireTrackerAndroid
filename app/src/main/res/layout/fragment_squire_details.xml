@@ -22,17 +22,123 @@
         app:layout_constraintGuide_percent="0.25"
         android:id="@+id/guidelineImage"/>
 
-    <androidx.core.widget.NestedScrollView
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sequenceRelative"
+        app:layout_constraintBottom_toBottomOf="@id/sequenceRelative"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/padding_button"
+        android:id="@+id/nextAccept"
+        android:layout_marginEnd="@dimen/side_margin"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineImage"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        android:id="@+id/sequenceRelative"
+        android:padding="@dimen/padding_button">
+        <TextView
+            android:id="@+id/sequenceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aaa"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/hintText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aaa"
+            android:layout_below="@id/sequenceText"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_arrow_left"
+        app:layout_constraintBottom_toBottomOf="@id/sequenceRelative"
+        app:layout_constraintEnd_toStartOf="@id/sequenceRelative"
+        app:layout_constraintTop_toTopOf="@id/sequenceRelative"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/previous"
+        app:layout_constraintHorizontal_bias="0.9"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@id/sequenceRelative"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sequenceRelative"
+        app:layout_constraintTop_toTopOf="@id/sequenceRelative"
+        android:id="@+id/next"
+        app:layout_constraintHorizontal_bias="0.1"/>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineImage"
+        app:layout_constraintTop_toBottomOf="@id/sequenceRelative"
         app:layout_constraintBottom_toBottomOf="parent"
         android:paddingTop="@dimen/padding_button"
         android:paddingBottom="@dimen/padding_button"
-        android:clipToPadding="false">
-    </androidx.core.widget.NestedScrollView>
+        android:layout_marginTop="@dimen/padding_button"
+        android:clipToPadding="false"
+        android:id="@+id/scrollView">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginEnd="@dimen/side_margin">
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/setNumber"
+                app:backgroundTint="@color/colorPrimary"
+                android:text="@string/set_progress_number"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/margin_top_btwn_elements"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/findSequence"
+                app:backgroundTint="@color/colorPrimary"
+                android:text="@string/find_sequence_number"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/margin_top_btwn_elements"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/specialConvo"
+                app:backgroundTint="@color/colorPrimary"
+                android:text="@string/see_special_conversation_options"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/margin_top_btwn_elements"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sequenceConvo"
+                app:backgroundTint="@color/colorPrimary"
+                android:text="@string/see_full_sequence"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/margin_top_btwn_elements"/>
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

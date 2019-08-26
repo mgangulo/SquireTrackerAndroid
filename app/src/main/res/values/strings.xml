@@ -43,4 +43,8 @@
     <string name="delete_with_one_char">You need to have at least one character to use this app!</string>
     <string name="progress_error_msg">Please put a number between 1 and %1$d</string>
     <string name="character_exist_error">This character already exists</string>
+    <string name="set_progress_number">Set progress number</string>
+    <string name="find_sequence_number">Find Sequence Number</string>
+    <string name="see_special_conversation_options">See Special Conversation Options</string>
+    <string name="see_full_sequence">See Full Sequence</string>
 </resources>
