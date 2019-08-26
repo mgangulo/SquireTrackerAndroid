@@ -10,24 +10,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:minHeight="@dimen/grid_squire_item_height">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/imageGuideline"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.65" />
 
         <FrameLayout
             android:id="@+id/squireImageFrame"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/imageGuideline"
+            android:layout_height="@dimen/grid_squire_item_image_height"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
 
             <ImageView
                 android:id="@+id/squireImage"
@@ -78,7 +71,7 @@
             app:layout_constraintBottom_toTopOf="@id/nextAccept"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageGuideline"
+            app:layout_constraintTop_toBottomOf="@id/squireImageFrame"
             android:id="@+id/sequenceRelative"
             android:layout_marginTop="8dp">
             <TextView
