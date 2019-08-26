@@ -41,8 +41,8 @@ class PlayerChar(var charName: String,
 
     override fun equals(other: Any?): Boolean {
         if (other!=null && other is PlayerChar){
-            return other.charName.equals(this@PlayerChar.charName)
-                    && other.server.equals(this@PlayerChar.server)
+            return other.charName.toLowerCase().equals(this@PlayerChar.charName.toLowerCase())
+                    && other.server.toLowerCase().equals(this@PlayerChar.server.toLowerCase())
         }
         return false
     }
