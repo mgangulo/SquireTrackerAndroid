@@ -1,19 +1,18 @@
 package com.mabinogifanmade.squiretracker.adapters
 
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.AppCompatButton
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.CharactersFragmentDirections
 import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
+import com.mabinogifanmade.squiretracker.utils.DialogUtils
 
 class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:PlayerChar, val context: Context)
     : RecyclerView.Adapter<PlayerAdapter.ViewHolder>(){
@@ -34,10 +33,14 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:Playe
             true -> View.INVISIBLE
             else -> View.VISIBLE
         }
+        holder.deleteButton.visibility = when (playerChars.size<=1){
+            true -> View.INVISIBLE
+            else -> View.VISIBLE
+        }
     }
 
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val editButton:ImageButton = itemView.findViewById(R.id.editButton)
         val deleteButton:ImageButton = itemView.findViewById(R.id.deleteButton)
         val switchButton: AppCompatButton = itemView.findViewById(R.id.switchButton)
@@ -50,6 +53,25 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:Playe
                 val action =
                 CharactersFragmentDirections.actionNavCharactersToNewPlayerCharFragment(true,adapterPosition)
                 Navigation.findNavController(it).navigate(action)
+            }
+            deleteButton.setOnClickListener {
+                if (playerChars.size>1) {
+                    DialogUtils.showDialog(it.context,
+                        it.context.getString(R.string.are_you_sure),
+                        it.context.getString(R.string.delete_char_message, playerChars.get(adapterPosition).charName),
+                        it.context.getString(R.string.yes_button),
+                        DialogInterface.OnClickListener { dialog, which ->
+                            if (adapterPosition >= 0 && adapterPosition < playerChars.size) {
+                                playerChars.removeAt(adapterPosition)
+                                notifyDataSetChanged()
+                            }
+                            dialog.dismiss()
+                        },
+                        it.context.getString(R.string.no_button),
+                        DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+                } else{
+                    Toast.makeText(it.context,R.string.delete_with_one_char,Toast.LENGTH_LONG).show()
+                }
             }
 
         }

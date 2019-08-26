@@ -38,4 +38,9 @@
     <string name="eirlyss_progress">Eirlys\'s Progress</string>
     <string name="dais_progress">Dai\'s Progress</string>
     <string name="name_empty_error">You need to enter a name</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="delete_char_message">Are you sure you want to delete %1$s?</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
+    <string name="delete_with_one_char">You need to have at least one character to use this app!</string>
 </resources>
