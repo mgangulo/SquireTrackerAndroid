@@ -17,6 +17,15 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"
             app:popUpTo="@+id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_squireDetailsFragment"
+            app:destination="@id/squireDetailsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_home" />
     </fragment>
     <fragment
         android:id="@+id/nav_characters"
@@ -46,5 +55,14 @@
             android:name="charPos"
             app:argType="integer"
             android:defaultValue="0"/>
+    </fragment>
+    <fragment
+        android:id="@+id/squireDetailsFragment"
+        android:name="com.mabinogifanmade.squiretracker.SquireDetailsFragment"
+        android:label="fragment_squire_details"
+        tools:layout="@layout/fragment_squire_details" >
+        <argument
+            android:name="squire"
+            app:argType="com.mabinogifanmade.squiretracker.squiredata.Squire" />
     </fragment>
 </navigation>

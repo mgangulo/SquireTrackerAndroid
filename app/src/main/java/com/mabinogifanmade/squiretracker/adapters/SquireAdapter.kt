@@ -4,12 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import com.mabinogifanmade.squiretracker.MainFragmentDirections
 import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
@@ -87,6 +90,7 @@ class SquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var
         val previous: ImageView = itemView.findViewById(R.id.previous);
         val nextAccept: ImageView = itemView.findViewById(R.id.nextAccept);
         val seqRelative: RelativeLayout = itemView.findViewById(R.id.sequenceRelative);
+        val infoButton: ImageButton = itemView.findViewById(R.id.infoButton);
 
         init {
             next.setOnClickListener(View.OnClickListener {
@@ -110,6 +114,12 @@ class SquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var
                 setSquireText(this,squire,
                     user.getCurrentCharacter().squireProgress.get(squire.id)!!)
             })
+            //TODO: Actually put a menu here instead of going to the fragment
+            infoButton.setOnClickListener {
+                val action =
+                    MainFragmentDirections.actionNavHomeToSquireDetailsFragment(squireList.get(adapterPosition))
+                Navigation.findNavController(it).navigate(action)
+            }
         }
 
     }
