@@ -13,6 +13,7 @@ import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.GeneralUtils
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
+import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_char_details.*
 import kotlinx.android.synthetic.main.include_player_info.view.*
 import kotlinx.android.synthetic.main.include_squire_progress.view.*
@@ -43,8 +44,7 @@ class PlayerCharDetailsFragment : Fragment() {
             charPos = args.charPos
             var playerChar: PlayerChar? = null
             if (editMode) {
-                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
-                playerChar = user?.playerChars?.get(charPos)
+                playerChar = UserUtils.getCharPlayerAt(context!!,charPos)
             }
             ArrayAdapter.createFromResource(
                 context!!,
@@ -87,10 +87,7 @@ class PlayerCharDetailsFragment : Fragment() {
         }
         val server: String = playerInfo.serverSpinner.selectedItem.toString()
         if (context != null) {
-            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
-            user?.playerChars?.get(charPos)?.charName = playerName
-            user?.playerChars?.get(charPos)?.server = server
-            ShrdPrfsUtils.saveUserData(context!!, user!!)
+            UserUtils.editPlayerAt(context!!,charPos,playerName,server)
             findNavController().popBackStack()
         }
     }
@@ -118,9 +115,7 @@ class PlayerCharDetailsFragment : Fragment() {
             GeneralUtils.textToNumber(kaourProgressString)
         )
         if (context != null) {
-            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
-            user?.playerChars?.add(newPlayer)
-            ShrdPrfsUtils.saveUserData(context!!, user!!)
+            UserUtils.saveNewPlayer(context!!,newPlayer)
             findNavController().popBackStack()
         }
     }
