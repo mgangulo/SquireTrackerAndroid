@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.CharactersFragmentDirections
 import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
+import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.DialogUtils
+import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 
 class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:PlayerChar, val context: Context)
     : RecyclerView.Adapter<PlayerAdapter.ViewHolder>(){
@@ -62,6 +64,9 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>,val currentChar:Playe
                         it.context.getString(R.string.yes_button),
                         DialogInterface.OnClickListener { dialog, which ->
                             if (adapterPosition >= 0 && adapterPosition < playerChars.size) {
+                                val user: UserGeneral? = ShrdPrfsUtils.getUserData(it.context)
+                                user?.playerChars?.removeAt(adapterPosition)
+                                ShrdPrfsUtils.saveUserData(it.context,user!!)
                                 playerChars.removeAt(adapterPosition)
                                 notifyDataSetChanged()
                             }
