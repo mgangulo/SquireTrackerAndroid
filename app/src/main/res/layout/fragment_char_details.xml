@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/character_name"
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top_btwn_elements">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/dais_progress"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top_btwn_elements">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/eirlyss_progress"
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top_btwn_elements">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/elsies_progress"
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top_btwn_elements">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.mabinogifanmade.squiretracker.utils.views.ClearableTextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/kaours_progress"

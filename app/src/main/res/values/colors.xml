@@ -9,4 +9,5 @@
     <color name="accept_green">#2AD684</color>
     <color name="cancel_red">#AA252B</color>
     <color name="white">#FFFFFF</color>
+    <color name="gray_icon">#BCBFBA</color>
 </resources>
