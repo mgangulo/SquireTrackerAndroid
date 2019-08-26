@@ -39,6 +39,15 @@ class PlayerChar(var charName: String,
         )
     }
 
+    fun setSquireProgress(squire: Squire,progress:Int) {
+        squireProgress.put(
+            squire.id,
+            ConversationUtils.getNumberInSequence(
+                progress,
+                squire.sequenceConvo.length)
+        )
+    }
+
     override fun equals(other: Any?): Boolean {
         if (other!=null && other is PlayerChar){
             return other.charName.toLowerCase().equals(this@PlayerChar.charName.toLowerCase())

@@ -106,7 +106,8 @@ class SquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var
             nextAccept.setOnClickListener(View.OnClickListener {
                 val squire: Squire = squireList.get(adapterPosition)
                 val user:UserGeneral? = ShrdPrfsUtils.getUserData(context)
-                user?.getCurrentCharacter()?.incSquireProgress(squire)
+                user?.getCurrentCharacter()?.setSquireProgress(
+                    squire,squireProgressPreview.get(squire.id)!!+1!!)
                 ShrdPrfsUtils.saveUserData(context,user!!)
                 YoYo.with(Techniques.FadeInRight)
                     .duration(700)
