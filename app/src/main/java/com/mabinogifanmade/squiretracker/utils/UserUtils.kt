@@ -62,5 +62,9 @@ class UserUtils {
             }
             ShrdPrfsUtils.saveUserData(context, user!!)
         }
+
+        fun getCurrentCharProgressForSquire(context: Context, squireID:Int): Int {
+            return getCurrentCharPlayer(context).squireProgress.get(squireID)!!
+        }
     }
 }
