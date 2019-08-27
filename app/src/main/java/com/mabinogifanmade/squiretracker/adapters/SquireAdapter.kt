@@ -115,7 +115,6 @@ class SquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var
                 setSquireText(this,squire,
                     user.getCurrentCharacter().squireProgress.get(squire.id)!!)
             })
-            //TODO: Actually put a menu here instead of going to the fragment
             infoButton.setOnClickListener {
                 val action =
                     MainFragmentDirections.actionNavHomeToSquireDetailsFragment(squireList.get(adapterPosition))

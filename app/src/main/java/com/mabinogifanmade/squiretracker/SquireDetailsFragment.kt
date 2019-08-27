@@ -7,8 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 import com.mabinogifanmade.squiretracker.squiredata.Squire
+import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
+import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_squire_details.*
 
@@ -27,6 +31,7 @@ private const val ARG_PARAM2 = "param2"
 class SquireDetailsFragment : Fragment() {
     val args: SquireDetailsFragmentArgs by navArgs()
     lateinit var squire: Squire
+    lateinit var squireProgressPreview: HashMap<Int,Int>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,17 +50,46 @@ class SquireDetailsFragment : Fragment() {
         if (context != null) {
             squire = args.squire
             squireName.setText(squire.squireName)
+            squireProgressPreview = UserUtils.getCurrentCharPlayer(context!!).squireProgress
             val progress:Int = UserUtils.getCurrentCharProgressForSquire(context!!,squire.id)
-            sequenceText.setText(
-                ConversationUtils.translateCurrentAbv(squire,false,progress)
+            setSquireText(progress)
+            next.setOnClickListener(View.OnClickListener {
+                setSquireText(squireProgressPreview.get(squire.id)!!+1)
+            })
+            previous.setOnClickListener(View.OnClickListener {
+                setSquireText(squireProgressPreview.get(squire.id)!!-1)
+            })
+            nextAccept.setOnClickListener(View.OnClickListener {
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                user?.getCurrentCharacter()?.setSquireProgress(
+                    squire,squireProgressPreview.get(squire.id)!!+1!!)
+                ShrdPrfsUtils.saveUserData(context!!,user!!)
+                YoYo.with(Techniques.FadeInRight)
+                    .duration(700)
+                    .playOn(sequenceRelative);
+                setSquireText(
+                    user.getCurrentCharacter().squireProgress.get(squire.id)!!)
+            })
+        }
+    }
+
+    private fun setSquireText(progress: Int) {
+        if (context!=null) {
+            val index: Int = ConversationUtils.getNumberInSequence(progress, squire.sequenceConvo.length)
+            sequenceText.text = context!!.getString(
+                R.string.number_sequence,
+                (index + 1),
+                ConversationUtils.translateCurrentAbv(squire, false, progress)
             )
-            if (squire.hasHint){
-                hintText.setText(
-                    ConversationUtils.translateCurrentAbv(squire,true,progress)
+            squireProgressPreview.put(squire.id, index)
+            if (squire.hasHint) {
+                hintText.visibility = View.VISIBLE
+                hintText.text = context!!.getString(
+                    R.string.hint,
+                    ConversationUtils.translateCurrentAbv(squire, true, progress)
                 )
-                hintText.visibility=View.VISIBLE
             } else {
-                hintText.visibility=View.GONE
+                hintText.visibility = View.GONE
             }
         }
     }
