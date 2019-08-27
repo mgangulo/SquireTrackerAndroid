@@ -1,6 +1,7 @@
 package com.mabinogifanmade.squiretracker.utils
 
 import android.content.Context
+import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 
@@ -65,6 +66,20 @@ class UserUtils {
 
         fun getCurrentCharProgressForSquire(context: Context, squireID:Int): Int {
             return getCurrentCharPlayer(context).squireProgress.get(squireID)!!
+        }
+
+        fun setCurrentCharSquireProgress(context: Context, squire: Squire, progress:Int):Boolean{
+            try {
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                user?.getCurrentCharacter()?.setSquireProgress(
+                    squire, progress
+                )
+                ShrdPrfsUtils.saveUserData(context!!, user!!)
+                return true
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+            return false
         }
     }
 }

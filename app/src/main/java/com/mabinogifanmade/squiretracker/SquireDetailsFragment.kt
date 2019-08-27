@@ -132,15 +132,9 @@ class SquireDetailsFragment : Fragment() {
                     else -> false
                 }
                 textLayout?.error = if (isValid) null else getString(R.string.progress_error_msg,squire.sequenceConvo.length)
-                if (isValid){
-                    val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
-                    user?.getCurrentCharacter()?.setSquireProgress(
-                        squire, input!!-1
-                    )
-                    ShrdPrfsUtils.saveUserData(context!!, user!!)
+                if (isValid && UserUtils.setCurrentCharSquireProgress(context!!,squire,input!!-1)){
                     setSquireText(input!!-1)
                     dialog.dismiss()
-
                 }
             }
         }
