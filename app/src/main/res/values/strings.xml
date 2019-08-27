@@ -35,6 +35,7 @@
     <string name="elsies_progress">Elsie\'s Progress</string>
     <string name="eirlyss_progress">Eirlys\'s Progress</string>
     <string name="dais_progress">Dai\'s Progress</string>
+    <string name="squire_name_progress">%1$s\'s Progress</string>
     <string name="name_empty_error">You need to enter a name</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="delete_char_message">Are you sure you want to delete %1$s?</string>
@@ -43,8 +44,10 @@
     <string name="delete_with_one_char">You need to have at least one character to use this app!</string>
     <string name="progress_error_msg">Please put a number between 1 and %1$d</string>
     <string name="character_exist_error">This character already exists</string>
-    <string name="set_progress_number">Set progress number</string>
+    <string name="set_progress_number">Set progress</string>
     <string name="find_sequence_number">Find Sequence Number</string>
     <string name="see_special_conversation_options">See Special Conversation Options</string>
     <string name="see_full_sequence">See Full Sequence</string>
+    <string name="submit_button">Submit</string>
+    <string name="cancel_button">Cancel</string>
 </resources>

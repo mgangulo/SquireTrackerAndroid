@@ -1,14 +1,19 @@
 package com.mabinogifanmade.squiretracker
 
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
@@ -31,7 +36,7 @@ private const val ARG_PARAM2 = "param2"
 class SquireDetailsFragment : Fragment() {
     val args: SquireDetailsFragmentArgs by navArgs()
     lateinit var squire: Squire
-    lateinit var squireProgressPreview: HashMap<Int,Int>
+    lateinit var squireProgressPreview: HashMap<Int, Int>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,30 +56,35 @@ class SquireDetailsFragment : Fragment() {
             squire = args.squire
             squireName.setText(squire.squireName)
             squireProgressPreview = UserUtils.getCurrentCharPlayer(context!!).squireProgress
-            val progress:Int = UserUtils.getCurrentCharProgressForSquire(context!!,squire.id)
+            val progress: Int = UserUtils.getCurrentCharProgressForSquire(context!!, squire.id)
             setSquireText(progress)
             next.setOnClickListener(View.OnClickListener {
-                setSquireText(squireProgressPreview.get(squire.id)!!+1)
+                setSquireText(squireProgressPreview.get(squire.id)!! + 1)
             })
             previous.setOnClickListener(View.OnClickListener {
-                setSquireText(squireProgressPreview.get(squire.id)!!-1)
+                setSquireText(squireProgressPreview.get(squire.id)!! - 1)
             })
             nextAccept.setOnClickListener(View.OnClickListener {
                 val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
                 user?.getCurrentCharacter()?.setSquireProgress(
-                    squire,squireProgressPreview.get(squire.id)!!+1!!)
-                ShrdPrfsUtils.saveUserData(context!!,user!!)
+                    squire, squireProgressPreview.get(squire.id)!! + 1!!
+                )
+                ShrdPrfsUtils.saveUserData(context!!, user!!)
                 YoYo.with(Techniques.FadeInRight)
                     .duration(700)
                     .playOn(sequenceRelative);
                 setSquireText(
-                    user.getCurrentCharacter().squireProgress.get(squire.id)!!)
+                    user.getCurrentCharacter().squireProgress.get(squire.id)!!
+                )
             })
+            setNumber.setOnClickListener {
+                showDialogInput()
+            }
         }
     }
 
     private fun setSquireText(progress: Int) {
-        if (context!=null) {
+        if (context != null) {
             val index: Int = ConversationUtils.getNumberInSequence(progress, squire.sequenceConvo.length)
             sequenceText.text = context!!.getString(
                 R.string.number_sequence,
@@ -90,6 +100,41 @@ class SquireDetailsFragment : Fragment() {
                 )
             } else {
                 hintText.visibility = View.GONE
+            }
+        }
+    }
+
+    fun showDialogInput() {
+        if (context != null && activity != null) {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+            val inflater = activity!!.layoutInflater
+            val dialogView = inflater.inflate(R.layout.dialog_input, null)
+            builder.setView(dialogView)
+            val dialog: AlertDialog = builder.create()
+            dialog.setTitle(R.string.set_progress_number)
+            val editText: TextInputEditText = dialogView.findViewById(R.id.inputEdit)
+            val textLayout: TextInputLayout = dialogView.findViewById(R.id.inputLayout)
+            textLayout.setHint(getString(R.string.squire_name_progress, squire.squireName))
+            editText.inputType= InputType.TYPE_CLASS_NUMBER
+            editText.setText((UserUtils.getCurrentCharProgressForSquire(context!!,squire.id)+1).toString())
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, context!!.getText(R.string.submit_button),
+                DialogInterface.OnClickListener { dialog, which ->
+                })
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context!!.getText(R.string.cancel_button),
+                DialogInterface.OnClickListener { dialog, which ->
+                    dialog.dismiss()
+                })
+            dialog.show()
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                val input:Int? = editText.text.toString().toIntOrNull()
+                val isValid = when(input!=null){
+                    true ->  input in 1..squire.sequenceConvo.length
+                    else -> false
+                }
+                textLayout?.error = if (isValid) null else getString(R.string.progress_error_msg,squire.sequenceConvo.length)
+                if (isValid){
+                    dialog.dismiss()
+                }
             }
         }
     }
