@@ -16,6 +16,7 @@
         android:textAlignment="center"
         android:gravity="center"
         android:id="@+id/levelTitle"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:padding="@dimen/convo_table_padding"/>
 
 </LinearLayout>

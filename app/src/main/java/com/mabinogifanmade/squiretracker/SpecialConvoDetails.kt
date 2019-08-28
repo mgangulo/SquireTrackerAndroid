@@ -33,6 +33,6 @@ class SpecialConvoDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val squire: Squire = args.squire
-        specialConvoRecycler.adapter = SpecialConvoAdapter(context!!,squire.specialOptions)
+        specialConvoRecycler.adapter = SpecialConvoAdapter(context!!,squire.specialOptions,squire.hasHint)
     }
 }

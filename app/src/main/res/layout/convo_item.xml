@@ -30,7 +30,8 @@
         android:text="10.85"
         android:gravity="center"
         android:textAlignment="center"
-        android:id="@+id/percentText"/>
+        android:id="@+id/numberText"
+        android:padding="@dimen/convo_table_padding"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="0dp"
@@ -42,7 +43,8 @@
         android:text="10.85"
         android:gravity="center"
         android:textAlignment="center"
-        android:id="@+id/hintText"/>
+        android:id="@+id/hintText"
+        android:padding="@dimen/convo_table_padding"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="0dp"
@@ -55,6 +57,7 @@
         android:gravity="center"
         android:textAlignment="center"
         android:id="@+id/sequenceText"
+        android:padding="@dimen/convo_table_padding"
         />
 
     <View
