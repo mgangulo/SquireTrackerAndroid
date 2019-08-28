@@ -1,6 +1,7 @@
 package com.mabinogifanmade.squiretracker.adapters
 
 import android.content.Context
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,15 +62,21 @@ class SpecialConvoAdapter(val context: Context, val dataHash: HashMap<Int, Array
     override fun onBindViewHolder(holder: SpecialConvoAdapter.ViewHolder, position: Int) {
         val data:Any = convoList[position]
         if (data is Int){
-            holder.levelTitle?.setText(context.getString(R.string.level_text,data))
+            holder.levelTitle?.setText(context.getString(R.string.level_text,data.toString()))
         }else if (data is Array<*>) {
             holder.percentText?.setText(data[0].toString())
             holder.hintText?.setText(data[1].toString())
             holder.sequenceText?.setText(data[2].toString())
+            holder.percentText?.setTypeface(holder.percentText!!.getTypeface(), Typeface.BOLD)
+            holder.hintText?.setTypeface(holder.percentText!!.getTypeface(), Typeface.BOLD)
+            holder.sequenceText?.setTypeface(holder.percentText!!.getTypeface(), Typeface.BOLD)
         } else if (data is SpecialOption){
             holder.percentText?.setText(data.percent.toString())
             holder.hintText?.setText(data.hint)
             holder.sequenceText?.setText(data.convoText)
+            holder.percentText?.setTypeface(holder.percentText!!.getTypeface(), Typeface.NORMAL)
+            holder.hintText?.setTypeface(holder.percentText!!.getTypeface(), Typeface.NORMAL)
+            holder.sequenceText?.setTypeface(holder.percentText!!.getTypeface(), Typeface.NORMAL)
         }
     }
 
