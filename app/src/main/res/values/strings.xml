@@ -50,4 +50,8 @@
     <string name="see_full_sequence">See Full Sequence</string>
     <string name="submit_button">Submit</string>
     <string name="cancel_button">Cancel</string>
+    <string name="hint_text">Hint</string>
+    <string name="word_text">Word</string>
+    <string name="percent_text">%</string>
+    <string name="level_text">Level %1$d</string>
 </resources>
