@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.R
-import com.mabinogifanmade.squiretracker.squiredata.SpecialOption
+import com.mabinogifanmade.squiretracker.squiredata.Squire
+import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 
-class SpecialConvoAdapter(
+class ConvoAdapter(
     val context: Context,
-    dataHash: HashMap<Int, ArrayList<SpecialOption>>,
-    val hasHint: Boolean
+    val squire: Squire
 ) :
-    RecyclerView.Adapter<SpecialConvoAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ConvoAdapter.ViewHolder>() {
     private var size: Int = 0
     private val headerPos: ArrayList<Int> = ArrayList()
 
@@ -23,9 +23,9 @@ class SpecialConvoAdapter(
     private val DATA_NO_HINT_VIEW_TYPE:Int = R.layout.convo_item_no_hint
     private val HEADER_VIEW_TYPE:Int = R.layout.level_squire_item
 
-    private val convoList: ArrayList<Any> = transformHashToArray(dataHash)
 
-    private fun transformHashToArray(dataSquire: HashMap<Int, ArrayList<SpecialOption>>): ArrayList<Any> {
+
+    /*private fun transformHashToArray(dataSquire: HashMap<Int, ArrayList<SpecialOption>>): ArrayList<Any> {
         val list: ArrayList<Any> = ArrayList()
         for (i in dataSquire.keys.sorted()) {
             list.add(i)
@@ -41,10 +41,10 @@ class SpecialConvoAdapter(
             }
         }
         return list
-    }
+    }*/
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialConvoAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConvoAdapter.ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 viewType,
@@ -55,36 +55,38 @@ class SpecialConvoAdapter(
     }
 
     override fun getItemCount(): Int {
-        return when (size < 0) {
-            true -> 0
-            else -> size
-        }
+        return squire.sequenceConvo.length+2
     }
 
-    override fun onBindViewHolder(holder: SpecialConvoAdapter.ViewHolder, position: Int) {
-        val data:Any = convoList[position]
-        if (data is Int){
-            holder.levelTitle?.setText(context.getString(R.string.level_text,data.toString()))
-        }else if (data is Array<*>) {
-            holder.percentText?.setText(data[0].toString())
-            holder.hintText?.setText(data[1].toString())
-            holder.sequenceText?.setText(data[2].toString())
-            holder.percentText?.setTypeface(holder.percentText!!.getTypeface(), Typeface.BOLD)
+    override fun onBindViewHolder(holder: ConvoAdapter.ViewHolder, position: Int) {
+
+        if (position==0){
+            holder.levelTitle?.setText(squire.squireName)
+        }else if (position==1) {
+            holder.numberText?.setText(context!!.getString(R.string.sequence_text))
+            holder.hintText?.setText(context!!.getString(R.string.hint_text))
+            holder.sequenceText?.setText(context!!.getString(R.string.word_text))
+            holder.numberText?.setTypeface(holder.numberText!!.getTypeface(), Typeface.BOLD)
             holder.hintText?.setTypeface(holder.hintText!!.getTypeface(), Typeface.BOLD)
             holder.sequenceText?.setTypeface(holder.sequenceText!!.getTypeface(), Typeface.BOLD)
-        } else if (data is SpecialOption){
-            holder.percentText?.setText(data.percent.toString())
-            holder.hintText?.setText(data.hint)
-            holder.sequenceText?.setText(data.convoText)
-            holder.percentText?.setTypeface(null, Typeface.NORMAL)
+        } else {
+            val pos:Int = position-2;
+            holder.numberText?.setText((pos+1).toString())
+            holder.hintText?.setText(
+                ConversationUtils.translateAbv(squire.sequenceHint[pos])
+            )
+            holder.sequenceText?.setText(
+                ConversationUtils.translateAbv(squire.sequenceConvo[pos])
+            )
+            holder.numberText?.setTypeface(null, Typeface.NORMAL)
             holder.hintText?.setTypeface(null, Typeface.NORMAL)
             holder.sequenceText?.setTypeface(null, Typeface.NORMAL)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (!(position in headerPos)){
-            return when (hasHint){
+        if (position!=0){
+            return when (squire.hasHint){
                 false -> DATA_NO_HINT_VIEW_TYPE
                 else -> DATA_VIEW_TYPE
             }
@@ -95,7 +97,7 @@ class SpecialConvoAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val levelTitle:AppCompatTextView? = itemView.findViewById(R.id.levelTitle)
-        val percentText:AppCompatTextView? = itemView.findViewById(R.id.numberText)
+        val numberText:AppCompatTextView? = itemView.findViewById(R.id.numberText)
         val hintText: AppCompatTextView? = itemView.findViewById(R.id.hintText)
         val sequenceText: AppCompatTextView? = itemView.findViewById(R.id.sequenceText)
     }

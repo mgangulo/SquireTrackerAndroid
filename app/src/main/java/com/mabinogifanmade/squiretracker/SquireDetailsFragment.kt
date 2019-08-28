@@ -87,6 +87,12 @@ class SquireDetailsFragment : Fragment() {
                         actionSquireDetailsFragmentToSpecialConvoDetails(squire)
                 Navigation.findNavController(it).navigate(action)
             }
+            sequenceConvo.setOnClickListener {
+                val action =
+                    SquireDetailsFragmentDirections.
+                        actionSquireDetailsFragmentToConvoDetails(squire)
+                Navigation.findNavController(it).navigate(action)
+            }
         }
     }
 

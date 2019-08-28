@@ -73,12 +73,29 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_squireDetailsFragment_to_convoDetails"
+            app:destination="@id/convoDetails"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/specialConvoDetails"
         android:name="com.mabinogifanmade.squiretracker.SpecialConvoDetails"
         android:label="fragment_special_convo_details"
         tools:layout="@layout/fragment_special_convo_details" >
+        <argument
+            android:name="squire"
+            app:argType="com.mabinogifanmade.squiretracker.squiredata.Squire" />
+    </fragment>
+    <fragment
+        android:id="@+id/convoDetails"
+        android:name="com.mabinogifanmade.squiretracker.ConvoDetails"
+        android:label="ConvoDetails" >
         <argument
             android:name="squire"
             app:argType="com.mabinogifanmade.squiretracker.squiredata.Squire" />
