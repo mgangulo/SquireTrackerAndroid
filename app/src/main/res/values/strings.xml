@@ -55,4 +55,5 @@
     <string name="sequence_text">Seq</string>
     <string name="percent_text">%</string>
     <string name="level_text">Level %1$s</string>
+    <string name="reset_button">Reset</string>
 </resources>

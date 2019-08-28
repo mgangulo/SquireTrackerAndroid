@@ -17,5 +17,6 @@
     <dimen name="margin_top_btwn_elements">8dp</dimen>
     <dimen name="dialog_padding">24dp</dimen>
     <dimen name="convo_table_padding">3dp</dimen>
+    <dimen name="big_title">20sp</dimen>
 
 </resources>

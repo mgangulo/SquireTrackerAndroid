@@ -82,6 +82,15 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_squireDetailsFragment_to_findSeqHintFragment"
+            app:destination="@id/findSeqHintFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/specialConvoDetails"
@@ -96,6 +105,15 @@
         android:id="@+id/convoDetails"
         android:name="com.mabinogifanmade.squiretracker.ConvoDetails"
         android:label="ConvoDetails" >
+        <argument
+            android:name="squire"
+            app:argType="com.mabinogifanmade.squiretracker.squiredata.Squire" />
+    </fragment>
+    <fragment
+        android:id="@+id/findSeqHintFragment"
+        android:name="com.mabinogifanmade.squiretracker.FindSeqHintFragment"
+        android:label="fragment_find_seq_hint"
+        tools:layout="@layout/fragment_find_seq_hint">
         <argument
             android:name="squire"
             app:argType="com.mabinogifanmade.squiretracker.squiredata.Squire" />

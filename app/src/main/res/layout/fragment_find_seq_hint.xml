@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FindSeqHintFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/squireNameTitle"
+        android:text="Squire name"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:textSize="@dimen/big_title"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="@dimen/margin_top_btwn_elements">
+
+        <TableRow>
+            <TextView
+                android:text="@string/hint_text"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+            <TextView
+                android:text="@string/word_text"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+        </TableRow>
+
+        <TableRow>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/hintSpinner1"/>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/seqSpinner1"/>
+        </TableRow>
+
+        <TableRow>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/hintSpinner2"/>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/seqSpinner2"/>
+        </TableRow>
+
+        <TableRow>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/hintSpinner3"/>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/seqSpinner3"/>
+        </TableRow>
+
+        <TableRow>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/hintSpinner4"/>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/seqSpinner4"/>
+        </TableRow>
+
+        <TableRow>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/hintSpinner5"/>
+            <Spinner
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/seqSpinner5"/>
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/searchResults"
+        android:text="Search result here"
+        android:layout_marginTop="@dimen/margin_top_btwn_elements"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/side_margin"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/suggestions"
+        android:text="Suggestion here"
+        android:layout_marginTop="@dimen/margin_top_btwn_elements"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/side_margin"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resetButton"
+        app:backgroundTint="@color/colorPrimary"
+        android:text="@string/reset_button"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/margin_top_btwn_elements"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/side_margin"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveButton"
+        app:backgroundTint="@color/accept_green"
+        android:text="@string/save_button"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/margin_top_btwn_elements"
+        android:layout_marginBottom="@dimen/margin_top_btwn_elements"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:visibility="gone"/>
+</LinearLayout>
