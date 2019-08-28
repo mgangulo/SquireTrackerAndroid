@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.mabinogifanmade.squiretracker.adapters.ConvoAdapter
 import com.mabinogifanmade.squiretracker.squiredata.Squire
+import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_convo_details.*
 
 
@@ -34,7 +35,8 @@ class ConvoDetails : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val squire: Squire = args.squire
         if (context!=null) {
-            convoRecycler.adapter = ConvoAdapter(context!!, squire)
+            convoRecycler.adapter = ConvoAdapter(context!!, squire,
+                UserUtils.getCurrentCharProgressForSquire(context!!,squire.id))
         }
     }
 }
