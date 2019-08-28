@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.mabinogifanmade.squiretracker.adapters.SpecialConvoAdapter
+import com.mabinogifanmade.squiretracker.squiredata.Squire
+import kotlinx.android.synthetic.main.fragment_special_convo_details.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,5 +30,9 @@ class SpecialConvoDetails : Fragment() {
         return inflater.inflate(R.layout.fragment_special_convo_details, container, false)
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val squire: Squire = args.squire
+        specialConvoRecycler.adapter = SpecialConvoAdapter(context!!,squire.specialOptions)
+    }
 }

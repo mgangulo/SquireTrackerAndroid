@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/side_margin"
-    android:layout_marginEnd="@dimen/side_margin">
+    android:layout_marginEnd="@dimen/side_margin"
+    android:layout_marginTop="@dimen/top_margin">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/colorPrimary"
+        android:background="@color/colorPrimary"
         android:textColor="@color/white"
         android:text="Lvl 1"
         android:textAlignment="center"
         android:gravity="center"
-        android:id="@+id/levelTitle"/>
+        android:id="@+id/levelTitle"
+        android:textStyle="bold"/>
 
 </LinearLayout>

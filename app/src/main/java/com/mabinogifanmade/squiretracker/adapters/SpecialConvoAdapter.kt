@@ -11,7 +11,7 @@ import com.mabinogifanmade.squiretracker.squiredata.SpecialOption
 
 class SpecialConvoAdapter(val context: Context, val dataHash: HashMap<Int, ArrayList<SpecialOption>>) :
     RecyclerView.Adapter<SpecialConvoAdapter.ViewHolder>() {
-    val size: Int = 0
+    var size: Int = 0
     val headerPos: ArrayList<Int> = ArrayList()
     val DATA_VIEW_TYPE:Int = 0
     val HEADER_VIEW_TYPE:Int = 1
@@ -19,17 +19,17 @@ class SpecialConvoAdapter(val context: Context, val dataHash: HashMap<Int, Array
 
     private fun transformHashToArray(dataSquire: HashMap<Int, ArrayList<SpecialOption>>): ArrayList<Any> {
         val list: ArrayList<Any> = ArrayList()
-        for (i in dataSquire.keys) {
+        for (i in dataSquire.keys.sorted()) {
             list.add(i)
             headerPos.add(list.size - 1)
-            size.inc()
+            size = size.inc()
             list.add(arrayOf(context!!.getString(R.string.percent_text),
                 context!!.getString(R.string.hint_text),
-                context!!.getString(R.string.percent_text)))
-            size.inc()
+                context!!.getString(R.string.word_text)))
+            size = size.inc()
             for (option in dataSquire.get(i)!!.iterator()) {
                 list.add(option)
-                size.inc()
+                size = size.inc()
             }
         }
         return list
@@ -61,7 +61,7 @@ class SpecialConvoAdapter(val context: Context, val dataHash: HashMap<Int, Array
     override fun onBindViewHolder(holder: SpecialConvoAdapter.ViewHolder, position: Int) {
         val data:Any = convoList[position]
         if (data is Int){
-            holder.levelTitle?.setText(data.toString())
+            holder.levelTitle?.setText(context.getString(R.string.level_text,data))
         }else if (data is Array<*>) {
             holder.percentText?.setText(data[0].toString())
             holder.hintText?.setText(data[1].toString())
