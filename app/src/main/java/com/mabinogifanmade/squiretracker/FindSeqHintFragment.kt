@@ -112,7 +112,7 @@ class FindSeqHintFragment : Fragment() {
             2 -> canSearchSeq(1) && hintSpinner2.selectedItemPosition != 0 && seqSpinner2.selectedItemPosition != 0
             3 -> canSearchSeq(2) && hintSpinner3.selectedItemPosition != 0 && seqSpinner3.selectedItemPosition != 0
             4 -> canSearchSeq(3) && hintSpinner4.selectedItemPosition != 0 && seqSpinner4.selectedItemPosition != 0
-            5 -> canSearchSeq(5) && hintSpinner5.selectedItemPosition != 0 && seqSpinner5.selectedItemPosition != 0
+            5 -> canSearchSeq(4) && hintSpinner5.selectedItemPosition != 0 && seqSpinner5.selectedItemPosition != 0
             else -> false
         }
     }
