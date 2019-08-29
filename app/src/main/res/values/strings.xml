@@ -57,4 +57,8 @@
     <string name="level_text">Level %1$s</string>
     <string name="reset_button">Reset</string>
     <string name="select_text">Select</string>
+    <string name="no_matches_found">No matches found</string>
+    <string name="found_number_matches">Found %1$s matches</string>
+    <string name="try_these">Next input could be one of these: %1$s</string>
+    <string name="found_match">Found one match at #%1$s</string>
 </resources>

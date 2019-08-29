@@ -123,9 +123,9 @@ class ConversationUtils {
         fun searchOnSeqWithHint(
             keySeq: String?,
             seq: String,
-            hint: String,
             keyHint: String,
-            findHint: Boolean
+            hint: String,
+            hintSuggestion: Boolean
         ): SearchResult {
             val nextOptionBuilder: StringBuilder = StringBuilder()
             val wordHint = Pattern.compile(keyHint)
@@ -136,7 +136,7 @@ class ConversationUtils {
                 val nextOptionIndex = getNumberInSequence(matchHint.end(), hint.length)
                 if (!keySeq.isNullOrEmpty()) {
                     if (seq.substring(matchHint.start(), matchHint.end() - 1).equals(keySeq)) {
-                        if (!findHint)
+                        if (!hintSuggestion)
                             nextOptionBuilder.append(seq[nextOptionIndex])
                         else
                             nextOptionBuilder.append(hint[nextOptionIndex])
@@ -154,7 +154,7 @@ class ConversationUtils {
             nextOptionBuilder.clear()
             for (i in 1..nextUnique.size) {
                 nextOptionBuilder.append(nextUnique[i])
-                if (i != nextUnique.size - 1)
+                if (i < nextUnique.size - 1)
                     nextOptionBuilder.append(", ")
             }
             return if (nextOption.length > 1) {
