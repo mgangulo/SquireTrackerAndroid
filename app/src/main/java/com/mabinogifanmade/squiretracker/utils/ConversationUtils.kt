@@ -78,7 +78,7 @@ class ConversationUtils {
                     true -> squire.sequenceHint
                     false -> squire.sequenceConvo
                 }
-            return translateAbv(currentSequence[getNumberInSequence(progress,currentSequence.length)])
+            return translateAbv(currentSequence[getNumberInSequence(progress, currentSequence.length)])
         }
 
         fun getNumberInSequence(progress: Int, lenght: Int): Int {
@@ -107,49 +107,62 @@ class ConversationUtils {
             return list
         }
 
-        fun searchOnSeq(key:String,seq:String):SearchResult{
-            val nextOptionBuilder:StringBuilder = StringBuilder()
+        fun searchOnSeq(key: String, seq: String): SearchResult {
+            val nextOptionBuilder: StringBuilder = StringBuilder()
             val word = Pattern.compile(key)
             val match = word.matcher(seq)
-            var matchPos:Int = 0
+            var matchPos: Int = 0
             while (match.find()) {
-                matchPos = match.start()+1
-                val nextOptionIndex = getNumberInSequence(match.end(),seq.length)
+                matchPos = match.start() + 1
+                val nextOptionIndex = getNumberInSequence(match.end(), seq.length)
                 nextOptionBuilder.append(seq[nextOptionIndex])
             }
-            val nextOption:String = nextOptionBuilder.toString()
-            val nextUnique = getUniqueConvoList(nextOption)
-            nextOptionBuilder.clear()
-            for (s in nextUnique){
-                nextOptionBuilder.append(s).append(" ")
-            }
-            if (nextOption.length>1){
-                return SearchResult(nextOption.length,nextOptionBuilder.toString(),matchPos)
-            } else
-                return SearchResult(nextOption.length,nextOptionBuilder.toString())
+            return generateSearchResult(nextOptionBuilder, matchPos)
         }
 
-        fun searchOnSeqWithHint(keyHint:String,hint:String):SearchResult{
-            val nextOptionBuilder:StringBuilder = StringBuilder()
+        fun searchOnSeqWithHint(
+            keySeq: String?,
+            seq: String,
+            hint: String,
+            keyHint: String,
+            findHint: Boolean
+        ): SearchResult {
+            val nextOptionBuilder: StringBuilder = StringBuilder()
             val wordHint = Pattern.compile(keyHint)
             val matchHint = wordHint.matcher(hint)
-            var matchPos:Int = 0
+            var matchPos: Int = 0
             while (matchHint.find()) {
-                matchPos = matchHint.start()+1
-                val nextOptionIndex = getNumberInSequence(matchHint.end(),hint.length)
-                nextOptionBuilder.append(hint[nextOptionIndex])
+                matchPos = matchHint.start() + 1
+                val nextOptionIndex = getNumberInSequence(matchHint.end(), hint.length)
+                if (!keySeq.isNullOrEmpty()) {
+                    if (seq.substring(matchHint.start(), matchHint.end() - 1).equals(keySeq)) {
+                        if (!findHint)
+                            nextOptionBuilder.append(seq[nextOptionIndex])
+                        else
+                            nextOptionBuilder.append(hint[nextOptionIndex])
+                    }
+                } else {
+                    nextOptionBuilder.append(hint[nextOptionIndex])
+                }
             }
-            val nextOption:String = nextOptionBuilder.toString()
+            return generateSearchResult(nextOptionBuilder, matchPos)
+        }
+
+        fun generateSearchResult(nextOptionBuilder: StringBuilder, matchPos: Int): SearchResult {
+            val nextOption: String = nextOptionBuilder.toString()
             val nextUnique = getUniqueConvoList(nextOption)
             nextOptionBuilder.clear()
-            for (s in nextUnique){
-                nextOptionBuilder.append(s).append(" ")
+            for (i in 1..nextUnique.size) {
+                nextOptionBuilder.append(nextUnique[i])
+                if (i != nextUnique.size - 1)
+                    nextOptionBuilder.append(", ")
             }
-            if (nextOption.length>1){
-                return SearchResult(nextOption.length,nextOptionBuilder.toString(),matchPos)
+            return if (nextOption.length > 1) {
+                SearchResult(nextOption.length, nextOptionBuilder.toString(), matchPos)
             } else
-                return SearchResult(nextOption.length,nextOptionBuilder.toString())
+                SearchResult(nextOption.length, nextOptionBuilder.toString())
         }
-    }
 
+
+    }
 }
