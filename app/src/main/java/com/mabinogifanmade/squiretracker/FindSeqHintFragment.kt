@@ -123,8 +123,8 @@ class FindSeqHintFragment : Fragment() {
             else -> canSearchSeq(pos)
         }
         if (canSearch) {
-            val keyHint: String = getHintSearchString(pos)
-            val keySeq: String = getSeqSearchString(pos)
+            val keyHint: String = getHintSearchString(pos).replace("-","")
+            val keySeq: String = getSeqSearchString(pos).replace("-","")
             val result: SearchResult =
                 ConversationUtils.searchOnSeqWithHint(
                     keySeq,

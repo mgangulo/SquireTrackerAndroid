@@ -142,7 +142,7 @@ class ConversationUtils {
                             nextOptionBuilder.append(hint[nextOptionIndex])
                     }
                 } else {
-                    nextOptionBuilder.append(hint[nextOptionIndex])
+                    nextOptionBuilder.append(seq[nextOptionIndex])
                 }
             }
             return generateSearchResult(nextOptionBuilder, matchPos)
@@ -152,7 +152,7 @@ class ConversationUtils {
             val nextOption: String = nextOptionBuilder.toString()
             val nextUnique = getUniqueConvoList(nextOption)
             nextOptionBuilder.clear()
-            for (i in 1..nextUnique.size) {
+            for (i in 0..nextUnique.size-1) {
                 nextOptionBuilder.append(nextUnique[i])
                 if (i < nextUnique.size - 1)
                     nextOptionBuilder.append(", ")
