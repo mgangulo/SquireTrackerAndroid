@@ -176,7 +176,8 @@
         android:text="Search result here"
         android:layout_marginTop="@dimen/side_margin"
         android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginEnd="@dimen/side_margin"/>
+        android:layout_marginEnd="@dimen/side_margin"
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -188,7 +189,8 @@
         android:text="Suggestion here"
         android:layout_marginTop="@dimen/margin_top_btwn_elements"
         android:layout_marginStart="@dimen/side_margin"
-        android:layout_marginEnd="@dimen/side_margin"/>
+        android:layout_marginEnd="@dimen/side_margin"
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -202,7 +204,8 @@
         android:layout_marginTop="@dimen/margin_top_btwn_elements"
         android:layout_marginStart="@dimen/side_margin"
         android:layout_marginEnd="@dimen/side_margin"
-        android:textSize="@dimen/big_title"/>
+        android:textSize="@dimen/big_title"
+        android:visibility="gone"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"

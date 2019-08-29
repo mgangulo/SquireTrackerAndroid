@@ -1,7 +1,6 @@
 package com.mabinogifanmade.squiretracker
 
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,8 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.mabinogifanmade.squiretracker.squiredata.Squire
-import com.mabinogifanmade.squiretracker.utils.ConversationUtils
+import com.mabinogifanmade.squiretracker.utils.GeneralUtils
 import kotlinx.android.synthetic.main.fragment_find_seq_hint.*
-import java.util.stream.Collectors
 
 
 /**
@@ -34,24 +32,12 @@ class FindSeqHintFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         squire = args.squire
-        val hintSpinnerList: ArrayList<String> = arrayListOf(getString(R.string.select_text))
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            hintSpinnerList.addAll(
-                squire.sequenceHint
-                    .chars().distinct()
-                    .mapToObj({ c -> ConversationUtils.translateAbv(c.toChar()) })
-                    .collect(Collectors.toList())
-            )
-        } else {
-            val charSet: Set<Char> = squire.sequenceHint.toCharArray().toSet()
-            for (c in charSet) {
-                hintSpinnerList.add(ConversationUtils.translateAbv(c))
-            }
-        }
+
+        squireNameTitle.setText(squire.squireName)
         ArrayAdapter<String>(
             context!!,
             android.R.layout.simple_spinner_item,
-            hintSpinnerList
+            getSpinnerList(squire.sequenceHint)
         ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             hintSpinner1.adapter = it
@@ -60,5 +46,23 @@ class FindSeqHintFragment : Fragment() {
             hintSpinner4.adapter = it
             hintSpinner5.adapter = it
         }
+        ArrayAdapter<String>(
+            context!!,
+            android.R.layout.simple_spinner_item,
+            getSpinnerList(squire.sequenceConvo)
+        ).also {
+            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            seqSpinner1.adapter = it
+            seqSpinner2.adapter = it
+            seqSpinner3.adapter = it
+            seqSpinner4.adapter = it
+            seqSpinner5.adapter = it
+        }
+    }
+
+    private fun getSpinnerList(convoString: String): ArrayList<String> {
+        val spinnerList: ArrayList<String> = arrayListOf(getString(R.string.select_text))
+        spinnerList.addAll(GeneralUtils.getUniqueValuesList(convoString))
+        return spinnerList
     }
 }
