@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.mabinogifanmade.squiretracker.squiredata.Squire
@@ -58,6 +59,13 @@ class FindSeqHintFragment : Fragment() {
             seqSpinner4.adapter = it
             seqSpinner5.adapter = it
         }
+        setSpinnerListener(hintSpinner1,1)
+    }
+
+    private fun setSpinnerListener(spinner: Spinner?, i: Int) {
+        spinner?.setOnItemClickListener { parent, view, position, id ->
+
+        }
     }
 
     private fun getSpinnerList(convoString: String): ArrayList<String> {
@@ -68,22 +76,22 @@ class FindSeqHintFragment : Fragment() {
 
     private fun canSearchHint(pos:Int):Boolean{
         return when(pos){
-            1  -> true
-            2 -> hintSpinner1.selectedItemPosition!=0 && seqSpinner1.selectedItemPosition!=0
+            1  -> hintSpinner1.selectedItemPosition!=0
+            2 -> canSearchHint(1) && seqSpinner1.selectedItemPosition!=0
             3 -> canSearchHint(2) && hintSpinner2.selectedItemPosition!=0 && seqSpinner2.selectedItemPosition!=0
             4 -> canSearchHint(3) && hintSpinner3.selectedItemPosition!=0 && seqSpinner3.selectedItemPosition!=0
-            5 -> canSearchHint(5) && hintSpinner5.selectedItemPosition!=0 && seqSpinner5.selectedItemPosition!=0
+            5 -> canSearchHint(4) && hintSpinner5.selectedItemPosition!=0 && seqSpinner5.selectedItemPosition!=0
             else -> false
         }
     }
 
     private fun canSearchSeq(pos:Int):Boolean{
         return when(pos){
-            1  -> hintSpinner1.selectedItemPosition!=0
-            2 ->  canSearchSeq(1) && seqSpinner1.selectedItemPosition!=0 && hintSpinner2.selectedItemPosition!=0
-            3 -> canSearchSeq(2) && seqSpinner2.selectedItemPosition!=0 && hintSpinner3.selectedItemPosition!=0
-            4 -> canSearchSeq(3) && seqSpinner3.selectedItemPosition!=0 && hintSpinner4.selectedItemPosition!=0
-            5 -> canSearchSeq(5) && seqSpinner4.selectedItemPosition!=0 && hintSpinner5.selectedItemPosition!=0
+            1  -> hintSpinner1.selectedItemPosition!=0 && seqSpinner1.selectedItemPosition!=0
+            2 ->  canSearchSeq(1) && hintSpinner2.selectedItemPosition!=0 && seqSpinner2.selectedItemPosition!=0
+            3 -> canSearchSeq(2) && hintSpinner3.selectedItemPosition!=0 && seqSpinner3.selectedItemPosition!=0
+            4 -> canSearchSeq(3) && hintSpinner4.selectedItemPosition!=0 && seqSpinner4.selectedItemPosition!=0
+            5 -> canSearchSeq(5) && hintSpinner5.selectedItemPosition!=0 && seqSpinner5.selectedItemPosition!=0
             else -> false
         }
     }
