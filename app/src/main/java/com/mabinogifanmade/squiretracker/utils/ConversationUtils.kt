@@ -1,9 +1,12 @@
 package com.mabinogifanmade.squiretracker.utils
 
-import android.content.Context
+import android.os.Build
 import com.mabinogifanmade.squiretracker.squiredata.Conversation
+import com.mabinogifanmade.squiretracker.squiredata.SearchResult
 import com.mabinogifanmade.squiretracker.squiredata.Squire
-import com.mabinogifanmade.squiretracker.userdata.UserGeneral
+import java.util.regex.Pattern
+import java.util.stream.Collectors
+
 
 class ConversationUtils {
     companion object {
@@ -84,6 +87,68 @@ class ConversationUtils {
                 (progress < 0) -> (lenght - 1)
                 else -> 0
             }
+        }
+
+        fun getUniqueConvoList(convoString: String): ArrayList<String> {
+            val list: ArrayList<String> = ArrayList()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                list.addAll(
+                    convoString
+                        .chars().distinct()
+                        .mapToObj({ c -> translateAbv(c.toChar()) })
+                        .collect(Collectors.toList())
+                )
+            } else {
+                val charSet: Set<Char> = convoString.toCharArray().toSet()
+                for (c in charSet) {
+                    list.add(translateAbv(c))
+                }
+            }
+            return list
+        }
+
+        fun searchOnSeq(key:String,seq:String):SearchResult{
+            val nextOptionBuilder:StringBuilder = StringBuilder()
+            val word = Pattern.compile(key)
+            val match = word.matcher(seq)
+            var matchPos:Int = 0
+            while (match.find()) {
+                matchPos = match.start()+1
+                val nextOptionIndex = getNumberInSequence(match.end(),seq.length)
+                nextOptionBuilder.append(seq[nextOptionIndex])
+            }
+            val nextOption:String = nextOptionBuilder.toString()
+            val nextUnique = getUniqueConvoList(nextOption)
+            nextOptionBuilder.clear()
+            for (s in nextUnique){
+                nextOptionBuilder.append(s).append(" ")
+            }
+            if (nextOption.length>1){
+                return SearchResult(nextOption.length,nextOptionBuilder.toString(),matchPos)
+            } else
+                return SearchResult(nextOption.length,nextOptionBuilder.toString())
+        }
+
+        fun searchOnSeqWithHint(keyHint:String,hint:String):SearchResult{
+            val nextOptionBuilder:StringBuilder = StringBuilder()
+            val wordHint = Pattern.compile(keyHint)
+            val matchHint = wordHint.matcher(hint)
+            var matchPos:Int = 0
+            while (matchHint.find()) {
+                matchPos = matchHint.start()+1
+                val nextOptionIndex = getNumberInSequence(matchHint.end(),hint.length)
+                nextOptionBuilder.append(hint[nextOptionIndex])
+            }
+            val nextOption:String = nextOptionBuilder.toString()
+            val nextUnique = getUniqueConvoList(nextOption)
+            nextOptionBuilder.clear()
+            for (s in nextUnique){
+                nextOptionBuilder.append(s).append(" ")
+            }
+            if (nextOption.length>1){
+                return SearchResult(nextOption.length,nextOptionBuilder.toString(),matchPos)
+            } else
+                return SearchResult(nextOption.length,nextOptionBuilder.toString())
         }
     }
 

@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.mabinogifanmade.squiretracker.squiredata.Squire
-import com.mabinogifanmade.squiretracker.utils.GeneralUtils
+import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 import kotlinx.android.synthetic.main.fragment_find_seq_hint.*
 
 
@@ -62,7 +62,29 @@ class FindSeqHintFragment : Fragment() {
 
     private fun getSpinnerList(convoString: String): ArrayList<String> {
         val spinnerList: ArrayList<String> = arrayListOf(getString(R.string.select_text))
-        spinnerList.addAll(GeneralUtils.getUniqueValuesList(convoString))
+        spinnerList.addAll(ConversationUtils.getUniqueConvoList(convoString))
         return spinnerList
+    }
+
+    private fun canSearchHint(pos:Int):Boolean{
+        return when(pos){
+            1  -> true
+            2 -> hintSpinner1.selectedItemPosition!=0 && seqSpinner1.selectedItemPosition!=0
+            3 -> canSearchHint(2) && hintSpinner2.selectedItemPosition!=0 && seqSpinner2.selectedItemPosition!=0
+            4 -> canSearchHint(3) && hintSpinner3.selectedItemPosition!=0 && seqSpinner3.selectedItemPosition!=0
+            5 -> canSearchHint(5) && hintSpinner5.selectedItemPosition!=0 && seqSpinner5.selectedItemPosition!=0
+            else -> false
+        }
+    }
+
+    private fun canSearchSeq(pos:Int):Boolean{
+        return when(pos){
+            1  -> hintSpinner1.selectedItemPosition!=0
+            2 ->  canSearchSeq(1) && seqSpinner1.selectedItemPosition!=0 && hintSpinner2.selectedItemPosition!=0
+            3 -> canSearchSeq(2) && seqSpinner2.selectedItemPosition!=0 && hintSpinner3.selectedItemPosition!=0
+            4 -> canSearchSeq(3) && seqSpinner3.selectedItemPosition!=0 && hintSpinner4.selectedItemPosition!=0
+            5 -> canSearchSeq(5) && seqSpinner4.selectedItemPosition!=0 && hintSpinner5.selectedItemPosition!=0
+            else -> false
+        }
     }
 }
