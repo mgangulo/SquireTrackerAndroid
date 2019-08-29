@@ -84,9 +84,7 @@ class FindSeqHintFragment : Fragment() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when (isHint) {
-                    true -> performSearch(i, isHint)
-                }
+                performSearch(i, isHint)
             }
         })
     }
