@@ -185,13 +185,13 @@ class FindSeqHintFragment : Fragment() {
         val stringBuilder: StringBuilder = StringBuilder()
         return when (pos) {
             1 -> stringBuilder.append(ConversationUtils.translateOption(seqSpinner1.selectedItem.toString())).toString()
-            2 -> stringBuilder.append(getHintSearchString(1))
+            2 -> stringBuilder.append(getSeqSearchString(1))
                 .append(ConversationUtils.translateOption(seqSpinner2.selectedItem.toString())).toString()
-            3 -> stringBuilder.append(getHintSearchString(2))
+            3 -> stringBuilder.append(getSeqSearchString(2))
                 .append(ConversationUtils.translateOption(seqSpinner3.selectedItem.toString())).toString()
-            4 -> stringBuilder.append(getHintSearchString(3))
+            4 -> stringBuilder.append(getSeqSearchString(3))
                 .append(ConversationUtils.translateOption(seqSpinner4.selectedItem.toString())).toString()
-            5 -> stringBuilder.append(getHintSearchString(4))
+            5 -> stringBuilder.append(getSeqSearchString(4))
                 .append(ConversationUtils.translateOption(seqSpinner5.selectedItem.toString())).toString()
             else -> ""
         }

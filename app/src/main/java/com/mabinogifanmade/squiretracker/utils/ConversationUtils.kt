@@ -114,7 +114,7 @@ class ConversationUtils {
             var matchPos: Int = 0
             while (match.find()) {
                 matchPos = match.start() + 1
-                val nextOptionIndex = getNumberInSequence(match.end(), seq.length)
+                val nextOptionIndex = getNumberInSequence(match.end()-1, seq.length)
                 nextOptionBuilder.append(seq[nextOptionIndex])
             }
             return generateSearchResult(nextOptionBuilder, matchPos)
@@ -133,13 +133,21 @@ class ConversationUtils {
             var matchPos: Int = 0
             while (matchHint.find()) {
                 matchPos = matchHint.start() + 1
-                val nextOptionIndex = getNumberInSequence(matchHint.end(), hint.length)
+                val nextOptionIndex = getNumberInSequence(matchHint.end()-1, hint.length)
                 if (!keySeq.isNullOrEmpty()) {
-                    if (seq.substring(matchHint.start(), matchHint.end()).equals(keySeq)) {
-                        if (!hintSuggestion)
+                    var seqSub = seq.substring(matchHint.start(), matchHint.end())
+                    if (seqSub.length > keySeq.length){
+                        seqSub = seqSub.substring(0,keySeq.length)
+                    }
+                    if (seqSub.equals(keySeq))
+
+                    if (seqSub.equals(keySeq)) {
+                        if (!hintSuggestion) {
                             nextOptionBuilder.append(seq[nextOptionIndex])
-                        else
+                        }
+                        else {
                             nextOptionBuilder.append(hint[nextOptionIndex])
+                        }
                     }
                 } else {
                     nextOptionBuilder.append(seq[nextOptionIndex])
@@ -148,7 +156,7 @@ class ConversationUtils {
             return generateSearchResult(nextOptionBuilder, matchPos)
         }
 
-        fun generateSearchResult(nextOptionBuilder: StringBuilder, matchPos: Int): SearchResult {
+        private fun generateSearchResult(nextOptionBuilder: StringBuilder, matchPos: Int): SearchResult {
             val nextOption: String = nextOptionBuilder.toString()
             val nextUnique = getUniqueConvoList(nextOption)
             nextOptionBuilder.clear()
@@ -163,6 +171,7 @@ class ConversationUtils {
                 SearchResult(nextOption.length, nextOptionBuilder.toString())
         }
 
+        private fun getSearchSubstring(key:String,sub:String){}
 
     }
 }
