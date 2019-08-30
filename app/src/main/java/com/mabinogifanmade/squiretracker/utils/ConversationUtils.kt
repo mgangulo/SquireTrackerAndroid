@@ -113,8 +113,8 @@ class ConversationUtils {
             val match = word.matcher(seq)
             var matchPos: Int = 0
             while (match.find()) {
-                matchPos = match.start() + 1
-                val nextOptionIndex = getNumberInSequence(match.end()-1, seq.length)
+                matchPos = getNumberInSequence(match.start(), seq.length) + 1
+                val nextOptionIndex = getNumberInSequence(match.end() - 1, seq.length)
                 nextOptionBuilder.append(seq[nextOptionIndex])
             }
             return generateSearchResult(nextOptionBuilder, matchPos)
@@ -132,23 +132,22 @@ class ConversationUtils {
             val matchHint = wordHint.matcher(hint)
             var matchPos: Int = 0
             while (matchHint.find()) {
-                matchPos = matchHint.start() + 1
-                val nextOptionIndex = getNumberInSequence(matchHint.end()-1, hint.length)
+                matchPos = getNumberInSequence(matchHint.start(), hint.length) + 1
+                val nextOptionIndex = getNumberInSequence(matchHint.end() - 1, hint.length)
                 if (!keySeq.isNullOrEmpty()) {
                     var seqSub = seq.substring(matchHint.start(), matchHint.end())
-                    if (seqSub.length > keySeq.length){
-                        seqSub = seqSub.substring(0,keySeq.length)
+                    if (seqSub.length > keySeq.length) {
+                        seqSub = seqSub.substring(0, keySeq.length)
                     }
                     if (seqSub.equals(keySeq))
 
-                    if (seqSub.equals(keySeq)) {
-                        if (!hintSuggestion) {
-                            nextOptionBuilder.append(seq[nextOptionIndex])
+                        if (seqSub.equals(keySeq)) {
+                            if (!hintSuggestion) {
+                                nextOptionBuilder.append(seq[nextOptionIndex])
+                            } else {
+                                nextOptionBuilder.append(hint[nextOptionIndex])
+                            }
                         }
-                        else {
-                            nextOptionBuilder.append(hint[nextOptionIndex])
-                        }
-                    }
                 } else {
                     nextOptionBuilder.append(seq[nextOptionIndex])
                 }
@@ -160,18 +159,16 @@ class ConversationUtils {
             val nextOption: String = nextOptionBuilder.toString()
             val nextUnique = getUniqueConvoList(nextOption)
             nextOptionBuilder.clear()
-            for (i in 0..nextUnique.size-1) {
+            for (i in 0..nextUnique.size - 1) {
                 nextOptionBuilder.append(nextUnique[i])
                 if (i < nextUnique.size - 1)
                     nextOptionBuilder.append(", ")
             }
             return if (nextOption.length > 1) {
-                SearchResult(nextOption.length, nextOptionBuilder.toString(), matchPos)
-            } else
                 SearchResult(nextOption.length, nextOptionBuilder.toString())
+            } else
+                SearchResult(nextOption.length, nextOptionBuilder.toString(), matchPos)
         }
-
-        private fun getSearchSubstring(key:String,sub:String){}
 
     }
 }
