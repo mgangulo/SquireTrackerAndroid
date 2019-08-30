@@ -135,7 +135,7 @@ class ConversationUtils {
                 matchPos = matchHint.start() + 1
                 val nextOptionIndex = getNumberInSequence(matchHint.end(), hint.length)
                 if (!keySeq.isNullOrEmpty()) {
-                    if (seq.substring(matchHint.start(), matchHint.end() - 1).equals(keySeq)) {
+                    if (seq.substring(matchHint.start(), matchHint.end()).equals(keySeq)) {
                         if (!hintSuggestion)
                             nextOptionBuilder.append(seq[nextOptionIndex])
                         else
