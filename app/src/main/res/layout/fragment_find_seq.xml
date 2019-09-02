@@ -30,51 +30,78 @@
             android:layout_marginEnd="@dimen/side_margin"
             android:layout_marginStart="@dimen/side_margin"
             android:layout_marginTop="@dimen/margin_top_btwn_elements"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/side_margin"
+        android:layout_marginStart="@dimen/side_margin">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/guideStart"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/guideEnd"
+            app:layout_constraintGuide_percent="0.75" />
+
         <Spinner
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/seqSpinner1"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/side_margin"
-            android:layout_marginStart="@dimen/side_margin"
-            android:layout_marginTop="@dimen/side_margin"/>
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/side_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"/>
         <Spinner
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/seqSpinner2"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/side_margin"
-            android:layout_marginStart="@dimen/side_margin"
-            android:layout_marginTop="@dimen/side_margin"/>
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/side_margin"
+            app:layout_constraintTop_toBottomOf="@id/seqSpinner1"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"/>
         <Spinner
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/seqSpinner3"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/side_margin"
-            android:layout_marginStart="@dimen/side_margin"
-            android:layout_marginTop="@dimen/side_margin"/>
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/side_margin"
+            app:layout_constraintTop_toBottomOf="@id/seqSpinner2"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"/>
         <Spinner
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/seqSpinner4"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/side_margin"
-            android:layout_marginStart="@dimen/side_margin"
-            android:layout_marginTop="@dimen/side_margin"/>
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/side_margin"
+            app:layout_constraintTop_toBottomOf="@id/seqSpinner3"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"/>
         <Spinner
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/seqSpinner5"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/side_margin"
-            android:layout_marginStart="@dimen/side_margin"
-            android:layout_marginTop="@dimen/side_margin"/>
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/side_margin"
+            app:layout_constraintTop_toBottomOf="@id/seqSpinner4"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:layout_width="match_parent"
