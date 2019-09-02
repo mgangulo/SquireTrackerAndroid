@@ -114,7 +114,7 @@ class ConversationUtils {
             var matchPos: Int = 0
             while (match.find()) {
                 matchPos = getNumberInSequence(match.start(), seq.length) + 1
-                val nextOptionIndex = getNumberInSequence(match.end() , seq.length)
+                val nextOptionIndex = getNumberInSequence(match.end(), seq.length)
                 nextOptionBuilder.append(seq[nextOptionIndex])
             }
             return generateSearchResult(nextOptionBuilder, matchPos)
@@ -154,19 +154,77 @@ class ConversationUtils {
                     nextOptionBuilder.append(seq[nextOptionIndex])
                 }
             }
+            val circIndex = searchCircularHint(keySeq,seq,keyHint,hint,hintSuggestion,nextOptionBuilder)
+            matchPos = when(circIndex){
+                -1 -> matchPos
+                else -> circIndex
+            }
             return generateSearchResult(nextOptionBuilder, matchPos)
+        }
+
+        private fun searchCircularHint(
+            keySeq: String?,
+            seq: String,
+            keyHint: String,
+            hint: String,
+            hintSuggestion: Boolean,
+            nextOptionBuilder: StringBuilder
+        ): Int {
+            val lastSeq = seq.substring(seq.length - keyHint.length, seq.length)
+            val circSeqStartIndex = lastSeq.length - 1
+            val circSeqEndIndex = lastSeq.length
+            val circularSeq = StringBuilder()
+                .append(lastSeq)
+                .append(seq.substring(0, keyHint.length))
+                .toString()
+            val lastHint = hint.substring(hint.length - keyHint.length, hint.length)
+            val circHintStartIndex = lastHint.length - 1
+            val circHintEndIndex = lastHint.length
+            val circularHint = StringBuilder()
+                .append(lastHint)
+                .append(hint.substring(0, keyHint.length))
+                .toString()
+            val wordHint = Pattern.compile(keyHint)
+            val matchHint = wordHint.matcher(circularHint)
+            while (matchHint.find()) {
+                if (circHintStartIndex in matchHint.start()..matchHint.end() &&
+                    circHintEndIndex in matchHint.start()..matchHint.end()) {
+                    if (!keySeq.isNullOrEmpty()) {
+                        var seqSub = circularSeq.substring(matchHint.start(), matchHint.end())
+                        if (seqSub.length > keySeq.length) {
+                            seqSub = seqSub.substring(0, keySeq.length)
+                        }
+                        if (seqSub.equals(keySeq))
+
+                            if (seqSub.equals(keySeq)) {
+                                if (!hintSuggestion) {
+                                    val nextOptionIndex = getNumberInSequence(matchHint.end() - 1, circularSeq.length)
+                                    nextOptionBuilder.append(circularSeq[nextOptionIndex])
+                                } else {
+                                    val nextOptionIndex = getNumberInSequence(matchHint.end(), circularHint.length)
+                                    nextOptionBuilder.append(circularHint[nextOptionIndex])
+                                }
+                            }
+                    } else {
+                        val nextOptionIndex = getNumberInSequence(matchHint.end() - 1, circularSeq.length)
+                        nextOptionBuilder.append(circularSeq[nextOptionIndex])
+                    }
+                    return 100
+                }
+            }
+            return -1
         }
 
         private fun generateSearchResult(nextOptionBuilder: StringBuilder, matchPos: Int): SearchResult {
             val nextOption: String = nextOptionBuilder.toString()
-                val nextUnique = getUniqueConvoList(nextOption)
-                nextOptionBuilder.clear()
-                for (i in 0..nextUnique.size - 1) {
-                    nextOptionBuilder.append(nextUnique[i])
-                    if (i < nextUnique.size - 1)
-                        nextOptionBuilder.append(", ")
-                }
-                return if (nextOption.length > 1) {
+            val nextUnique = getUniqueConvoList(nextOption)
+            nextOptionBuilder.clear()
+            for (i in 0..nextUnique.size - 1) {
+                nextOptionBuilder.append(nextUnique[i])
+                if (i < nextUnique.size - 1)
+                    nextOptionBuilder.append(", ")
+            }
+            return if (nextOption.length > 1) {
                 SearchResult(nextOption.length, nextOptionBuilder.toString())
             } else
                 SearchResult(nextOption.length, nextOptionBuilder.toString(), matchPos)
