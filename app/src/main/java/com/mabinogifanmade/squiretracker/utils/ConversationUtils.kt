@@ -122,7 +122,7 @@ class ConversationUtils {
             var matchPos: Int = 0
             while (match.find()) {
                 matchPos = getNumberInSequence(match.end()-1, seq.length) + 1
-                val nextOptionIndex = getNumberInSequence(match.end()-1, seq.length)
+                val nextOptionIndex = getNumberInSequence(match.end(), seq.length)
                 nextOptionBuilder.append(seq[nextOptionIndex])
             }
             val circIndex = searchCircular(key,seq, nextOptionBuilder)
@@ -138,21 +138,25 @@ class ConversationUtils {
             seq: String,
             nextOptionBuilder: StringBuilder
         ): Int {
-            val lastSeq = seq.substring(seq.length - keySeq.length, seq.length)
-            val circSeqStartIndex = lastSeq.length - 1
-            val circSeqEndIndex = lastSeq.length
-            val circularSeq = StringBuilder()
-                .append(lastSeq)
-                .append(seq.substring(0, keySeq.length))
-                .toString()
-            val word = Pattern.compile(keySeq)
-            val match = word.matcher(seq)
-            while (match.find()) {
-                if (circSeqStartIndex in match.start()..match.end() &&
-                    circSeqEndIndex in match.start()..match.end()) {
-                    val nextOptionIndex = getNumberInSequence(match.end() - 1, circularSeq.length)
-                    nextOptionBuilder.append(circularSeq[nextOptionIndex])
-                    return getNumberInSequenceWithOffset(seq.length+match.end()-1,seq.length)+1
+            if (keySeq.length>1) {
+                val lastSeq = seq.substring(seq.length - keySeq.length, seq.length)
+                val circSeqStartIndex = lastSeq.length - 1
+                val circSeqEndIndex = lastSeq.length
+                val circularSeq = StringBuilder()
+                    .append(lastSeq)
+                    .append(seq.substring(0, keySeq.length))
+                    .toString()
+                val word = Pattern.compile(keySeq)
+                val match = word.matcher(circularSeq)
+                while (match.find()) {
+                    if (circSeqStartIndex in match.start()..match.end() &&
+                        circSeqEndIndex in match.start()..match.end()
+                    ) {
+                        val nextOptionIndex = getNumberInSequence(match.end() - 1, circularSeq.length)
+                        nextOptionBuilder.append(circularSeq[nextOptionIndex])
+                        return getNumberInSequenceWithOffset(
+                            seq.length - circSeqEndIndex + match.end(), seq.length) + 1
+                    }
                 }
             }
             return -1
@@ -247,7 +251,8 @@ class ConversationUtils {
                         val nextOptionIndex = getNumberInSequence(matchHint.end() - 1, circularSeq.length)
                         nextOptionBuilder.append(circularSeq[nextOptionIndex])
                     }
-                    return getNumberInSequenceWithOffset(hint.length+matchHint.end()-1,hint.length)+1
+                    return getNumberInSequenceWithOffset(
+                        hint.length - circHintEndIndex +matchHint.end()-1,hint.length)+1
                 }
             }
             return -1

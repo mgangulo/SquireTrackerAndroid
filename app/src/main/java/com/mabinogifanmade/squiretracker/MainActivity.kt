@@ -117,5 +117,15 @@ MainFragment.OnFragmentInteractionListener {
                     ", "+ConversationUtils.translateAbv(Squire.EIRLYS.sequenceConvo.get(i))+"\n"
         }
         Log.v("SquireConvo",s)
+        s = "Elsie\n"
+        for (i in 0..Squire.ELSIE.sequenceConvo.length-1){
+            s= s +ConversationUtils.translateAbv(Squire.ELSIE.sequenceConvo.get(i))+"\n"
+        }
+        Log.v("SquireConvo",s)
+        s = "Kaour\n"
+        for (i in 0..Squire.KAOUR.sequenceConvo.length-1){
+            s= s +ConversationUtils.translateAbv(Squire.KAOUR.sequenceConvo.get(i))+"\n"
+        }
+        Log.v("SquireConvo",s)
     }
 }
