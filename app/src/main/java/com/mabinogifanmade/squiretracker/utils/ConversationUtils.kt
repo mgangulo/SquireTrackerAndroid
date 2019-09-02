@@ -140,13 +140,13 @@ class ConversationUtils {
             val matchHint = wordHint.matcher(hint)
             var matchPos: Int = 0
             while (matchHint.find()) {
-                matchPos = getNumberInSequence(matchHint.start(), hint.length) + 1
-                if (!keySeq.isNullOrEmpty()) {
-                    var seqSub = seq.substring(matchHint.start(), matchHint.end())
-                    if (seqSub.length > keySeq.length) {
-                        seqSub = seqSub.substring(0, keySeq.length)
-                    }
-                    if (seqSub.equals(keySeq))
+                matchPos = getNumberInSequence(matchHint.end()-1, hint.length) + 1
+                    if (!keySeq.isNullOrEmpty()) {
+                        var seqSub = seq.substring(matchHint.start(), matchHint.end())
+                        if (seqSub.length > keySeq.length) {
+                            seqSub = seqSub.substring(0, keySeq.length)
+                        }
+                        if (seqSub.equals(keySeq))
 
                         if (seqSub.equals(keySeq)) {
                             if (!hintSuggestion) {
@@ -220,7 +220,7 @@ class ConversationUtils {
                     if (circHintStartIndex< matchHint.end()-1){
 
                     }
-                    return getNumberInSequenceWithOffset(hint.length+matchHint.start(),hint.length)+1
+                    return getNumberInSequenceWithOffset(hint.length+matchHint.end()-1,hint.length)+1
                 }
             }
             return -1
