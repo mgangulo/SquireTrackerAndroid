@@ -121,10 +121,10 @@ class FindSeqHintFragment : Fragment() {
     private fun canSearchHint(pos: Int): Boolean {
         return when (pos) {
             1 -> hintSpinner1.selectedItemPosition != 0
-            2 -> canSearchHint(1) && seqSpinner1.selectedItemPosition != 0
-            3 -> canSearchHint(2) && hintSpinner2.selectedItemPosition != 0 && seqSpinner2.selectedItemPosition != 0
-            4 -> canSearchHint(3) && hintSpinner3.selectedItemPosition != 0 && seqSpinner3.selectedItemPosition != 0
-            5 -> canSearchHint(4) && hintSpinner5.selectedItemPosition != 0 && seqSpinner5.selectedItemPosition != 0
+            2 -> canSearchHint(1) && seqSpinner1.selectedItemPosition != 0 && hintSpinner2.selectedItemPosition != 0
+            3 -> canSearchHint(2) && seqSpinner2.selectedItemPosition != 0 && hintSpinner3.selectedItemPosition != 0
+            4 -> canSearchHint(3) && seqSpinner3.selectedItemPosition != 0 && hintSpinner4.selectedItemPosition != 0
+            5 -> canSearchHint(4) && seqSpinner4.selectedItemPosition != 0 && hintSpinner5.selectedItemPosition != 0
             else -> false
         }
     }
@@ -145,9 +145,8 @@ class FindSeqHintFragment : Fragment() {
         var isHint = false
         var canSearch = false
         while (pos in 1..5){
-            isHint = canSearchHint(pos)
-            val isSeq = canSearchSeq(pos)
-            if (isHint || isSeq){
+            if (canSearchHint(pos) || canSearchSeq(pos)){
+                isHint = canSearchHint(pos) && !canSearchSeq(pos)
                 canSearch = true
                 break
             }
