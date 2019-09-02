@@ -9,10 +9,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.mabinogifanmade.squiretracker.squiredata.SearchResult
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
+import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_find_seq_hint.*
 
 
@@ -23,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_find_seq_hint.*
 class FindSeqHintFragment : Fragment() {
     val args: FindSeqHintFragmentArgs by navArgs()
     private lateinit var squire: Squire
+    private var searchPos:Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +74,26 @@ class FindSeqHintFragment : Fragment() {
         setSpinnerListener(seqSpinner3)
         setSpinnerListener(seqSpinner4)
         setSpinnerListener(seqSpinner5)
+        resetButton.setOnClickListener {
+            if (results.visibility == View.GONE) {
+                hintSpinner1.setSelection(0)
+                hintSpinner2.setSelection(0)
+                hintSpinner3.setSelection(0)
+                hintSpinner4.setSelection(0)
+                hintSpinner5.setSelection(0)
+                seqSpinner1.setSelection(0)
+                seqSpinner2.setSelection(0)
+                seqSpinner3.setSelection(0)
+                seqSpinner4.setSelection(0)
+                seqSpinner5.setSelection(0)
+            }
+        }
+        saveButton.setOnClickListener {
+            if (results.visibility == View.VISIBLE) {
+                UserUtils.setCurrentCharSquireProgress(context!!, squire, searchPos)
+                findNavController().popBackStack()
+            }
+        }
     }
 
     private fun setSpinnerListener(spinner: Spinner?) {
@@ -151,14 +174,18 @@ class FindSeqHintFragment : Fragment() {
 
     private fun handleSearchResult(result: SearchResult) {
         if (result.matches == 1) {
+            searchPos = result.seqPos!!.dec()
             searchResults.visibility = View.GONE
             suggestions.visibility = View.GONE
             resetButton.visibility = View.GONE
             results.setText(getString(R.string.found_match, result.seqPos.toString()))
             results.visibility = View.VISIBLE
+            saveButton.visibility = View.VISIBLE
 
         } else if (result.matches > 1) {
+            searchPos = 0
             results.visibility = View.GONE
+            saveButton.visibility = View.GONE
             searchResults.setText(getString(R.string.found_number_matches, result.matches.toString()))
             suggestions.setText(getString(R.string.try_these, result.suggest))
             searchResults.visibility = View.VISIBLE
@@ -169,6 +196,8 @@ class FindSeqHintFragment : Fragment() {
     }
 
     private fun setNoMatchesView() {
+        searchPos = 0
+        saveButton.visibility = View.GONE
         suggestions.visibility = View.GONE
         results.visibility = View.GONE
         searchResults.setText(getString(R.string.no_matches_found))
