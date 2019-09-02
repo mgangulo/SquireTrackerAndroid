@@ -89,6 +89,14 @@ class ConversationUtils {
             }
         }
 
+        fun getNumberInSequenceWithOffset(progress: Int, lenght: Int): Int {
+            var progress2 = progress
+            while (progress2>lenght-1){
+                progress2 = progress2 - lenght - 1
+            }
+            return getNumberInSequence(progress2,lenght)
+        }
+
         fun getUniqueConvoList(convoString: String): ArrayList<String> {
             val list: ArrayList<String> = ArrayList()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -209,7 +217,10 @@ class ConversationUtils {
                         val nextOptionIndex = getNumberInSequence(matchHint.end() - 1, circularSeq.length)
                         nextOptionBuilder.append(circularSeq[nextOptionIndex])
                     }
-                    return 100
+                    if (circHintStartIndex< matchHint.end()-1){
+
+                    }
+                    return getNumberInSequenceWithOffset(hint.length+matchHint.start(),hint.length)+1
                 }
             }
             return -1
