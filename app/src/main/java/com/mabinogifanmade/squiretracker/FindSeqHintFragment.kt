@@ -61,19 +61,19 @@ class FindSeqHintFragment : Fragment() {
             seqSpinner4.adapter = it
             seqSpinner5.adapter = it
         }
-        setSpinnerListener(hintSpinner1, 1, true)
-        setSpinnerListener(hintSpinner2, 2, true)
-        setSpinnerListener(hintSpinner3, 3, true)
-        setSpinnerListener(hintSpinner4, 4, true)
-        setSpinnerListener(hintSpinner5, 5, true)
-        setSpinnerListener(seqSpinner1, 1, false)
-        setSpinnerListener(seqSpinner2, 2, false)
-        setSpinnerListener(seqSpinner3, 3, false)
-        setSpinnerListener(seqSpinner4, 4, false)
-        setSpinnerListener(seqSpinner5, 5, false)
+        setSpinnerListener(hintSpinner1)
+        setSpinnerListener(hintSpinner2)
+        setSpinnerListener(hintSpinner3)
+        setSpinnerListener(hintSpinner4)
+        setSpinnerListener(hintSpinner5)
+        setSpinnerListener(seqSpinner1)
+        setSpinnerListener(seqSpinner2)
+        setSpinnerListener(seqSpinner3)
+        setSpinnerListener(seqSpinner4)
+        setSpinnerListener(seqSpinner5)
     }
 
-    private fun setSpinnerListener(spinner: Spinner?, i: Int, isHint: Boolean) {
+    private fun setSpinnerListener(spinner: Spinner?) {
         spinner?.onItemSelectedListener=(object : AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
@@ -84,7 +84,7 @@ class FindSeqHintFragment : Fragment() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                performSearch(i, isHint)
+                performSearch()
             }
         })
     }
@@ -117,11 +117,21 @@ class FindSeqHintFragment : Fragment() {
         }
     }
 
-    private fun performSearch(pos: Int, isHint: Boolean) {
-        val canSearch: Boolean = when (isHint) {
-            true -> canSearchHint(pos)
-            else -> canSearchSeq(pos)
+    private fun performSearch() {
+        var pos:Int = 5
+        var isHint = false
+        var canSearch = false
+        while (pos in 1..5){
+            isHint = canSearchHint(pos)
+            val isSeq = canSearchSeq(pos)
+            if (isHint || isSeq){
+                canSearch = true
+                break
+            }
+            pos = pos.dec()
         }
+
+
         if (canSearch) {
             val keyHint: String = getHintSearchString(pos).replace("-","")
             val keySeq: String = getSeqSearchString(pos).replace("-","")
