@@ -94,9 +94,10 @@ class SquireDetailsFragment : Fragment() {
                 Navigation.findNavController(it).navigate(action)
             }
             findSequence.setOnClickListener {
-                val action =
-                    SquireDetailsFragmentDirections.
-                        actionSquireDetailsFragmentToFindSeqHintFragment(squire)
+                val action = when (squire.hasHint) {
+                    true -> SquireDetailsFragmentDirections.actionSquireDetailsFragmentToFindSeqHintFragment(squire)
+                    else -> SquireDetailsFragmentDirections.actionSquireDetailsFragmentToFindSeqFragment(squire)
+                }
                 Navigation.findNavController(it).navigate(action)
             }
         }
