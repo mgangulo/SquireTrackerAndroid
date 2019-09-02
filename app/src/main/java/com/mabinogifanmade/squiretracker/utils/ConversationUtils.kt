@@ -121,11 +121,41 @@ class ConversationUtils {
             val match = word.matcher(seq)
             var matchPos: Int = 0
             while (match.find()) {
-                matchPos = getNumberInSequence(match.start(), seq.length) + 1
-                val nextOptionIndex = getNumberInSequence(match.end(), seq.length)
+                matchPos = getNumberInSequence(match.end()-1, seq.length) + 1
+                val nextOptionIndex = getNumberInSequence(match.end()-1, seq.length)
                 nextOptionBuilder.append(seq[nextOptionIndex])
             }
+            val circIndex = searchCircular(key,seq, nextOptionBuilder)
+            matchPos = when(circIndex){
+                -1 -> matchPos
+                else -> circIndex
+            }
             return generateSearchResult(nextOptionBuilder, matchPos)
+        }
+
+        private fun searchCircular(
+            keySeq: String,
+            seq: String,
+            nextOptionBuilder: StringBuilder
+        ): Int {
+            val lastSeq = seq.substring(seq.length - keySeq.length, seq.length)
+            val circSeqStartIndex = lastSeq.length - 1
+            val circSeqEndIndex = lastSeq.length
+            val circularSeq = StringBuilder()
+                .append(lastSeq)
+                .append(seq.substring(0, keySeq.length))
+                .toString()
+            val word = Pattern.compile(keySeq)
+            val match = word.matcher(seq)
+            while (match.find()) {
+                if (circSeqStartIndex in match.start()..match.end() &&
+                    circSeqEndIndex in match.start()..match.end()) {
+                    val nextOptionIndex = getNumberInSequence(match.end() - 1, circularSeq.length)
+                    nextOptionBuilder.append(circularSeq[nextOptionIndex])
+                    return getNumberInSequenceWithOffset(seq.length+match.end()-1,seq.length)+1
+                }
+            }
+            return -1
         }
 
         fun searchOnSeqWithHint(
@@ -216,9 +246,6 @@ class ConversationUtils {
                     } else {
                         val nextOptionIndex = getNumberInSequence(matchHint.end() - 1, circularSeq.length)
                         nextOptionBuilder.append(circularSeq[nextOptionIndex])
-                    }
-                    if (circHintStartIndex< matchHint.end()-1){
-
                     }
                     return getNumberInSequenceWithOffset(hint.length+matchHint.end()-1,hint.length)+1
                 }
