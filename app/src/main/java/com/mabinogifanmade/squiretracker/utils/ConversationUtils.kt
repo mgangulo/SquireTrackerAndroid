@@ -251,8 +251,14 @@ class ConversationUtils {
                         val nextOptionIndex = getNumberInSequence(matchHint.end() - 1, circularSeq.length)
                         nextOptionBuilder.append(circularSeq[nextOptionIndex])
                     }
-                    return getNumberInSequenceWithOffset(
-                        hint.length - circHintEndIndex +matchHint.end()-1,hint.length)+1
+                    //Pos for next sequence
+                    if (hintSuggestion)
+                        return getNumberInSequenceWithOffset(
+                        hint.length - circHintEndIndex + matchHint.end()+1,hint.length)+1
+                    else
+                        //pos for current sequence
+                        return getNumberInSequenceWithOffset(
+                            hint.length - circHintEndIndex + matchHint.end(),hint.length)+1
                 }
             }
             return -1
