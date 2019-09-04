@@ -121,7 +121,7 @@ class ConversationUtils {
             val match = word.matcher(seq)
             var matchPos: Int = 0
             while (match.find()) {
-                matchPos = getNumberInSequence(match.end() - 1, seq.length) + 1
+                matchPos = getNumberInSequence(match.end(), seq.length) + 1
                 val nextOptionIndex = getNumberInSequence(match.end(), seq.length)
                 nextOptionBuilder.append(seq[nextOptionIndex])
             }
@@ -155,7 +155,7 @@ class ConversationUtils {
                         val nextOptionIndex = getNumberInSequence(match.end() - 1, circularSeq.length)
                         nextOptionBuilder.append(circularSeq[nextOptionIndex])
                         return getNumberInSequenceWithOffset(
-                            seq.length - circSeqEndIndex + match.end(), seq.length
+                            seq.length - circSeqEndIndex + match.end()+1, seq.length
                         ) + 1
                     }
                 }
