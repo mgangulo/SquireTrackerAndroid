@@ -148,12 +148,13 @@ class SquireDetailsFragment : Fragment() {
             dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                 val input:Int? = editText.text.toString().toIntOrNull()
                 val isValid = when(input!=null){
-                    true ->  input in 1..squire.sequenceConvo.length
+                    true ->  input > 1
                     else -> false
                 }
-                textLayout?.error = if (isValid) null else getString(R.string.progress_error_msg,squire.sequenceConvo.length)
-                if (isValid && UserUtils.setCurrentCharSquireProgress(context!!,squire,input!!-1)){
-                    setSquireText(input!!-1)
+                textLayout?.error = if (isValid) null else getString(R.string.progress_error_msg)
+                if (isValid && UserUtils.setCurrentCharSquireProgress(context!!,squire,
+                        ConversationUtils.getNumberInSequenceWithOffset(input!!-1,squire.sequenceConvo.length))){
+                    setSquireText(ConversationUtils.getNumberInSequenceWithOffset(input!!-1,squire.sequenceConvo.length))
                     dialog.dismiss()
                 }
             }

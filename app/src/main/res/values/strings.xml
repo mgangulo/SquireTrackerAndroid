@@ -42,7 +42,8 @@
     <string name="yes_button">Yes</string>
     <string name="no_button">No</string>
     <string name="delete_with_one_char">You need to have at least one character to use this app!</string>
-    <string name="progress_error_msg">Please put a number between 1 and %1$d</string>
+    <string name="progress_error_msg">Please put a number greater than 0</string>
+    <string name="progress_range_error_msg">Please put a number between 1 and %1$d</string>
     <string name="character_exist_error">This character already exists</string>
     <string name="set_progress_number">Set progress</string>
     <string name="find_sequence_number">Find Sequence Number</string>

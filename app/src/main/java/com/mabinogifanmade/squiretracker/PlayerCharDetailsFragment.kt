@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
+import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 import com.mabinogifanmade.squiretracker.utils.GeneralUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_char_details.*
@@ -119,10 +120,10 @@ class PlayerCharDetailsFragment : Fragment() {
         ) {
             val newPlayer = PlayerChar(
                 playerName, server,
-                daiProgress - 1,
-                eirlysProgress - 1,
-                elsieProgress - 1,
-                kaourProgress - 1
+                ConversationUtils.getNumberInSequenceWithOffset(daiProgress - 1, Squire.DAI.sequenceConvo.length),
+                ConversationUtils.getNumberInSequenceWithOffset(eirlysProgress - 1, Squire.EIRLYS.sequenceConvo.length),
+                ConversationUtils.getNumberInSequenceWithOffset(elsieProgress - 1, Squire.ELSIE.sequenceConvo.length),
+            ConversationUtils.getNumberInSequenceWithOffset(kaourProgress - 1, Squire.KAOUR.sequenceConvo.length)
             )
             if (context != null) {
                 if (!UserUtils.characterExist(context!!, newPlayer)) {
@@ -136,11 +137,11 @@ class PlayerCharDetailsFragment : Fragment() {
     }
 
     fun checkValidSquireProgress(progress: Int, layout: TextInputLayout, squire: Squire): Boolean {
-        if (progress >= 1 && progress <= squire.sequenceConvo.length) {
+        if (progress >= 1) {
             layout.setError(null)
             return true
         } else {
-            layout.setError(getString(R.string.progress_error_msg, squire.sequenceConvo.length))
+            layout.setError(getString(R.string.progress_error_msg))
             return false
         }
     }
