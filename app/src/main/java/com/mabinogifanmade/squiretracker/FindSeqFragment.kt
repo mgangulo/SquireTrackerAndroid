@@ -126,6 +126,7 @@ class FindSeqFragment : Fragment() {
             suggestions.setText(getString(R.string.try_these, result.suggest))
             searchResults.visibility = View.VISIBLE
             suggestions.visibility = View.VISIBLE
+            resetButton.visibility = View.VISIBLE
         } else {
             setNoMatchesView()
         }
@@ -138,6 +139,7 @@ class FindSeqFragment : Fragment() {
         results.visibility = View.GONE
         searchResults.setText(getString(R.string.no_matches_found))
         searchResults.visibility = View.VISIBLE
+        resetButton.visibility = View.VISIBLE
     }
 
     private fun getSpinnerList(convoString: String): ArrayList<String> {
