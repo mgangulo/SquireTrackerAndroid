@@ -1,4 +1,4 @@
-package com.mabinogifanmade.squiretracker
+package com.mabinogifanmade.squiretracker.activitiesfragments
 
 
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
+import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils

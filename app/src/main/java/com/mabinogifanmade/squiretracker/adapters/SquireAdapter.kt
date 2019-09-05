@@ -12,8 +12,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
-import com.mabinogifanmade.squiretracker.MainFragmentDirections
 import com.mabinogifanmade.squiretracker.R
+import com.mabinogifanmade.squiretracker.activitiesfragments.MainFragmentDirections
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils

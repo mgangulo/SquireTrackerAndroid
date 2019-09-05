@@ -1,4 +1,4 @@
-package com.mabinogifanmade.squiretracker
+package com.mabinogifanmade.squiretracker.activitiesfragments
 
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
@@ -25,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(),
-MainFragment.OnFragmentInteractionListener {
+    MainFragment.OnFragmentInteractionListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -39,11 +40,13 @@ MainFragment.OnFragmentInteractionListener {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawerLayout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        val navController = Navigation.findNavController(this,R.id.nav_host)
+        val navController = Navigation.findNavController(this, R.id.nav_host)
         appBarConfiguration = AppBarConfiguration(navController.graph,drawerLayout)
         navView.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)

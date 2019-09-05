@@ -1,4 +1,4 @@
-package com.mabinogifanmade.squiretracker
+package com.mabinogifanmade.squiretracker.activitiesfragments
 
 
 import android.os.Bundle
@@ -11,18 +11,14 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.squiredata.SearchResult
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
-import kotlinx.android.synthetic.main.fragment_find_seq_hint.*
+import kotlinx.android.synthetic.main.fragment_find_seq.*
 
-
-/**
- * A simple [Fragment] subclass.
- *
- */
-class FindSeqHintFragment : Fragment() {
+class FindSeqFragment : Fragment() {
     val args: FindSeqHintFragmentArgs by navArgs()
     private lateinit var squire: Squire
     private var searchPos:Int = 0
@@ -32,26 +28,12 @@ class FindSeqHintFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find_seq_hint, container, false)
+        return inflater.inflate(R.layout.fragment_find_seq, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         squire = args.squire
-
-        squireNameTitle.setText(squire.squireName)
-        ArrayAdapter<String>(
-            context!!,
-            android.R.layout.simple_spinner_item,
-            getSpinnerList(squire.sequenceHint)
-        ).also {
-            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            hintSpinner1.adapter = it
-            hintSpinner2.adapter = it
-            hintSpinner3.adapter = it
-            hintSpinner4.adapter = it
-            hintSpinner5.adapter = it
-        }
         ArrayAdapter<String>(
             context!!,
             android.R.layout.simple_spinner_item,
@@ -64,11 +46,6 @@ class FindSeqHintFragment : Fragment() {
             seqSpinner4.adapter = it
             seqSpinner5.adapter = it
         }
-        setSpinnerListener(hintSpinner1)
-        setSpinnerListener(hintSpinner2)
-        setSpinnerListener(hintSpinner3)
-        setSpinnerListener(hintSpinner4)
-        setSpinnerListener(hintSpinner5)
         setSpinnerListener(seqSpinner1)
         setSpinnerListener(seqSpinner2)
         setSpinnerListener(seqSpinner3)
@@ -76,11 +53,6 @@ class FindSeqHintFragment : Fragment() {
         setSpinnerListener(seqSpinner5)
         resetButton.setOnClickListener {
             if (results.visibility == View.GONE) {
-                hintSpinner1.setSelection(0)
-                hintSpinner2.setSelection(0)
-                hintSpinner3.setSelection(0)
-                hintSpinner4.setSelection(0)
-                hintSpinner5.setSelection(0)
                 seqSpinner1.setSelection(0)
                 seqSpinner2.setSelection(0)
                 seqSpinner3.setSelection(0)
@@ -112,41 +84,11 @@ class FindSeqHintFragment : Fragment() {
         })
     }
 
-    private fun getSpinnerList(convoString: String): ArrayList<String> {
-        val spinnerList: ArrayList<String> = arrayListOf(getString(R.string.select_text))
-        spinnerList.addAll(ConversationUtils.getUniqueConvoList(convoString))
-        return spinnerList
-    }
-
-    private fun canSearchHint(pos: Int): Boolean {
-        return when (pos) {
-            1 -> hintSpinner1.selectedItemPosition != 0
-            2 -> canSearchHint(1) && seqSpinner1.selectedItemPosition != 0 && hintSpinner2.selectedItemPosition != 0
-            3 -> canSearchHint(2) && seqSpinner2.selectedItemPosition != 0 && hintSpinner3.selectedItemPosition != 0
-            4 -> canSearchHint(3) && seqSpinner3.selectedItemPosition != 0 && hintSpinner4.selectedItemPosition != 0
-            5 -> canSearchHint(4) && seqSpinner4.selectedItemPosition != 0 && hintSpinner5.selectedItemPosition != 0
-            else -> false
-        }
-    }
-
-    private fun canSearchSeq(pos: Int): Boolean {
-        return when (pos) {
-            1 -> hintSpinner1.selectedItemPosition != 0 && seqSpinner1.selectedItemPosition != 0
-            2 -> canSearchSeq(1) && hintSpinner2.selectedItemPosition != 0 && seqSpinner2.selectedItemPosition != 0
-            3 -> canSearchSeq(2) && hintSpinner3.selectedItemPosition != 0 && seqSpinner3.selectedItemPosition != 0
-            4 -> canSearchSeq(3) && hintSpinner4.selectedItemPosition != 0 && seqSpinner4.selectedItemPosition != 0
-            5 -> canSearchSeq(4) && hintSpinner5.selectedItemPosition != 0 && seqSpinner5.selectedItemPosition != 0
-            else -> false
-        }
-    }
-
     private fun performSearch() {
         var pos:Int = 5
-        var isHint = false
         var canSearch = false
         while (pos in 1..5){
-            if (canSearchHint(pos) || canSearchSeq(pos)){
-                isHint = canSearchHint(pos) && !canSearchSeq(pos)
+            if (canSearchSeq(pos)){
                 canSearch = true
                 break
             }
@@ -155,15 +97,11 @@ class FindSeqHintFragment : Fragment() {
 
 
         if (canSearch) {
-            val keyHint: String = getHintSearchString(pos).replace("-","")
             val keySeq: String = getSeqSearchString(pos).replace("-","")
             val result: SearchResult =
-                ConversationUtils.searchOnSeqWithHint(
+                ConversationUtils.searchOnSeq(
                     keySeq,
-                    squire.sequenceConvo,
-                    keyHint,
-                    squire.sequenceHint,
-                    !isHint
+                    squire.sequenceConvo
                 )
             handleSearchResult(result)
         } else {
@@ -205,19 +143,20 @@ class FindSeqHintFragment : Fragment() {
         resetButton.visibility = View.VISIBLE
     }
 
-    private fun getHintSearchString(pos: Int): String {
-        val stringBuilder: StringBuilder = StringBuilder()
+    private fun getSpinnerList(convoString: String): ArrayList<String> {
+        val spinnerList: ArrayList<String> = arrayListOf(getString(R.string.select_text))
+        spinnerList.addAll(ConversationUtils.getUniqueConvoList(convoString))
+        return spinnerList
+    }
+
+    private fun canSearchSeq(pos: Int): Boolean {
         return when (pos) {
-            1 -> stringBuilder.append(ConversationUtils.translateOption(hintSpinner1.selectedItem.toString())).toString()
-            2 -> stringBuilder.append(getHintSearchString(1))
-                .append(ConversationUtils.translateOption(hintSpinner2.selectedItem.toString())).toString()
-            3 -> stringBuilder.append(getHintSearchString(2))
-                .append(ConversationUtils.translateOption(hintSpinner3.selectedItem.toString())).toString()
-            4 -> stringBuilder.append(getHintSearchString(3))
-                .append(ConversationUtils.translateOption(hintSpinner4.selectedItem.toString())).toString()
-            5 -> stringBuilder.append(getHintSearchString(4))
-                .append(ConversationUtils.translateOption(hintSpinner5.selectedItem.toString())).toString()
-            else -> ""
+            1 -> seqSpinner1.selectedItemPosition != 0
+            2 -> canSearchSeq(1) && seqSpinner2.selectedItemPosition != 0
+            3 -> canSearchSeq(2) && seqSpinner3.selectedItemPosition != 0
+            4 -> canSearchSeq(3) && seqSpinner4.selectedItemPosition != 0
+            5 -> canSearchSeq(4) && seqSpinner5.selectedItemPosition != 0
+            else -> false
         }
     }
 
@@ -236,4 +175,5 @@ class FindSeqHintFragment : Fragment() {
             else -> ""
         }
     }
+
 }

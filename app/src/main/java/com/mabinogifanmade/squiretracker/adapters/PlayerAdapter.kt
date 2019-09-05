@@ -12,8 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.mabinogifanmade.squiretracker.CharactersFragmentDirections
 import com.mabinogifanmade.squiretracker.R
+import com.mabinogifanmade.squiretracker.activitiesfragments.CharactersFragmentDirections
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.utils.DialogUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils

@@ -1,4 +1,4 @@
-package com.mabinogifanmade.squiretracker
+package com.mabinogifanmade.squiretracker.activitiesfragments
 
 
 import android.content.DialogInterface
@@ -15,6 +15,7 @@ import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
@@ -83,20 +84,26 @@ class SquireDetailsFragment : Fragment() {
             }
             specialConvo.setOnClickListener {
                 val action =
-                    SquireDetailsFragmentDirections.
-                        actionSquireDetailsFragmentToSpecialConvoDetails(squire)
+                    SquireDetailsFragmentDirections.actionSquireDetailsFragmentToSpecialConvoDetails(
+                        squire
+                    )
                 Navigation.findNavController(it).navigate(action)
             }
             sequenceConvo.setOnClickListener {
                 val action =
-                    SquireDetailsFragmentDirections.
-                        actionSquireDetailsFragmentToConvoDetails(squire)
+                    SquireDetailsFragmentDirections.actionSquireDetailsFragmentToConvoDetails(
+                        squire
+                    )
                 Navigation.findNavController(it).navigate(action)
             }
             findSequence.setOnClickListener {
                 val action = when (squire.hasHint) {
-                    true -> SquireDetailsFragmentDirections.actionSquireDetailsFragmentToFindSeqHintFragment(squire)
-                    else -> SquireDetailsFragmentDirections.actionSquireDetailsFragmentToFindSeqFragment(squire)
+                    true -> SquireDetailsFragmentDirections.actionSquireDetailsFragmentToFindSeqHintFragment(
+                        squire
+                    )
+                    else -> SquireDetailsFragmentDirections.actionSquireDetailsFragmentToFindSeqFragment(
+                        squire
+                    )
                 }
                 Navigation.findNavController(it).navigate(action)
             }

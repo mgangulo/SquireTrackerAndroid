@@ -1,4 +1,4 @@
-package com.mabinogifanmade.squiretracker
+package com.mabinogifanmade.squiretracker.activitiesfragments
 
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.adapters.SquireAdapter
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar

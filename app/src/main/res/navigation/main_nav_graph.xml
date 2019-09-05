@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.mabinogifanmade.squiretracker.MainFragment"
+        android:name="com.mabinogifanmade.squiretracker.activitiesfragments.MainFragment"
         android:label="FragmentMain" >
         <action
             android:id="@+id/action_nav_home_to_charactersFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_characters"
-        android:name="com.mabinogifanmade.squiretracker.CharactersFragment"
+        android:name="com.mabinogifanmade.squiretracker.activitiesfragments.CharactersFragment"
         android:label="fragment_characters"
         tools:layout="@layout/fragment_characters" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/newPlayerCharFragment"
-        android:name="com.mabinogifanmade.squiretracker.PlayerCharDetailsFragment"
+        android:name="com.mabinogifanmade.squiretracker.activitiesfragments.PlayerCharDetailsFragment"
         android:label="fragment_new_player_char"
         tools:layout="@layout/fragment_char_details" >
         <argument
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/squireDetailsFragment"
-        android:name="com.mabinogifanmade.squiretracker.SquireDetailsFragment"
+        android:name="com.mabinogifanmade.squiretracker.activitiesfragments.SquireDetailsFragment"
         android:label="fragment_squire_details"
         tools:layout="@layout/fragment_squire_details" >
         <argument
@@ -103,7 +103,7 @@
     </fragment>
     <fragment
         android:id="@+id/specialConvoDetails"
-        android:name="com.mabinogifanmade.squiretracker.SpecialConvoDetails"
+        android:name="com.mabinogifanmade.squiretracker.activitiesfragments.SpecialConvoDetails"
         android:label="fragment_special_convo_details"
         tools:layout="@layout/fragment_special_convo_details" >
         <argument
@@ -112,7 +112,7 @@
     </fragment>
     <fragment
         android:id="@+id/convoDetails"
-        android:name="com.mabinogifanmade.squiretracker.ConvoDetails"
+        android:name="com.mabinogifanmade.squiretracker.activitiesfragments.ConvoDetails"
         android:label="ConvoDetails" >
         <argument
             android:name="squire"
@@ -120,7 +120,7 @@
     </fragment>
     <fragment
         android:id="@+id/findSeqHintFragment"
-        android:name="com.mabinogifanmade.squiretracker.FindSeqHintFragment"
+        android:name="com.mabinogifanmade.squiretracker.activitiesfragments.FindSeqHintFragment"
         android:label="fragment_find_seq_hint"
         tools:layout="@layout/fragment_find_seq_hint">
         <argument
@@ -129,7 +129,7 @@
     </fragment>
     <fragment
         android:id="@+id/findSeqFragment"
-        android:name="com.mabinogifanmade.squiretracker.FindSeqFragment"
+        android:name="com.mabinogifanmade.squiretracker.activitiesfragments.FindSeqFragment"
         android:label="fragment_find_seq"
         tools:layout="@layout/fragment_find_seq" >
     <argument
