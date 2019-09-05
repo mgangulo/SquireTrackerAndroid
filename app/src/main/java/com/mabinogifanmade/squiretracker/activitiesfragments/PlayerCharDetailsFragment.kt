@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
@@ -30,7 +31,7 @@ class PlayerCharDetailsFragment : Fragment() {
     val args: PlayerCharDetailsFragmentArgs by navArgs()
     var editMode: Boolean = false
     var charPos: Int = -1
-
+    var onBoardingMode: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +46,7 @@ class PlayerCharDetailsFragment : Fragment() {
         if (context != null) {
             editMode = args.isEditMode
             charPos = args.charPos
+            onBoardingMode = args.isOnBoardingMode
             var playerChar: PlayerChar? = null
             if (editMode) {
                 playerChar = UserUtils.getCharPlayerAt(context!!, charPos)
@@ -127,11 +129,29 @@ class PlayerCharDetailsFragment : Fragment() {
             ConversationUtils.getNumberInSequenceWithOffset(kaourProgress - 1, Squire.KAOUR.sequenceConvo.length)
             )
             if (context != null) {
-                if (!UserUtils.characterExist(context!!, newPlayer)) {
-                    UserUtils.saveNewPlayer(context!!, newPlayer)
-                    findNavController().popBackStack()
+                if (!onBoardingMode) {
+                    if (!UserUtils.characterExist(context!!, newPlayer)) {
+                        UserUtils.saveNewPlayer(context!!, newPlayer)
+                        findNavController().popBackStack()
+                    } else {
+                        Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG).show()
+                    }
                 } else {
-                    Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG).show()
+                    try {
+                        UserUtils.saveNewPlayerOnBoarding(context!!, newPlayer)
+                        val directions = PlayerCharDetailsFragmentDirections.navigateToMain()
+                        findNavController().navigate(
+                            directions,
+                            NavOptions.Builder()
+                                .setPopUpTo(
+                                    R.id.onBoardingNewPlayerFragment,
+                                    true
+                                ).build()
+                        )
+                        activity!!.finish()
+                    } catch (e:Exception){
+                        e.printStackTrace()
+                    }
                 }
             }
         }

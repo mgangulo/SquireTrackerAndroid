@@ -16,7 +16,8 @@
             app:exitAnim="@anim/fade_out"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:popExitAnim="@anim/fade_out"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/navigate_to_main"
             app:destination="@id/mainActivity"
@@ -24,7 +25,8 @@
             app:exitAnim="@anim/fade_out"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <activity

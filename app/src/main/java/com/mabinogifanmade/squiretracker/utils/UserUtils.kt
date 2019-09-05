@@ -13,6 +13,11 @@ class UserUtils {
             ShrdPrfsUtils.saveUserData(context!!, user!!)
         }
 
+        fun saveNewPlayerOnBoarding(context:Context, newPlayer:PlayerChar){
+            val user: UserGeneral = UserGeneral(newPlayer)
+            ShrdPrfsUtils.saveUserData(context!!, user)
+        }
+
         fun characterExist(context:Context, newPlayer:PlayerChar):Boolean{
             val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
             return user!!.playerChars.contains(newPlayer)
