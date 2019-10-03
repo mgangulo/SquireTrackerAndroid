@@ -2,6 +2,7 @@ package com.mabinogifanmade.squiretracker.squiredata
 
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import com.mabinogifanmade.squiretracker.R
 
 enum class Squire : SquireCommon {
 
@@ -42,7 +43,7 @@ enum class Squire : SquireCommon {
             get()="PDPFTPPPPCPTPDMDFPPCFPPFFCFPCMDPCPFFCPFTPFPDMDPDPFCFFPFTTPPPPPFTCFPFPFPTPMCPTPFPMDTDFMFDFMFCPFCDF"
 
         override val imageSquire: Int
-            get()=0
+            get()=R.drawable.dai
 
     },
 
@@ -88,7 +89,7 @@ enum class Squire : SquireCommon {
             get()="MPCPMTMMTMTFTTCDTFMTDFDDCTCPFFMMMTTTMCMMCPPTCPCCMCTMMTTDDMTCPFTTCMTMMMPTTPTMTMTFMTCMFPTTCCMTCMMDC"
 
         override val imageSquire: Int
-            get()=0
+            get()=R.drawable.eirlys
 
     },
 
@@ -128,7 +129,7 @@ enum class Squire : SquireCommon {
             get()="CPFDFPDDPMTPDPTPMCPPPDPCPDMFPPPDCDTDPCMTPPMDCDCPPDPTDPMPPPFDPPMTDDPPPFPTCPFPFDMPPDTPPFDMMFFFFDPPM"
 
         override val imageSquire: Int
-            get()=0
+            get()= R.drawable.elsie
     },
 
     KAOUR {
@@ -167,7 +168,7 @@ enum class Squire : SquireCommon {
             get()="PPTCPDTCDCMMFDCFDMMMFDMFPMFTDMMPDMFMTTTPTDFCTPFDPDCMPFCCCFFPPTFTMTCDFTPFDTMMCMMFCCTFCDMFDCDFDTMCT"
 
         override val imageSquire: Int
-            get()=0
+            get()= R.drawable.kaour
 
     }
 }
