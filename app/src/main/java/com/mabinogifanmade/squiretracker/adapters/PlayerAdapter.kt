@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.R
@@ -41,6 +42,7 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>, val context: Context
             true -> View.INVISIBLE
             else -> View.VISIBLE
         }
+        holder.charAvatar.setImageDrawable(ContextCompat.getDrawable(context,character.avatar))
     }
 
 

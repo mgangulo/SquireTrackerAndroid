@@ -16,7 +16,8 @@
             android:id="@+id/characterAvatar"
             android:layout_width="@dimen/player_avatar_dimens"
             android:layout_height="@dimen/player_avatar_dimens"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:scaleType="centerInside"/>
 
         <RelativeLayout
             android:id="@+id/charInfoRelative"
