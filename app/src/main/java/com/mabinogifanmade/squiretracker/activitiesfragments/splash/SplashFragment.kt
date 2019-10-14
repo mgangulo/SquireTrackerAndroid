@@ -34,7 +34,11 @@ class SplashFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-       if (context!=null) {
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (context!=null) {
             val directions = when (ShrdPrfsUtils.userDataExist(context!!)) {
                 true -> SplashFragmentDirections.navigateToMain()
                 else -> SplashFragmentDirections.navigateToOnBoarding()
