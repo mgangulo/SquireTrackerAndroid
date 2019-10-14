@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -38,5 +39,60 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top_btwn_elements"
         android:text="@string/avatar_label" />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexWrap="wrap">
+
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_mabi_orange"
+            android:layout_margin="@dimen/player_avatar_margin"
+            />
+
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_mabi_yellow"
+            android:layout_margin="@dimen/player_avatar_margin"/>
+
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_mabi_green"
+            android:layout_margin="@dimen/player_avatar_margin"/>
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_mabi_blue"
+            android:layout_margin="@dimen/player_avatar_margin"/>
+
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_mabi_purple"
+            android:layout_margin="@dimen/player_avatar_margin"/>
+
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_mabi_pink"
+            android:layout_margin="@dimen/player_avatar_margin" />
+
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_mabi_red"
+            android:layout_margin="@dimen/player_avatar_margin"/>
+
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_mabi_black"
+            android:layout_margin="@dimen/player_avatar_margin"/>
+
+    </com.google.android.flexbox.FlexboxLayout>
 
 </LinearLayout>
