@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.Navigation
@@ -99,6 +101,7 @@ class MainActivity : AppCompatActivity(),
         headerView.findViewById<TextView>(R.id.navHeaderTitle)
             .setText(UserUtils.getCurrentCharPlayer(this).charName)
         headerView.findViewById<TextView>(R.id.navHeaderSubtitle).setText(UserUtils.getCurrentCharPlayer(this).server)
+        headerView.findViewById<ImageView>(R.id.imageView).setImageDrawable(ContextCompat.getDrawable(this,UserUtils.getCurrentCharPlayer(this).avatar))
     }
    /* override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host)

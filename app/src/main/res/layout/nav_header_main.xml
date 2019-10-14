@@ -14,13 +14,13 @@
         android:gravity="bottom">
 
     <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
-            app:srcCompat="@mipmap/ic_launcher_round"
+            android:layout_width="@dimen/player_avatar_dimens"
+            android:layout_height="@dimen/player_avatar_dimens"
             android:contentDescription="@string/nav_header_desc"
             android:id="@+id/imageView"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:background="@drawable/nav_avatar_background"
+        android:scaleType="centerInside"/>
 
     <TextView
         android:id="@+id/navHeaderTitle"
