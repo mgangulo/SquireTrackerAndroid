@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
@@ -19,6 +20,7 @@ import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 import com.mabinogifanmade.squiretracker.utils.GeneralUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_char_details.*
+import kotlinx.android.synthetic.main.include_player_info.*
 import kotlinx.android.synthetic.main.include_player_info.view.*
 import kotlinx.android.synthetic.main.include_squire_progress.view.*
 
@@ -32,6 +34,7 @@ class PlayerCharDetailsFragment : Fragment() {
     var editMode: Boolean = false
     var charPos: Int = -1
     var onBoardingMode: Boolean = false
+    var avyPos = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +72,14 @@ class PlayerCharDetailsFragment : Fragment() {
                     )
                 }
             }
+            avatar1.setOnClickListener { setSelected(1) }
+            avatar2.setOnClickListener { setSelected(2) }
+            avatar3.setOnClickListener { setSelected(3) }
+            avatar4.setOnClickListener { setSelected(4) }
+            avatar5.setOnClickListener { setSelected(5) }
+            avatar6.setOnClickListener { setSelected(6) }
+            avatar7.setOnClickListener { setSelected(7) }
+            avatar8.setOnClickListener { setSelected(8) }
             if (editMode) {
                 playerInfo.charNameEdit.setText(playerChar!!.charName)
                 squireProgress.visibility = View.GONE
@@ -112,21 +123,50 @@ class PlayerCharDetailsFragment : Fragment() {
         }
         val server: String = playerInfo.serverSpinner.selectedItem.toString()
 
-        val daiProgress = GeneralUtils.textToProgress(squireProgress.daiProgressEdit.getText().toString())
-        val eirlysProgress = GeneralUtils.textToProgress(squireProgress.eirlysProgressEdit.getText().toString())
-        val elsieProgress = GeneralUtils.textToProgress(squireProgress.elsieProgressEdit.getText().toString())
-        val kaourProgress = GeneralUtils.textToProgress(squireProgress.kaourProgressEdit.getText().toString())
-        if (checkValidSquireProgress(daiProgress, squireProgress.daiProgressLayout, Squire.DAI) and
-            checkValidSquireProgress(eirlysProgress, squireProgress.eirlysProgressLayout, Squire.EIRLYS) and
-            checkValidSquireProgress(elsieProgress, squireProgress.elsieProgressLayout, Squire.ELSIE) and
-            checkValidSquireProgress(kaourProgress, squireProgress.kaourProgressLayout, Squire.KAOUR)
+        val daiProgress =
+            GeneralUtils.textToProgress(squireProgress.daiProgressEdit.getText().toString())
+        val eirlysProgress =
+            GeneralUtils.textToProgress(squireProgress.eirlysProgressEdit.getText().toString())
+        val elsieProgress =
+            GeneralUtils.textToProgress(squireProgress.elsieProgressEdit.getText().toString())
+        val kaourProgress =
+            GeneralUtils.textToProgress(squireProgress.kaourProgressEdit.getText().toString())
+        if (checkValidSquireProgress(
+                daiProgress,
+                squireProgress.daiProgressLayout
+            ) and
+            checkValidSquireProgress(
+                eirlysProgress,
+                squireProgress.eirlysProgressLayout
+            ) and
+            checkValidSquireProgress(
+                elsieProgress,
+                squireProgress.elsieProgressLayout
+            ) and
+            checkValidSquireProgress(
+                kaourProgress,
+                squireProgress.kaourProgressLayout
+            )
         ) {
             val newPlayer = PlayerChar(
                 playerName, server,
-                ConversationUtils.getNumberInSequenceWithOffset(daiProgress - 1, Squire.DAI.sequenceConvo.length),
-                ConversationUtils.getNumberInSequenceWithOffset(eirlysProgress - 1, Squire.EIRLYS.sequenceConvo.length),
-                ConversationUtils.getNumberInSequenceWithOffset(elsieProgress - 1, Squire.ELSIE.sequenceConvo.length),
-            ConversationUtils.getNumberInSequenceWithOffset(kaourProgress - 1, Squire.KAOUR.sequenceConvo.length)
+                ConversationUtils.getNumberInSequenceWithOffset(
+                    daiProgress - 1,
+                    Squire.DAI.sequenceConvo.length
+                ),
+                ConversationUtils.getNumberInSequenceWithOffset(
+                    eirlysProgress - 1,
+                    Squire.EIRLYS.sequenceConvo.length
+                ),
+                ConversationUtils.getNumberInSequenceWithOffset(
+                    elsieProgress - 1,
+                    Squire.ELSIE.sequenceConvo.length
+                ),
+                ConversationUtils.getNumberInSequenceWithOffset(
+                    kaourProgress - 1,
+                    Squire.KAOUR.sequenceConvo.length
+                ),
+                getAvatarFromPos(avyPos)
             )
             if (context != null) {
                 if (!onBoardingMode) {
@@ -134,7 +174,8 @@ class PlayerCharDetailsFragment : Fragment() {
                         UserUtils.saveNewPlayer(context!!, newPlayer)
                         findNavController().popBackStack()
                     } else {
-                        Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG).show()
+                        Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG)
+                            .show()
                     }
                 } else {
                     try {
@@ -149,7 +190,7 @@ class PlayerCharDetailsFragment : Fragment() {
                                 ).build()
                         )
                         activity!!.finish()
-                    } catch (e:Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }
@@ -157,7 +198,7 @@ class PlayerCharDetailsFragment : Fragment() {
         }
     }
 
-    fun checkValidSquireProgress(progress: Int, layout: TextInputLayout, squire: Squire): Boolean {
+    fun checkValidSquireProgress(progress: Int, layout: TextInputLayout): Boolean {
         if (progress >= 1) {
             layout.setError(null)
             return true
@@ -165,5 +206,39 @@ class PlayerCharDetailsFragment : Fragment() {
             layout.setError(getString(R.string.progress_error_msg))
             return false
         }
+    }
+
+    fun getAvatarFromPos(pos: Int): Int {
+        return when (pos) {
+            1 -> R.drawable.ic_mabi_orange
+            2 -> R.drawable.ic_mabi_yellow
+            3 -> R.drawable.ic_mabi_green
+            4 -> R.drawable.ic_mabi_blue
+            5 -> R.drawable.ic_mabi_purple
+            6 -> R.drawable.ic_mabi_pink
+            7 -> R.drawable.ic_mabi_red
+            8 -> R.drawable.ic_mabi_black
+            else -> R.drawable.ic_mabi_orange
+        }
+    }
+
+    fun getImageViewFromPos(pos: Int): ImageView {
+        return when (pos) {
+            1 -> avatar1
+            2 -> avatar2
+            3 -> avatar3
+            4 -> avatar4
+            5 -> avatar5
+            6 -> avatar6
+            7 -> avatar7
+            8 -> avatar8
+            else -> avatar1
+        }
+    }
+
+    fun setSelected(pos:Int){
+        getImageViewFromPos(avyPos).setBackgroundResource(0)
+        avyPos = pos
+        getImageViewFromPos(avyPos).setBackgroundResource(R.drawable.avatar_border)
     }
 }

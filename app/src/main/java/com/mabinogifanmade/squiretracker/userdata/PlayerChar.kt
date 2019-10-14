@@ -1,5 +1,6 @@
 package com.mabinogifanmade.squiretracker.userdata
 
+import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.squiredata.Squire
 import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 
@@ -8,7 +9,8 @@ class PlayerChar(var charName: String,
                  val daiProgress: Int,
                  val eirlysProgress: Int,
                  val elsieProgress: Int,
-                 val kaourProgress: Int) {
+                 val kaourProgress: Int,
+                 val avatar:Int = R.drawable.ic_mabi_orange) {
 
     val squireProgress: HashMap<Int, Int> =
         hashMapOf(

@@ -51,48 +51,56 @@
             android:src="@drawable/ic_mabi_orange"
             android:padding="@dimen/player_avatar_margin"
             android:background="@drawable/avatar_border"
+            android:id="@+id/avatar1"
             />
 
         <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_mabi_yellow"
-            android:padding="@dimen/player_avatar_margin"/>
+            android:padding="@dimen/player_avatar_margin"
+            android:id="@+id/avatar2"/>
 
         <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_mabi_green"
-            android:padding="@dimen/player_avatar_margin"/>
+            android:padding="@dimen/player_avatar_margin"
+            android:id="@+id/avatar3"/>
         <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_mabi_blue"
-            android:padding="@dimen/player_avatar_margin"/>
+            android:padding="@dimen/player_avatar_margin"
+            android:id="@+id/avatar4"/>
 
         <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_mabi_purple"
-            android:padding="@dimen/player_avatar_margin"/>
+            android:padding="@dimen/player_avatar_margin"
+            android:id="@+id/avatar5"/>
 
         <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_mabi_pink"
-            android:padding="@dimen/player_avatar_margin" />
+            android:padding="@dimen/player_avatar_margin"
+            android:id="@+id/avatar6" />
 
         <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_mabi_red"
-            android:padding="@dimen/player_avatar_margin"/>
+            android:padding="@dimen/player_avatar_margin"
+            android:id="@+id/avatar7"/>
 
         <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_mabi_black"
-            android:padding="@dimen/player_avatar_margin"/>
+            android:padding="@dimen/player_avatar_margin"
+            android:id="@+id/avatar8"/>
 
     </com.google.android.flexbox.FlexboxLayout>
 
