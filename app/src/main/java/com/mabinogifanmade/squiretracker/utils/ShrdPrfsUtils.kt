@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.google.gson.Gson
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
-import java.lang.Exception
 
 class ShrdPrfsUtils {
     companion object {
@@ -18,6 +17,7 @@ class ShrdPrfsUtils {
             val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             try {
                 prefs.edit().putString(USER_DATA_KEY, Gson().toJson(userData)).apply()
+                success = true
             } catch (e: NullPointerException) {
                 e.printStackTrace()
             } catch (ex: Exception) {

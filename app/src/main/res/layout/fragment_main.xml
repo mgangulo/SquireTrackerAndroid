@@ -81,43 +81,20 @@
             android:id="@+id/toggleKaour"/>
     </LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/listOption"
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/side_margin"
-        android:layout_marginEnd="@dimen/padding_button"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/squireRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/gridRadioOption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:button="@drawable/radio_grid"
-            android:checked="false"
-            android:gravity="center"
-            android:padding="@dimen/padding_button"
-            android:text="" />
-
-        <RadioButton
-            android:id="@+id/listRadioOption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:button="@drawable/radio_list"
-            android:checked="true"
-            android:gravity="center"
-            android:padding="@dimen/padding_button"
-            android:text="" />
-
-
-    </RadioGroup>
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/side_margin"
+        android:layout_marginEnd="@dimen/padding_button"
+        android:padding="@dimen/padding_button"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/listOption"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/squireRecyclerView"

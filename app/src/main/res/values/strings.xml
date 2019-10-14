@@ -62,4 +62,6 @@
     <string name="found_number_matches">Found %1$s matches</string>
     <string name="try_these">Next input could be one of these: %1$s</string>
     <string name="found_match">Found one match at #%1$s</string>
+    <string name="list_view">List View</string>
+    <string name="grid_view">Grid View</string>
 </resources>

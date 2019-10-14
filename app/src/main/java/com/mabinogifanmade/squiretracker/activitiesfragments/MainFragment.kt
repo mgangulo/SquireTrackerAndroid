@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
 class MainFragment : Fragment() {
+    private var isGrid: Boolean = true
     private var listener: OnFragmentInteractionListener? = null
     private val squireList: ArrayList<Squire> = arrayListOf(Squire.DAI, Squire.EIRLYS, Squire.ELSIE, Squire.KAOUR)
     private var user: UserGeneral? = null
@@ -31,32 +32,37 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listOption.setOnCheckedChangeListener { group, checkedId ->
-            setRecyclerViewType(
-                when (checkedId) {
-                    R.id.gridRadioOption -> true
-                    else -> false
-                }
-            )
-        }
-
+        listOption.setOnClickListener { changeViews(true)}
         toggleDai?.setOnCheckedChangeListener(getSquireToggleListener(Squire.DAI))
         toggleEirlys?.setOnCheckedChangeListener(getSquireToggleListener(Squire.EIRLYS))
         toggleElsie?.setOnCheckedChangeListener(getSquireToggleListener(Squire.ELSIE))
         toggleKaour?.setOnCheckedChangeListener(getSquireToggleListener(Squire.KAOUR))
-
         user = ShrdPrfsUtils.getUserData(context!!)
-        squireRecyclerView?.adapter = SquireAdapter(squireList, context!!, false,
+        squireRecyclerView?.adapter = SquireAdapter(squireList, context!!, isGrid,
             user!!.getCurrentCharacter().squireProgress)
         setUserDataOnView()
     }
 
+    private fun changeViews(save:Boolean) {
+        if (context!=null) {
+            if (save)
+                isGrid = !isGrid
+            listOption.setImageResource(
+                when(isGrid){
+                    true -> R.drawable.selector_list
+                    else -> R.drawable.selector_grid
+                }
+            )
+            setRecyclerViewType(isGrid,save)
+        }
+    }
+
     fun setUserDataOnView() {
         if (user != null) {
-
             val currentChar: PlayerChar = user!!.getCurrentCharacter()
-            gridRadioOption.isChecked = user!!.prefersGrid
-            listRadioOption.isChecked = !user!!.prefersGrid
+            isGrid = user!!.prefersGrid
+            changeViews(false)
+
             for (i in (squireList.size - 1) downTo 0) {
                 val squire: Squire = squireList.get(i)
                 if (!currentChar.squiresActive.contains(squire.id)) {
@@ -133,7 +139,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setRecyclerViewType(isGrid: Boolean) {
+    private fun setRecyclerViewType(isGrid: Boolean, save:Boolean) {
         val layoutManager = squireRecyclerView?.layoutManager as GridLayoutManager
         layoutManager?.setSpanCount(
             when (isGrid) {
@@ -142,8 +148,10 @@ class MainFragment : Fragment() {
             }
         )
         (squireRecyclerView?.adapter as SquireAdapter).setViewType(isGrid)
-        val user:UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
-        user?.prefersGrid = isGrid
-        ShrdPrfsUtils.saveUserData(context!!,user!!)
+        if (save) {
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+            user?.prefersGrid = isGrid
+            ShrdPrfsUtils.saveUserData(context!!, user!!)
+        }
     }
 }
