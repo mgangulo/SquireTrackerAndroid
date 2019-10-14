@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.google.android.material.textfield.TextInputEditText
@@ -57,11 +57,7 @@ class SquireDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (context != null) {
             squire = args.squire
-            Glide
-                .with(context!!)
-                .load(squire.imageSquire)
-                .centerCrop()
-                .into(squireImage);
+            squireImage.setImageDrawable(ContextCompat.getDrawable(context!!,squire.imageSquire))
             squireName.setText(squire.squireName)
             squireProgressPreview = UserUtils.getCurrentCharPlayer(context!!).squireProgress
             val progress: Int = UserUtils.getCurrentCharProgressForSquire(context!!, squire.id)

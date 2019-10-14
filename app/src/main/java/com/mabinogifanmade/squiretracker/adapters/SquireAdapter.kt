@@ -8,9 +8,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.mabinogifanmade.squiretracker.R
@@ -75,11 +75,8 @@ class SquireAdapter(val squireList: ArrayList<Squire>, val context: Context, var
         } else {
             holder.hint.visibility = View.GONE
         }
-        Glide
-            .with(context)
-            .load(squire.imageSquire)
-            .centerCrop()
-            .into(holder.image);
+        holder.image.setImageDrawable(ContextCompat.getDrawable(context,squire.imageSquire))
+
     }
 
     fun setViewType(isGrid: Boolean) {
