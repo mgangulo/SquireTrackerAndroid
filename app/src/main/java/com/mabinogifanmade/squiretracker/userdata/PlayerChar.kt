@@ -10,7 +10,7 @@ class PlayerChar(var charName: String,
                  val eirlysProgress: Int,
                  val elsieProgress: Int,
                  val kaourProgress: Int,
-                 val avatar:Int = R.drawable.ic_mabi_orange) {
+                 var avatar:Int = R.drawable.ic_mabi_orange) {
 
     val squireProgress: HashMap<Int, Int> =
         hashMapOf(

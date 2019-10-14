@@ -83,6 +83,7 @@ class PlayerCharDetailsFragment : Fragment() {
             if (editMode) {
                 playerInfo.charNameEdit.setText(playerChar!!.charName)
                 squireProgress.visibility = View.GONE
+                setSelected(getPosFromAvatar(playerChar!!.avatar))
             }
             saveButton.setOnClickListener {
                 if (!editMode)
@@ -102,9 +103,10 @@ class PlayerCharDetailsFragment : Fragment() {
             playerInfo.charNameInputLayout.setError(null)
         }
         val server: String = playerInfo.serverSpinner.selectedItem.toString()
+        val avatar: Int = getAvatarFromPos(avyPos)
         if (context != null) {
             if (!UserUtils.characterExist(context!!, charPos, playerName, server)) {
-                UserUtils.editPlayerAt(context!!, charPos, playerName, server)
+                UserUtils.editPlayerAt(context!!, charPos, playerName, server,avatar)
                 findNavController().popBackStack()
             } else {
                 Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG).show()
@@ -222,6 +224,20 @@ class PlayerCharDetailsFragment : Fragment() {
         }
     }
 
+    fun getPosFromAvatar(avy: Int): Int {
+        return when (avy) {
+            R.drawable.ic_mabi_orange -> 1
+            R.drawable.ic_mabi_yellow -> 2
+            R.drawable.ic_mabi_green -> 3
+            R.drawable.ic_mabi_blue -> 4
+            R.drawable.ic_mabi_purple -> 5
+            R.drawable.ic_mabi_pink -> 6
+            R.drawable.ic_mabi_red -> 7
+            R.drawable.ic_mabi_black -> 8
+            else -> 1
+        }
+    }
+
     fun getImageViewFromPos(pos: Int): ImageView {
         return when (pos) {
             1 -> avatar1
@@ -236,7 +252,7 @@ class PlayerCharDetailsFragment : Fragment() {
         }
     }
 
-    fun setSelected(pos:Int){
+    fun setSelected(pos: Int) {
         getImageViewFromPos(avyPos).setBackgroundResource(0)
         avyPos = pos
         getImageViewFromPos(avyPos).setBackgroundResource(R.drawable.avatar_border)

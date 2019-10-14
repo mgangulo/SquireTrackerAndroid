@@ -39,10 +39,11 @@ class UserUtils {
             ShrdPrfsUtils.saveUserData(context,user!!)
         }
 
-        fun editPlayerAt(context: Context,charPos: Int, playerName: String, server: String) {
+        fun editPlayerAt(context: Context,charPos: Int, playerName: String, server: String, avatar:Int) {
             val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
             user?.playerChars?.get(charPos)?.charName = playerName
             user?.playerChars?.get(charPos)?.server = server
+            user?.playerChars?.get(charPos)?.avatar = avatar
             ShrdPrfsUtils.saveUserData(context, user!!)
         }
 
