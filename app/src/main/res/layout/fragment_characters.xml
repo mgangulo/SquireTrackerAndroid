@@ -30,7 +30,11 @@
             android:orientation="vertical"
             android:layout_marginTop="@dimen/side_margin"
             android:layout_marginStart="@dimen/side_margin"
-            android:padding="1dp"
+            android:paddingBottom="@dimen/top_margin"
+            android:clipToPadding="false"
+            android:paddingTop="1dp"
+            android:paddingEnd="1dp"
+            android:paddingStart="1dp"
             android:id="@+id/charRecycler">
 
         </androidx.recyclerview.widget.RecyclerView>
