@@ -9,9 +9,9 @@
                 android:icon="@drawable/ic_people"
                 android:title="@string/menu_characters"/>
         <item
-                android:id="@+id/nav_slideshow"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="@string/menu_slideshow"/>
+                android:id="@+id/nav_privacy"
+                android:icon="@drawable/ic_policy"
+                android:title="@string/menu_privacy"/>
         <item
                 android:id="@+id/nav_tools"
                 android:icon="@drawable/ic_menu_manage"

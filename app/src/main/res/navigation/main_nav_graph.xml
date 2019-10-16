@@ -26,6 +26,16 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"
             app:popUpTo="@+id/nav_home" />
+
+        <action
+            android:id="@+id/action_nav_home_to_privacyFragment"
+            app:destination="@id/nav_privacy"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@+id/nav_home" />
     </fragment>
     <fragment
         android:id="@+id/nav_characters"
@@ -141,4 +151,10 @@
         app:argType="com.mabinogifanmade.squiretracker.squiredata.Squire" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_privacy"
+        android:name="com.mabinogifanmade.squiretracker.activitiesfragments.PrivacyPolicyFragment"
+        android:label="fragment_characters"
+        tools:layout="@layout/fragment_privacy_policy" >
+    </fragment>
 </navigation>
