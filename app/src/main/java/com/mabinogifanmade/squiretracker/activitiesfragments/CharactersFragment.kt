@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -15,17 +14,13 @@ import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import kotlinx.android.synthetic.main.fragment_characters.*
 
+class CharactersFragment : BaseFragment(),
+        PlayerAdapter.OnStartDragListener{
+    private var touchHelper: ItemTouchHelper? =null
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
-class CharactersFragment : BaseFragment() {
+    override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
+        touchHelper?.startDrag(viewHolder)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,7 +86,7 @@ class CharactersFragment : BaseFragment() {
             }
 
         }
-        val touchHelper:ItemTouchHelper = ItemTouchHelper(callback)
-        touchHelper.attachToRecyclerView(charRecycler)
+        touchHelper = ItemTouchHelper(callback)
+        touchHelper?.attachToRecyclerView(charRecycler)
     }
 }

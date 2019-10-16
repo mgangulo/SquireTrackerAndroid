@@ -3,6 +3,7 @@ package com.mabinogifanmade.squiretracker.adapters
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
@@ -22,6 +23,17 @@ import java.util.*
 
 class PlayerAdapter(val playerChars: ArrayList<PlayerChar>, val context: Context)
     : RecyclerView.Adapter<PlayerAdapter.ViewHolder>(){
+    private val mDragStartListener: OnStartDragListener? = null
+
+    interface OnStartDragListener {
+        /**
+         * Called when a view is requesting a start of a drag.
+         *
+         * @param viewHolder The holder of the view to drag.
+         */
+
+        fun onStartDrag(viewHolder: RecyclerView.ViewHolder)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.player_character_item,parent,false))
@@ -116,6 +128,14 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>, val context: Context
                 UserUtils.switchPlayerCharacter(it.context,adapterPosition)
                 notifyDataSetChanged()
             }
+            charAvatar.setOnTouchListener(object : View.OnTouchListener {
+                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                    if (event!!.equals(MotionEvent.ACTION_DOWN)) {
+                        mDragStartListener?.onStartDrag(this@ViewHolder);
+                    }
+                    return false;
+                }
+            })
         }
     }
 
