@@ -36,6 +36,10 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"
             app:popUpTo="@+id/nav_home" />
+
+        <action
+            android:id="@+id/action_nav_home_to_releasesLink"
+            app:destination="@id/nav_releases"/>
     </fragment>
     <fragment
         android:id="@+id/nav_characters"
@@ -157,4 +161,9 @@
         android:label="fragment_characters"
         tools:layout="@layout/fragment_privacy_policy" >
     </fragment>
+
+    <activity
+        android:id="@+id/nav_releases"
+        app:action="android.intent.action.VIEW"
+        app:data="@string/releases_url"/>
 </navigation>
