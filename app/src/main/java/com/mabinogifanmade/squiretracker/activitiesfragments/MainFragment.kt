@@ -2,6 +2,7 @@ package com.mabinogifanmade.squiretracker.activitiesfragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ import java.util.*
 class MainFragment : BaseFragment() {
     private var isGrid: Boolean = true
     private var mainListener: OnMainFragmentListener? = null
-    private val squireList: ArrayList<Squire> = arrayListOf(Squire.DAI, Squire.EIRLYS, Squire.ELSIE, Squire.KAOUR)
+    private lateinit var squireList: ArrayList<Squire>
     private var user: UserGeneral? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +32,7 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        squireList = arrayListOf(Squire.DAI, Squire.EIRLYS, Squire.ELSIE, Squire.KAOUR)
         listOption.setOnClickListener { changeViews(true)}
         toggleDai?.setOnCheckedChangeListener(getSquireToggleListener(Squire.DAI))
         toggleEirlys?.setOnCheckedChangeListener(getSquireToggleListener(Squire.EIRLYS))
@@ -39,6 +41,7 @@ class MainFragment : BaseFragment() {
         user = ShrdPrfsUtils.getUserData(context!!)
         squireRecyclerView?.adapter = SquireAdapter(squireList, context!!, isGrid,
             user!!.getCurrentCharacter().squireProgress)
+        Log.v("SquireList","size: "+squireList.size)
         setUserDataOnView()
     }
 
@@ -61,24 +64,35 @@ class MainFragment : BaseFragment() {
             val currentChar: PlayerChar = user!!.getCurrentCharacter()
             isGrid = user!!.prefersGrid
             changeViews(false)
-
+            var itChanged = false
             for (i in (squireList.size - 1) downTo 0) {
                 val squire: Squire = squireList.get(i)
                 if (!currentChar.squiresActive.contains(squire.id)) {
                     squireList.remove(squire)
                     if (squire.equals(Squire.DAI)) {
-                        toggleDai?.isChecked = false
+                        itChanged = true
+                        toggleDai?.setChecked(false)
+                        toggleDai?.setSelected(false)
                     }
                     if (squire.equals(Squire.EIRLYS)) {
-                        toggleEirlys?.isChecked = false
+                        itChanged = true
+                        toggleEirlys?.setChecked(false)
+                        toggleEirlys?.setSelected(false)
                     }
                     if (squire.equals(Squire.ELSIE)) {
-                        toggleElsie?.isChecked = false
+                        itChanged = true
+                        toggleElsie?.setChecked(false)
+                        toggleElsie?.setSelected(false)
                     }
                     if (squire.equals(Squire.KAOUR)) {
-                        toggleKaour?.isChecked = false
+                        itChanged = true
+                        toggleKaour?.setChecked(false)
+                        toggleKaour?.setSelected(false)
                     }
                 }
+            }
+            if (itChanged){
+                squireRecyclerView?.adapter?.notifyDataSetChanged()
             }
             mainListener?.updateInfoOnNav()
             listener?.updateTitles(getString(R.string.app_name),getString(R.string.character_progress,currentChar.charName))
