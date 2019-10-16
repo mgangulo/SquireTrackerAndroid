@@ -32,11 +32,9 @@
     <activity
         android:id="@+id/onBoardingActivity"
         android:name="com.mabinogifanmade.squiretracker.activitiesfragments.OnBoardingActivity"
-        android:label="activity_on_boarding"
         tools:layout="@layout/activity_on_boarding" />
     <activity
         android:id="@+id/mainActivity"
         android:name="com.mabinogifanmade.squiretracker.activitiesfragments.MainActivity"
-        android:label="main_activity"
         tools:layout="@layout/activity_main" />
 </navigation>
