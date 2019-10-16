@@ -41,7 +41,7 @@
                 android:text="@string/save_button"
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/margin_top_btwn_elements"
-                android:layout_marginBottom="@dimen/margin_top_btwn_elements"/>
+                android:layout_marginBottom="@dimen/top_margin"/>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
