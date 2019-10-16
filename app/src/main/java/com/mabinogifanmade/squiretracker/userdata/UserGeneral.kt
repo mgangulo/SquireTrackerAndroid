@@ -15,7 +15,7 @@ class UserGeneral(playerChar: PlayerChar) {
         val s = StringBuilder()
         s.append("prefers grid: ").append(prefersGrid).append("\n")
             .append("Current char: ").append(currentCharacter).append("\n")
-        for (i in 0..playerChars.size) {
+        for (i in 0..playerChars.size-1) {
             s.append("Char at pos ").append(i).append(" :").append("\n")
                 .append(playerChars.get(i).toString())
                 .append("\n")

@@ -3,7 +3,9 @@ package com.mabinogifanmade.squiretracker.utils
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import android.util.Log
 import com.google.gson.Gson
+import com.mabinogifanmade.squiretracker.BuildConfig
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 
 class ShrdPrfsUtils {
@@ -18,6 +20,9 @@ class ShrdPrfsUtils {
             try {
                 prefs.edit().putString(USER_DATA_KEY, Gson().toJson(userData)).apply()
                 success = true
+                if (BuildConfig.DEBUG){
+                    Log.v("UserSaved",userData.toString())
+                }
             } catch (e: NullPointerException) {
                 e.printStackTrace()
             } catch (ex: Exception) {
