@@ -12,6 +12,24 @@ class PlayerChar(var charName: String,
                  val kaourProgress: Int,
                  var avatar:Int = R.drawable.ic_mabi_orange) {
 
+    override fun toString(): String {
+        val s = StringBuilder()
+        s.append("Name: ").append(charName).append("\n")
+            .append("Server: ").append(server).append("\n")
+            .append("Dai progress: ").append(daiProgress)
+            .append(" active? ").append(squiresActive.contains(Squire.DAI.id))
+            .append("\n")
+            .append("Eirlys progress: ").append(eirlysProgress)
+            .append(" active? ").append(squiresActive.contains(Squire.EIRLYS.id))
+            .append("\n")
+            .append("Elsie progress: ").append(elsieProgress)
+            .append(" active? ").append(squiresActive.contains(Squire.ELSIE.id))
+            .append("\n")
+            .append("Kaour progress: ").append(kaourProgress)
+            .append(" active? ").append(squiresActive.contains(Squire.KAOUR.id)).append("\n")
+        return s.toString()
+    }
+
     val squireProgress: HashMap<Int, Int> =
         hashMapOf(
             Squire.DAI.id to daiProgress,
