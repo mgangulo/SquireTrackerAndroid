@@ -13,6 +13,16 @@ class UserUtils {
             ShrdPrfsUtils.saveUserData(context!!, user!!)
         }
 
+        fun editPlayerOrder(context:Context, list:ArrayList<PlayerChar>){
+            try {
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                user!!.playerChars = list
+                ShrdPrfsUtils.saveUserData(context!!, user!!)
+            } catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+
         fun saveNewPlayerOnBoarding(context:Context, newPlayer:PlayerChar){
             val user: UserGeneral = UserGeneral(newPlayer)
             ShrdPrfsUtils.saveUserData(context!!, user)

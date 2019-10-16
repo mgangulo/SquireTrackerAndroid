@@ -18,6 +18,7 @@ import com.mabinogifanmade.squiretracker.activitiesfragments.CharactersFragmentD
 import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.utils.DialogUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
+import java.util.*
 
 class PlayerAdapter(val playerChars: ArrayList<PlayerChar>, val context: Context)
     : RecyclerView.Adapter<PlayerAdapter.ViewHolder>(){
@@ -30,11 +31,42 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>, val context: Context
         return playerChars.size
     }
 
+    fun deleteDuplicates() {
+        val temp = linkedSetOf<PlayerChar>()
+        temp.addAll(playerChars)
+        playerChars.clear()
+        playerChars.addAll(temp)
+    }
+
+    fun finishDragAndDrop() {
+        deleteDuplicates()
+        UserUtils.editPlayerOrder(context,playerChars)
+        try {
+            notifyDataSetChanged()
+        } catch (e: IllegalStateException) {
+            e.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun swapItems(initPos: Int, endPos: Int) {
+        if (initPos < endPos) {
+            for (i in initPos until endPos) {
+                Collections.swap(playerChars, i, i + 1)
+            }
+        } else {
+            for (i in initPos downTo endPos + 1) {
+                Collections.swap(playerChars, i, i - 1)
+            }
+        }
+        notifyItemMoved(initPos, endPos)
+    }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val character: PlayerChar = playerChars.get(position)
         holder.characterName.setText(character.charName)
         holder.characterServer.setText(character.server)
-        holder.switchButton.visibility = when (position == UserUtils.getCurrentCharPlayerPos(context)){
+        holder.switchButton.visibility = when (character.equals(UserUtils.getCurrentCharPlayer(context))){
             true -> View.INVISIBLE
             else -> View.VISIBLE
         }

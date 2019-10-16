@@ -1,7 +1,7 @@
 package com.mabinogifanmade.squiretracker.userdata
 
 class UserGeneral(playerChar: PlayerChar) {
-    val playerChars: ArrayList<PlayerChar> = arrayListOf(playerChar)
+    var playerChars: ArrayList<PlayerChar> = arrayListOf(playerChar)
     var currentCharacter: Int = 0
     var prefersGrid: Boolean = false;
 
