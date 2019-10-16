@@ -1,7 +1,6 @@
 package com.mabinogifanmade.squiretracker.activitiesfragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -18,11 +17,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.mabinogifanmade.squiretracker.R
-import com.mabinogifanmade.squiretracker.squiredata.Squire
-import com.mabinogifanmade.squiretracker.userdata.PlayerChar
-import com.mabinogifanmade.squiretracker.userdata.UserGeneral
-import com.mabinogifanmade.squiretracker.utils.ConversationUtils
-import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -40,7 +34,6 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-       // setDummyData()
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -61,21 +54,6 @@ class MainActivity : AppCompatActivity(),
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    override fun onStart() {
-        super.onStart()
-        test()
-    }
-
-    fun setDummyData() {
-        if (!ShrdPrfsUtils.userDataExist(this)) {
-            val user: UserGeneral = UserGeneral(PlayerChar("Alaguesia", "Alexina"))
-            val currentChar: PlayerChar = user.playerChars.get(0)
-            currentChar.squiresActive.remove(1)
-            currentChar.squiresActive.remove(3)
-            user.prefersGrid = true
-            ShrdPrfsUtils.saveUserData(this, user)
-        }
-    }
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -114,30 +92,4 @@ class MainActivity : AppCompatActivity(),
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }*/
 
-    fun test(){
-        return
-        Log.v("SquireConvo","Dai")
-        var s:String = "Dai\n"
-        for (i in 0..Squire.DAI.sequenceHint.length-1){
-            s = s +ConversationUtils.translateAbv(Squire.DAI.sequenceHint.get(i))+
-                    ", "+ConversationUtils.translateAbv(Squire.DAI.sequenceConvo.get(i))+"\n"
-        }
-        Log.v("SquireConvo",s)
-        s = "Eirlys\n"
-        for (i in 0..Squire.EIRLYS.sequenceHint.length-1){
-            s= s + ConversationUtils.translateAbv(Squire.EIRLYS.sequenceHint.get(i)) +
-                    ", "+ConversationUtils.translateAbv(Squire.EIRLYS.sequenceConvo.get(i))+"\n"
-        }
-        Log.v("SquireConvo",s)
-        s = "Elsie\n"
-        for (i in 0..Squire.ELSIE.sequenceConvo.length-1){
-            s= s +ConversationUtils.translateAbv(Squire.ELSIE.sequenceConvo.get(i))+"\n"
-        }
-        Log.v("SquireConvo",s)
-        s = "Kaour\n"
-        for (i in 0..Squire.KAOUR.sequenceConvo.length-1){
-            s= s +ConversationUtils.translateAbv(Squire.KAOUR.sequenceConvo.get(i))+"\n"
-        }
-        Log.v("SquireConvo",s)
-    }
 }
