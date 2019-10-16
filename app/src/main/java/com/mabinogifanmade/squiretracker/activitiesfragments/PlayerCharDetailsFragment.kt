@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.include_squire_progress.view.*
  * A simple [Fragment] subclass.
  *
  */
-class PlayerCharDetailsFragment : Fragment() {
+class PlayerCharDetailsFragment : BaseFragment() {
     val args: PlayerCharDetailsFragmentArgs by navArgs()
     var editMode: Boolean = false
     var charPos: Int = -1
@@ -81,9 +81,19 @@ class PlayerCharDetailsFragment : Fragment() {
             avatar7.setOnClickListener { setSelected(7) }
             avatar8.setOnClickListener { setSelected(8) }
             if (editMode) {
-                playerInfo.charNameEdit.setText(playerChar!!.charName)
                 squireProgress.visibility = View.GONE
-                setSelected(getPosFromAvatar(playerChar!!.avatar))
+                if (playerChar != null) {
+                    playerInfo.charNameEdit.setText(playerChar!!.charName)
+                    setSelected(getPosFromAvatar(playerChar!!.avatar))
+                    listener?.updateTitles(
+                        getString(
+                            R.string.edit_character,
+                            playerChar!!.charName
+                        )
+                    )
+                }
+            } else {
+                listener?.updateTitles(getString(R.string.add_character))
             }
             saveButton.setOnClickListener {
                 if (!editMode)
@@ -106,7 +116,7 @@ class PlayerCharDetailsFragment : Fragment() {
         val avatar: Int = getAvatarFromPos(avyPos)
         if (context != null) {
             if (!UserUtils.characterExist(context!!, charPos, playerName, server)) {
-                UserUtils.editPlayerAt(context!!, charPos, playerName, server,avatar)
+                UserUtils.editPlayerAt(context!!, charPos, playerName, server, avatar)
                 findNavController().popBackStack()
             } else {
                 Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG).show()

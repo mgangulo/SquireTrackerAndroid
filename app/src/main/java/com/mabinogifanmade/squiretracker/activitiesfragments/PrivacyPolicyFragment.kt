@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_privacy_policy.*
 /**
  * A simple [Fragment] subclass.
  */
-class PrivacyPolicyFragment : Fragment() {
+class PrivacyPolicyFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +24,7 @@ class PrivacyPolicyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        listener?.updateTitles(getString(R.string.menu_privacy))
         webview.loadUrl("file:///android_asset/privacy_policy.html");
     }
 }

@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_convo_details.*
  * A simple [Fragment] subclass.
  *
  */
-class ConvoDetails : Fragment() {
+class ConvoDetails : BaseFragment() {
     val args: ConvoDetailsArgs by navArgs()
 
     override fun onCreateView(
@@ -35,6 +35,7 @@ class ConvoDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val squire: Squire = args.squire
+        listener?.updateTitles(getString(R.string.squire_sequence,squire.squireName))
         if (context!=null) {
             convoRecycler.adapter = ConvoAdapter(context!!, squire,
                 UserUtils.getCurrentCharProgressForSquire(context!!,squire.id))

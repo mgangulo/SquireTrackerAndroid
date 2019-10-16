@@ -28,7 +28,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(),
-    MainFragment.OnFragmentInteractionListener {
+    MainFragment.OnMainFragmentListener,
+    BaseFragment.OnBaseFragmentListener {
+
+    override fun updateTitles(title: String, subtitle: String) {
+        supportActionBar?.setTitle(title)
+        supportActionBar?.setSubtitle(subtitle)
+    }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 

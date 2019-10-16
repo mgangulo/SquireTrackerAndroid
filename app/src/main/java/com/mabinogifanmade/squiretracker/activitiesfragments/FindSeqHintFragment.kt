@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_find_seq_hint.*
  * A simple [Fragment] subclass.
  *
  */
-class FindSeqHintFragment : Fragment() {
+class FindSeqHintFragment : BaseFragment() {
     val args: FindSeqHintFragmentArgs by navArgs()
     private lateinit var squire: Squire
     private var searchPos:Int = 0
@@ -39,7 +39,7 @@ class FindSeqHintFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         squire = args.squire
-
+        listener?.updateTitles(getString(R.string.find_squire_progress,squire.squireName))
         squireNameTitle.setText(squire.squireName)
         ArrayAdapter<String>(
             context!!,

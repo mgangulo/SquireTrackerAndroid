@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.daimajia.androidanimations.library.Techniques
@@ -24,26 +23,10 @@ import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_squire_details.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SquireDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class SquireDetailsFragment : Fragment() {
+class SquireDetailsFragment : BaseFragment() {
     val args: SquireDetailsFragmentArgs by navArgs()
     lateinit var squire: Squire
     lateinit var squireProgressPreview: HashMap<Int, Int>
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +40,7 @@ class SquireDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (context != null) {
             squire = args.squire
+            listener?.updateTitles(getString(R.string.squire_details,squire.squireName))
             squireImage.setImageDrawable(ContextCompat.getDrawable(context!!,squire.imageSquire))
             squireName.setText(squire.squireName)
             squireProgressPreview = UserUtils.getCurrentCharPlayer(context!!).squireProgress

@@ -23,7 +23,7 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class CharactersFragment : Fragment() {
+class CharactersFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +41,7 @@ class CharactersFragment : Fragment() {
                 user.playerChars,
                 context!!
             )
+            listener?.updateTitles(getString(R.string.characters))
             charRecycler.adapter = adapter
             addChar.setOnClickListener(
                 Navigation.createNavigateOnClickListener(R.id.action_nav_characters_to_newPlayerCharFragment, null))

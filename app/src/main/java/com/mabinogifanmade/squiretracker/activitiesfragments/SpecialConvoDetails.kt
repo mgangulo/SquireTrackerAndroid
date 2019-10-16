@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_special_convo_details.*
  * A simple [Fragment] subclass.
  *
  */
-class SpecialConvoDetails : Fragment() {
+class SpecialConvoDetails : BaseFragment() {
     val args: SpecialConvoDetailsArgs by navArgs()
 
     override fun onCreateView(
@@ -34,6 +34,7 @@ class SpecialConvoDetails : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val squire: Squire = args.squire
+        listener?.updateTitles(getString(R.string.squire_special,squire.squireName))
         if (context!=null) {
             specialConvoRecycler.adapter = SpecialConvoAdapter(context!!, squire.specialOptions, squire.hasHint)
         }

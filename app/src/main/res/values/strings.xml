@@ -68,4 +68,11 @@
     <string name="menu_releases">Releases</string>
     <string name="characters">Characters</string>
     <string name="add_character">Add new character</string>
+    <string name="edit_character">Edit %1$s</string>
+    <string name="character_progress">%1$s\'s progress</string>
+
+    <string name="find_squire_progress">Find progress on %1$s</string>
+    <string name="squire_details">%1$s\'s details</string>
+    <string name="squire_sequence">%1$s\'s conversation sequence</string>
+    <string name="squire_special">%1$s\'s special options</string>
 </resources>

@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/onBoardingNewPlayerFragment"
         android:name="com.mabinogifanmade.squiretracker.activitiesfragments.PlayerCharDetailsFragment"
-        android:label="@string/add_character"
         tools:layout="@layout/fragment_char_details">
         <argument
             android:name="isEditMode"

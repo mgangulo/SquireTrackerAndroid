@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.adapters.SquireAdapter
@@ -17,9 +16,9 @@ import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
     private var isGrid: Boolean = true
-    private var listener: OnFragmentInteractionListener? = null
+    private var mainListener: OnMainFragmentListener? = null
     private val squireList: ArrayList<Squire> = arrayListOf(Squire.DAI, Squire.EIRLYS, Squire.ELSIE, Squire.KAOUR)
     private var user: UserGeneral? = null
     override fun onCreateView(
@@ -81,7 +80,8 @@ class MainFragment : Fragment() {
                     }
                 }
             }
-            listener?.updateInfoOnNav()
+            mainListener?.updateInfoOnNav()
+            listener?.updateTitles(getString(R.string.app_name),getString(R.string.character_progress,currentChar.charName))
         }
     }
 
@@ -89,8 +89,8 @@ class MainFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
+        if (context is OnMainFragmentListener) {
+            mainListener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
@@ -98,21 +98,10 @@ class MainFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        listener = null
+        mainListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
+    interface OnMainFragmentListener {
         fun updateInfoOnNav()
     }
 

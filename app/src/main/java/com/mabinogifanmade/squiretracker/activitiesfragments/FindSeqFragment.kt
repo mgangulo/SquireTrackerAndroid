@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.mabinogifanmade.squiretracker.R
@@ -18,7 +17,7 @@ import com.mabinogifanmade.squiretracker.utils.ConversationUtils
 import com.mabinogifanmade.squiretracker.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_find_seq.*
 
-class FindSeqFragment : Fragment() {
+class FindSeqFragment : BaseFragment() {
     val args: FindSeqHintFragmentArgs by navArgs()
     private lateinit var squire: Squire
     private var searchPos:Int = 0
@@ -34,6 +33,7 @@ class FindSeqFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         squire = args.squire
+        listener?.updateTitles(getString(R.string.find_squire_progress,squire.squireName))
         ArrayAdapter<String>(
             context!!,
             android.R.layout.simple_spinner_item,
