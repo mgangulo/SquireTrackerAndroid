@@ -15,6 +15,7 @@ import com.mabinogifanmade.squiretracker.userdata.PlayerChar
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import kotlinx.android.synthetic.main.fragment_main.*
+import me.rishabhkhanna.customtogglebutton.CustomToggleButton
 import java.util.*
 
 class MainFragment : BaseFragment() {
@@ -41,7 +42,7 @@ class MainFragment : BaseFragment() {
         user = ShrdPrfsUtils.getUserData(context!!)
         squireRecyclerView?.adapter = SquireAdapter(squireList, context!!, isGrid,
             user!!.getCurrentCharacter().squireProgress)
-        Log.v("SquireList","size: "+squireList.size)
+
         setUserDataOnView()
     }
 
@@ -69,27 +70,16 @@ class MainFragment : BaseFragment() {
                 val squire: Squire = squireList.get(i)
                 if (!currentChar.squiresActive.contains(squire.id)) {
                     squireList.remove(squire)
-                    if (squire.equals(Squire.DAI)) {
-                        itChanged = true
-                        toggleDai?.setChecked(false)
-                        toggleDai?.setSelected(false)
-                    }
-                    if (squire.equals(Squire.EIRLYS)) {
-                        itChanged = true
-                        toggleEirlys?.setChecked(false)
-                        toggleEirlys?.setSelected(false)
-                    }
-                    if (squire.equals(Squire.ELSIE)) {
-                        itChanged = true
-                        toggleElsie?.setChecked(false)
-                        toggleElsie?.setSelected(false)
-                    }
-                    if (squire.equals(Squire.KAOUR)) {
-                        itChanged = true
-                        toggleKaour?.setChecked(false)
-                        toggleKaour?.setSelected(false)
-                    }
+                    itChanged = true
                 }
+                Log.v("SquireList",squire.name+" check: "+currentChar.squiresActive.contains(squire.id).toString())
+                // getToggleSquire(squire)?.setChecked(currentChar.squiresActive.contains(squire.id))
+                //getToggleSquire(squire)?.setSelected(currentChar.squiresActive.contains(squire.id))
+                if (getToggleSquire(squire).isChecked!=currentChar.squiresActive.contains(squire.id))
+                    getToggleSquire(squire)?.toggle()
+                getToggleSquire(squire)?.rootView?.refreshDrawableState()
+                getToggleSquire(squire)?.rootView?.requestLayout()
+                getToggleSquire(squire)?.rootView?.forceLayout()
             }
             if (itChanged){
                 squireRecyclerView?.adapter?.notifyDataSetChanged()
@@ -155,6 +145,15 @@ class MainFragment : BaseFragment() {
             val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
             user?.prefersGrid = isGrid
             ShrdPrfsUtils.saveUserData(context!!, user!!)
+        }
+    }
+
+    private fun getToggleSquire(squire:Squire): CustomToggleButton {
+        return when (squire){
+            Squire.DAI ->  toggleDai
+            Squire.EIRLYS -> toggleEirlys
+            Squire.ELSIE -> toggleElsie
+            else -> toggleKaour
         }
     }
 }
