@@ -141,7 +141,7 @@ class SquireDetailsFragment : BaseFragment() {
             dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                 val input:Int? = editText.text.toString().toIntOrNull()
                 val isValid = when(input!=null){
-                    true ->  input > 1
+                    true ->  input >= 1
                     else -> false
                 }
                 textLayout?.error = if (isValid) null else getString(R.string.progress_error_msg)
