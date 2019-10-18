@@ -40,10 +40,10 @@ class MainFragment : BaseFragment() {
         toggleElsie?.setOnCheckedChangeListener(getSquireToggleListener(Squire.ELSIE))
         toggleKaour?.setOnCheckedChangeListener(getSquireToggleListener(Squire.KAOUR))
         user = ShrdPrfsUtils.getUserData(context!!)
-        squireRecyclerView?.adapter = SquireAdapter(squireList, context!!, isGrid,
+        squireRecyclerView?.adapter = SquireAdapter(squireList, context!!, user!!.prefersGrid,
             user!!.getCurrentCharacter().squireProgress)
 
-        setUserDataOnView()
+
     }
 
     private fun changeViews(save:Boolean) {
@@ -58,6 +58,11 @@ class MainFragment : BaseFragment() {
             )
             setRecyclerViewType(isGrid,save)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setUserDataOnView()
     }
 
     fun setUserDataOnView() {
