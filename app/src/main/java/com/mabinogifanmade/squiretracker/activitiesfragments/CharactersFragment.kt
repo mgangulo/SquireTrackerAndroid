@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mabinogifanmade.squiretracker.R
 import com.mabinogifanmade.squiretracker.adapters.PlayerAdapter
 import com.mabinogifanmade.squiretracker.userdata.UserGeneral
+import com.mabinogifanmade.squiretracker.utils.GeneralUtils
 import com.mabinogifanmade.squiretracker.utils.ShrdPrfsUtils
 import kotlinx.android.synthetic.main.fragment_characters.*
 
@@ -28,6 +29,12 @@ class CharactersFragment : BaseFragment(),
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_characters, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //FIXME: When back pressed callback works for toolbar do this properly
+        GeneralUtils.hideKeyboard(activity!!)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
