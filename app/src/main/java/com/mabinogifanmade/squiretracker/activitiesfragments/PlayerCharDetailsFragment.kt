@@ -36,6 +36,27 @@ class PlayerCharDetailsFragment : BaseFragment() {
     var onBoardingMode: Boolean = false
     var avyPos = 1
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+       /* val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            GeneralUtils.hideKeyboard(activity!!)
+        }
+        callback.isEnabled = true*/
+        //callback.handleOnBackPressed()
+            /*requireActivity().
+                onBackPressedDispatcher.addCallback(this,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        GeneralUtils.hideKeyboard(activity!!)
+                    }
+                })*/
+
+
+
+    }
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -96,6 +117,7 @@ class PlayerCharDetailsFragment : BaseFragment() {
                 listener?.updateTitles(getString(R.string.add_character))
             }
             saveButton.setOnClickListener {
+                GeneralUtils.hideKeyboard(activity)
                 if (!editMode)
                     saveNew()
                 else
