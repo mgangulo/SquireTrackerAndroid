@@ -34,6 +34,7 @@ class FindSeqFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         squire = args.squire
         listener?.updateTitles(getString(R.string.find_squire_progress,squire.squireName))
+        squireNameTitle.setText(squire.squireName)
         ArrayAdapter<String>(
             context!!,
             android.R.layout.simple_spinner_item,
