@@ -176,5 +176,14 @@ class FindSeqFragment : BaseFragment() {
             else -> ""
         }
     }
-
+    private fun getSeqSpinner(pos: Int): Spinner? {
+        return when (pos) {
+            1 -> seqSpinner1
+            2 -> seqSpinner2
+            3 -> seqSpinner3
+            4 -> seqSpinner4
+            5 -> seqSpinner5
+            else -> null
+        }
+    }
 }

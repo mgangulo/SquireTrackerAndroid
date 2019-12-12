@@ -75,4 +75,20 @@ class PlayerChar(var charName: String,
         }
         return false
     }
+
+    val squireHintSearch: HashMap<Int, String?> =
+        hashMapOf(
+            Squire.DAI.id to null,
+            Squire.EIRLYS.id to null,
+            Squire.ELSIE.id to null,
+            Squire.KAOUR.id to null
+        )
+
+    val squireSeqSearch: HashMap<Int, String?> =
+        hashMapOf(
+            Squire.DAI.id to null,
+            Squire.EIRLYS.id to null,
+            Squire.ELSIE.id to null,
+            Squire.KAOUR.id to null
+        )
 }

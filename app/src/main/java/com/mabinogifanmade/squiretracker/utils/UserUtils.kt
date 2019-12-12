@@ -97,5 +97,52 @@ class UserUtils {
             }
             return false
         }
+
+        fun getCurrentCharSquireSearch(context: Context?, squire: Squire):String?{
+            try {
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                val seq = user?.getCurrentCharacter()?.squireSeqSearch?.get(squire.id)
+                if (!seq.isNullOrEmpty())
+                    return seq
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        fun getCurrentCharSquireSearchHint(context: Context?, squire: Squire) : Pair<String,String?>? {
+            try {
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                val hint = user?.getCurrentCharacter()?.squireHintSearch?.get(squire.id)
+                val seq = user?.getCurrentCharacter()?.squireSeqSearch?.get(squire.id)
+                if (!hint.isNullOrEmpty())
+                    return Pair(hint,seq)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        fun saveCurrentCharSquireSearch(context: Context?, squire: Squire, seq:String?){
+            try {
+                val user: UserGeneral = ShrdPrfsUtils.getUserData(context!!)!!
+                user?.getCurrentCharacter()?.squireSeqSearch?.put(squire.id,seq)
+                ShrdPrfsUtils.saveUserData(context,user)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+
+        fun saveCurrentCharSquireSearchHint(context: Context?, squire: Squire, seq:String?, hint:String?) {
+            try {
+                val user: UserGeneral = ShrdPrfsUtils.getUserData(context!!)!!
+                user?.getCurrentCharacter()?.squireSeqSearch?.put(squire.id,seq)
+                user?.getCurrentCharacter()?.squireHintSearch?.put(squire.id,hint)
+                ShrdPrfsUtils.saveUserData(context,user)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+
     }
 }
