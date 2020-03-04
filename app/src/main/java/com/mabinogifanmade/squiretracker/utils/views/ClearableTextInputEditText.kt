@@ -9,13 +9,13 @@ import android.view.View
 import com.google.android.material.textfield.TextInputEditText
 
 
-class ClearableTextInputEditText(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
+class ClearableTextInputEditText(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
     TextInputEditText(context, attrs, defStyleAttr) {
     var iconVisibility: Boolean = false;
 
-    constructor(context: Context?) : this(context, null as AttributeSet?) {}
+    constructor(context: Context) : this(context, null as AttributeSet?) {}
 
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, android.R.attr.editTextStyle) {}
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, android.R.attr.editTextStyle) {}
 
     init {
         this.addTextChangedListener(object : TextWatcher {
