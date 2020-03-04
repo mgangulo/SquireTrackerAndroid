@@ -110,7 +110,7 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>, val context: Context
                         it.context.getString(R.string.are_you_sure),
                         it.context.getString(R.string.delete_char_message, playerChars.get(adapterPosition).charName),
                         it.context.getString(R.string.yes_button),
-                        DialogInterface.OnClickListener { dialog, which ->
+                        DialogInterface.OnClickListener { dialog, _ ->
                             if (adapterPosition >= 0 && adapterPosition < playerChars.size) {
                                 UserUtils.removePlayerAt(it.context,adapterPosition)
                                 playerChars.removeAt(adapterPosition)
@@ -119,7 +119,7 @@ class PlayerAdapter(val playerChars: ArrayList<PlayerChar>, val context: Context
                             dialog.dismiss()
                         },
                         it.context.getString(R.string.no_button),
-                        DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+                        DialogInterface.OnClickListener { dialog, _ -> dialog.dismiss() })
                 } else{
                     Toast.makeText(it.context,R.string.delete_with_one_char,Toast.LENGTH_LONG).show()
                 }

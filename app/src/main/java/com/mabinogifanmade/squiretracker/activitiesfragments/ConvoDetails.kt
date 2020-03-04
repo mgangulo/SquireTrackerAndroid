@@ -37,8 +37,8 @@ class ConvoDetails : BaseFragment() {
         val squire: Squire = args.squire
         listener?.updateTitles(getString(R.string.squire_sequence,squire.squireName))
         if (context!=null) {
-            convoRecycler.adapter = ConvoAdapter(context!!, squire,
-                UserUtils.getCurrentCharProgressForSquire(context!!,squire.id))
+            convoRecycler.adapter = ConvoAdapter(requireContext(), squire,
+                UserUtils.getCurrentCharProgressForSquire(requireContext(),squire.id))
         }
     }
 }

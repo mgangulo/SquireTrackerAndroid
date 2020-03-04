@@ -35,7 +35,7 @@ class ShrdPrfsUtils {
         fun getUserData(context: Context): UserGeneral? {
             val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             var userString = prefs.getString(USER_DATA_KEY, ERROR)
-            if (!userString.equals(ERROR))
+            if (userString!=null && !userString.equals(ERROR))
                 return Gson().fromJson(userString, UserGeneral::class.java)
             else
                 return null

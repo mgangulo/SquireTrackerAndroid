@@ -36,7 +36,7 @@ class SpecialConvoDetails : BaseFragment() {
         val squire: Squire = args.squire
         listener?.updateTitles(getString(R.string.squire_special,squire.squireName))
         if (context!=null) {
-            specialConvoRecycler.adapter = SpecialConvoAdapter(context!!, squire.specialOptions, squire.hasHint)
+            specialConvoRecycler.adapter = SpecialConvoAdapter(requireContext(), squire.specialOptions, squire.hasHint)
         }
     }
 }

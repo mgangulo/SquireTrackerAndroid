@@ -21,7 +21,7 @@ class ClearableTextInputEditText(context: Context, attrs: AttributeSet?, defStyl
         this.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s != null) {
-                    if (s!!.length > 0) {
+                    if (s.length > 0) {
                         setClearDrawable(true)
                     } else {
                         setClearDrawable(false)

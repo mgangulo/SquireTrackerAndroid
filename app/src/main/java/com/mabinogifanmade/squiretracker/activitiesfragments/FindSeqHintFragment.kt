@@ -45,7 +45,7 @@ class FindSeqHintFragment : BaseFragment() {
         val hintList = getSpinnerList(squire.sequenceHint)
         val seqList = getSpinnerList(squire.sequenceConvo)
         ArrayAdapter<String>(
-            context!!,
+            requireContext(),
             android.R.layout.simple_spinner_item,
             hintList
         ).also {
@@ -57,7 +57,7 @@ class FindSeqHintFragment : BaseFragment() {
             hintSpinner5.adapter = it
         }
         ArrayAdapter<String>(
-            context!!,
+            requireContext(),
             android.R.layout.simple_spinner_item,
             seqList
         ).also {
@@ -96,7 +96,7 @@ class FindSeqHintFragment : BaseFragment() {
         saveButton.setOnClickListener {
             if (results.visibility == View.VISIBLE) {
                 UserUtils.saveCurrentCharSquireSearchHint(context,squire,null,null)
-                UserUtils.setCurrentCharSquireProgress(context!!, squire, searchPos)
+                UserUtils.setCurrentCharSquireProgress(requireContext(), squire, searchPos)
                 findNavController().popBackStack()
             }
         }

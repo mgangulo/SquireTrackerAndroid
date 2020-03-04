@@ -62,13 +62,13 @@ class ConvoAdapter(
         if (position == 0) {
             holder.levelTitle?.setText(squire.squireName)
         } else if (position == 1) {
-            holder.numberText?.setText(context!!.getString(R.string.sequence_text))
-            holder.hintText?.setText(context!!.getString(R.string.hint_text))
-            holder.sequenceText?.setText(context!!.getString(R.string.word_text))
-            holder.numberText?.setTypeface(holder.numberText!!.getTypeface(), Typeface.BOLD)
-            holder.hintText?.setTypeface(holder.hintText!!.getTypeface(), Typeface.BOLD)
-            holder.sequenceText?.setTypeface(holder.sequenceText!!.getTypeface(), Typeface.BOLD)
-            holder.rootLayout?.setBackgroundColor(ContextCompat.getColor(context!!, R.color.white))
+            holder.numberText?.setText(context.getString(R.string.sequence_text))
+            holder.hintText?.setText(context.getString(R.string.hint_text))
+            holder.sequenceText?.setText(context.getString(R.string.word_text))
+            holder.numberText?.setTypeface(holder.numberText.getTypeface(), Typeface.BOLD)
+            holder.hintText?.setTypeface(holder.hintText.getTypeface(), Typeface.BOLD)
+            holder.sequenceText?.setTypeface(holder.sequenceText.getTypeface(), Typeface.BOLD)
+            holder.rootLayout?.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
         } else {
             val pos: Int = position - 2;
             holder.numberText?.setText((pos + 1).toString())
@@ -98,9 +98,9 @@ class ConvoAdapter(
 
     private fun setBackgroundColor(holder: ViewHolder, position: Int) {
         if (position <                              currentProgress) {
-            holder.rootLayout?.setBackgroundColor(ContextCompat.getColor(context!!, R.color.super_light_green))
+            holder.rootLayout?.setBackgroundColor(ContextCompat.getColor(context, R.color.super_light_green))
         } else {
-            holder.rootLayout?.setBackgroundColor(ContextCompat.getColor(context!!, R.color.white))
+            holder.rootLayout?.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
         }
     }
 
