@@ -47,6 +47,7 @@ class SplashFragment : Fragment() {
                 NavOptions.Builder()
                     .setPopUpTo(R.id.splashFragment,
                         true).build())
+            requireActivity().finish()
         }
     }
 }
