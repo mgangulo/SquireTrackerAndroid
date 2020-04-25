@@ -31,9 +31,9 @@ class SpecialConvoAdapter(
             list.add(i)
             headerPos.add(list.size - 1)
             size = size.inc()
-            list.add(arrayOf(context!!.getString(R.string.percent_text),
-                context!!.getString(R.string.hint_text),
-                context!!.getString(R.string.word_text)))
+            list.add(arrayOf(context.getString(R.string.percent_text),
+                context.getString(R.string.hint_text),
+                context.getString(R.string.word_text)))
             size = size.inc()
             for (option in dataSquire.get(i)!!.iterator()) {
                 list.add(option)
@@ -69,9 +69,9 @@ class SpecialConvoAdapter(
             holder.percentText?.setText(data[0].toString())
             holder.hintText?.setText(data[1].toString())
             holder.sequenceText?.setText(data[2].toString())
-            holder.percentText?.setTypeface(holder.percentText!!.getTypeface(), Typeface.BOLD)
-            holder.hintText?.setTypeface(holder.hintText!!.getTypeface(), Typeface.BOLD)
-            holder.sequenceText?.setTypeface(holder.sequenceText!!.getTypeface(), Typeface.BOLD)
+            holder.percentText?.setTypeface(holder.percentText.getTypeface(), Typeface.BOLD)
+            holder.hintText?.setTypeface(holder.hintText.getTypeface(), Typeface.BOLD)
+            holder.sequenceText?.setTypeface(holder.sequenceText.getTypeface(), Typeface.BOLD)
         } else if (data is SpecialOption){
             holder.percentText?.setText(data.percent.toString())
             holder.hintText?.setText(data.hint)

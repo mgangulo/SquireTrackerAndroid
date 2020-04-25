@@ -41,10 +41,10 @@ class SquireDetailsFragment : BaseFragment() {
         if (context != null) {
             squire = args.squire
             listener?.updateTitles(getString(R.string.squire_details,squire.squireName))
-            squireImage.setImageDrawable(ContextCompat.getDrawable(context!!,squire.imageSquire))
+            squireImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),squire.imageSquire))
             squireName.setText(squire.squireName)
-            squireProgressPreview = UserUtils.getCurrentCharPlayer(context!!).squireProgress
-            val progress: Int = UserUtils.getCurrentCharProgressForSquire(context!!, squire.id)
+            squireProgressPreview = UserUtils.getCurrentCharPlayer(requireContext()).squireProgress
+            val progress: Int = UserUtils.getCurrentCharProgressForSquire(requireContext(), squire.id)
             setSquireText(progress)
             next.setOnClickListener(View.OnClickListener {
                 setSquireText(squireProgressPreview.get(squire.id)!! + 1)
@@ -53,11 +53,11 @@ class SquireDetailsFragment : BaseFragment() {
                 setSquireText(squireProgressPreview.get(squire.id)!! - 1)
             })
             nextAccept.setOnClickListener(View.OnClickListener {
-                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(requireContext())
                 user?.getCurrentCharacter()?.setSquireProgress(
-                    squire, squireProgressPreview.get(squire.id)!! + 1!!
+                    squire, squireProgressPreview.get(squire.id)!! + 1
                 )
-                ShrdPrfsUtils.saveUserData(context!!, user!!)
+                ShrdPrfsUtils.saveUserData(requireContext(), user!!)
                 YoYo.with(Techniques.FadeInRight)
                     .duration(700)
                     .playOn(sequenceRelative);
@@ -99,7 +99,7 @@ class SquireDetailsFragment : BaseFragment() {
     private fun setSquireText(progress: Int) {
         if (context != null) {
             val index: Int = ConversationUtils.getNumberInSequence(progress, squire.sequenceConvo.length)
-            sequenceText.text = context!!.getString(
+            sequenceText.text = requireContext().getString(
                 R.string.number_sequence,
                 (index + 1),
                 ConversationUtils.translateCurrentAbv(squire, false, progress)
@@ -107,7 +107,7 @@ class SquireDetailsFragment : BaseFragment() {
             squireProgressPreview.put(squire.id, index)
             if (squire.hasHint) {
                 hintText.visibility = View.VISIBLE
-                hintText.text = context!!.getString(
+                hintText.text = requireContext().getString(
                     R.string.hint,
                     ConversationUtils.translateCurrentAbv(squire, true, progress)
                 )
@@ -119,8 +119,8 @@ class SquireDetailsFragment : BaseFragment() {
 
     fun showDialogInput() {
         if (context != null && activity != null) {
-            val builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
-            val inflater = activity!!.layoutInflater
+            val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+            val inflater = requireActivity().layoutInflater
             val dialogView = inflater.inflate(R.layout.dialog_input, null)
             builder.setView(dialogView)
             val dialog: AlertDialog = builder.create()
@@ -129,12 +129,12 @@ class SquireDetailsFragment : BaseFragment() {
             val textLayout: TextInputLayout = dialogView.findViewById(R.id.inputLayout)
             textLayout.setHint(getString(R.string.squire_name_progress, squire.squireName))
             editText.inputType= InputType.TYPE_CLASS_NUMBER
-            editText.setText((UserUtils.getCurrentCharProgressForSquire(context!!,squire.id)+1).toString())
-            dialog.setButton(DialogInterface.BUTTON_POSITIVE, context!!.getText(R.string.submit_button),
-                DialogInterface.OnClickListener { dialog, which ->
+            editText.setText((UserUtils.getCurrentCharProgressForSquire(requireContext(),squire.id)+1).toString())
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, requireContext().getText(R.string.submit_button),
+                DialogInterface.OnClickListener { _, _ ->
                 })
-            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context!!.getText(R.string.cancel_button),
-                DialogInterface.OnClickListener { dialog, which ->
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, requireContext().getText(R.string.cancel_button),
+                DialogInterface.OnClickListener { _, _ ->
                     dialog.dismiss()
                 })
             dialog.show()
@@ -144,10 +144,10 @@ class SquireDetailsFragment : BaseFragment() {
                     true ->  input >= 1
                     else -> false
                 }
-                textLayout?.error = if (isValid) null else getString(R.string.progress_error_msg)
-                if (isValid && UserUtils.setCurrentCharSquireProgress(context!!,squire,
+                textLayout.error = if (isValid) null else getString(R.string.progress_error_msg)
+                if (isValid && UserUtils.setCurrentCharSquireProgress(requireContext(),squire,
                         ConversationUtils.getNumberInSequenceWithOffset(input!!-1,squire.sequenceConvo.length))){
-                    setSquireText(ConversationUtils.getNumberInSequenceWithOffset(input!!-1,squire.sequenceConvo.length))
+                    setSquireText(ConversationUtils.getNumberInSequenceWithOffset(input-1,squire.sequenceConvo.length))
                     dialog.dismiss()
                 }
             }

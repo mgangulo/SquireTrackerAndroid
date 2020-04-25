@@ -216,8 +216,6 @@ class ConversationUtils {
             nextOptionBuilder: StringBuilder
         ): Int {
             val lastSeq = seq.substring(seq.length - keyHint.length, seq.length)
-            val circSeqStartIndex = lastSeq.length - 1
-            val circSeqEndIndex = lastSeq.length
             val circularSeq = StringBuilder()
                 .append(lastSeq)
                 .append(seq.substring(0, keyHint.length))

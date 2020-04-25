@@ -16,7 +16,7 @@ class GeneralUtils {
             try {
                 val imm =
                     activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                if (activity != null && activity.currentFocus != null && activity.currentFocus!!.windowToken != null)
+                if (activity.currentFocus != null && activity.currentFocus!!.windowToken != null)
                     imm.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
             } catch (e: Exception) {
                 e.printStackTrace()

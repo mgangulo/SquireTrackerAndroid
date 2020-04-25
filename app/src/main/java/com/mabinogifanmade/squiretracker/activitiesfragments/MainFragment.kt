@@ -39,8 +39,8 @@ class MainFragment : BaseFragment() {
         toggleEirlys?.setOnCheckedChangeListener(getSquireToggleListener(Squire.EIRLYS))
         toggleElsie?.setOnCheckedChangeListener(getSquireToggleListener(Squire.ELSIE))
         toggleKaour?.setOnCheckedChangeListener(getSquireToggleListener(Squire.KAOUR))
-        user = ShrdPrfsUtils.getUserData(context!!)
-        squireRecyclerView?.adapter = SquireAdapter(squireList, context!!, user!!.prefersGrid,
+        user = ShrdPrfsUtils.getUserData(requireContext())
+        squireRecyclerView?.adapter = SquireAdapter(squireList, requireContext(), user!!.prefersGrid,
             user!!.getCurrentCharacter().squireProgress)
 
 
@@ -81,10 +81,10 @@ class MainFragment : BaseFragment() {
                 // getToggleSquire(squire)?.setChecked(currentChar.squiresActive.contains(squire.id))
                 //getToggleSquire(squire)?.setSelected(currentChar.squiresActive.contains(squire.id))
                 if (getToggleSquire(squire).isChecked!=currentChar.squiresActive.contains(squire.id))
-                    getToggleSquire(squire)?.toggle()
-                getToggleSquire(squire)?.rootView?.refreshDrawableState()
-                getToggleSquire(squire)?.rootView?.requestLayout()
-                getToggleSquire(squire)?.rootView?.forceLayout()
+                    getToggleSquire(squire).toggle()
+                getToggleSquire(squire).rootView?.refreshDrawableState()
+                getToggleSquire(squire).rootView?.requestLayout()
+                getToggleSquire(squire).rootView?.forceLayout()
             }
             if (itChanged){
                 squireRecyclerView?.adapter?.notifyDataSetChanged()
@@ -117,7 +117,7 @@ class MainFragment : BaseFragment() {
     private fun getSquireToggleListener(squire: Squire): CompoundButton.OnCheckedChangeListener {
         return CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (buttonView.isPressed) {
-                val user: UserGeneral = ShrdPrfsUtils.getUserData(context!!)!!
+                val user: UserGeneral = ShrdPrfsUtils.getUserData(requireContext())!!
                 if (isChecked) {
                     if (!squireList.contains(squire)) {
                         squireList.add(squire)
@@ -139,7 +139,7 @@ class MainFragment : BaseFragment() {
 
     private fun setRecyclerViewType(isGrid: Boolean, save:Boolean) {
         val layoutManager = squireRecyclerView?.layoutManager as GridLayoutManager
-        layoutManager?.setSpanCount(
+        layoutManager.setSpanCount(
             when (isGrid) {
                 true -> 2
                 false -> 1
@@ -147,9 +147,9 @@ class MainFragment : BaseFragment() {
         )
         (squireRecyclerView?.adapter as SquireAdapter).setViewType(isGrid)
         if (save) {
-            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(requireContext())
             user?.prefersGrid = isGrid
-            ShrdPrfsUtils.saveUserData(context!!, user!!)
+            ShrdPrfsUtils.saveUserData(requireContext(), user!!)
         }
     }
 

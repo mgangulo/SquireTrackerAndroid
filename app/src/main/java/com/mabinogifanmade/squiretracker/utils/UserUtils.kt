@@ -8,16 +8,16 @@ import com.mabinogifanmade.squiretracker.userdata.UserGeneral
 class UserUtils {
     companion object{
         fun saveNewPlayer(context:Context, newPlayer:PlayerChar){
-            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
             user?.playerChars?.add(newPlayer)
-            ShrdPrfsUtils.saveUserData(context!!, user!!)
+            ShrdPrfsUtils.saveUserData(context, user!!)
         }
 
         fun editPlayerOrder(context:Context, list:ArrayList<PlayerChar>){
             try {
-                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
                 user!!.playerChars = list
-                ShrdPrfsUtils.saveUserData(context!!, user!!)
+                ShrdPrfsUtils.saveUserData(context, user)
             } catch (e:Exception){
                 e.printStackTrace()
             }
@@ -25,22 +25,22 @@ class UserUtils {
 
         fun saveNewPlayerOnBoarding(context:Context, newPlayer:PlayerChar){
             val user: UserGeneral = UserGeneral(newPlayer)
-            ShrdPrfsUtils.saveUserData(context!!, user)
+            ShrdPrfsUtils.saveUserData(context, user)
         }
 
         fun characterExist(context:Context, newPlayer:PlayerChar):Boolean{
-            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
             return user!!.playerChars.contains(newPlayer)
         }
 
 
         fun characterExist(context: Context, charPos: Int, playerName: String, server: String): Boolean {
-            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+            val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
             val player:PlayerChar = user!!.playerChars.get(charPos)
             player.charName = playerName
             player.server = server
-            user?.playerChars?.removeAt(charPos)
-            return user!!.playerChars.contains(player)
+            user.playerChars.removeAt(charPos)
+            return user.playerChars.contains(player)
         }
 
         fun removePlayerAt(context: Context?, pos: Int) {
@@ -75,7 +75,7 @@ class UserUtils {
         fun switchPlayerCharacter(context: Context,pos:Int) {
             val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
             if (pos>=0 && pos<user!!.playerChars.size){
-                user?.currentCharacter = pos
+                user.currentCharacter = pos
             }
             ShrdPrfsUtils.saveUserData(context, user!!)
         }
@@ -86,16 +86,63 @@ class UserUtils {
 
         fun setCurrentCharSquireProgress(context: Context, squire: Squire, progress:Int):Boolean{
             try {
-                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context)
                 user?.getCurrentCharacter()?.setSquireProgress(
                     squire, progress
                 )
-                ShrdPrfsUtils.saveUserData(context!!, user!!)
+                ShrdPrfsUtils.saveUserData(context, user!!)
                 return true
             }catch (e:Exception){
                 e.printStackTrace()
             }
             return false
         }
+
+        fun getCurrentCharSquireSearch(context: Context?, squire: Squire):String?{
+            try {
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                val seq = user?.getCurrentCharacter()?.squireSeqSearch?.get(squire.id)
+                if (!seq.isNullOrEmpty())
+                    return seq
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        fun getCurrentCharSquireSearchHint(context: Context?, squire: Squire) : Pair<String,String?>? {
+            try {
+                val user: UserGeneral? = ShrdPrfsUtils.getUserData(context!!)
+                val hint = user?.getCurrentCharacter()?.squireHintSearch?.get(squire.id)
+                val seq = user?.getCurrentCharacter()?.squireSeqSearch?.get(squire.id)
+                if (!hint.isNullOrEmpty())
+                    return Pair(hint,seq)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+            return null
+        }
+
+        fun saveCurrentCharSquireSearch(context: Context?, squire: Squire, seq:String?){
+            try {
+                val user: UserGeneral = ShrdPrfsUtils.getUserData(context!!)!!
+                user.getCurrentCharacter().squireSeqSearch.put(squire.id,seq)
+                ShrdPrfsUtils.saveUserData(context,user)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+
+        fun saveCurrentCharSquireSearchHint(context: Context?, squire: Squire, seq:String?, hint:String?) {
+            try {
+                val user: UserGeneral = ShrdPrfsUtils.getUserData(context!!)!!
+                user.getCurrentCharacter().squireSeqSearch.put(squire.id,seq)
+                user.getCurrentCharacter().squireHintSearch.put(squire.id,hint)
+                ShrdPrfsUtils.saveUserData(context,user)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+
     }
 }

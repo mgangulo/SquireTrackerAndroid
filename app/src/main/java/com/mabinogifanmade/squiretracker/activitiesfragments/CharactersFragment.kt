@@ -40,10 +40,10 @@ class CharactersFragment : BaseFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (context != null) {
-            val user: UserGeneral = ShrdPrfsUtils.getUserData(context!!)!!
+            val user: UserGeneral = ShrdPrfsUtils.getUserData(requireContext())!!
             val adapter: PlayerAdapter = PlayerAdapter(
                 user.playerChars,
-                context!!
+                requireContext()
             )
             listener?.updateTitles(getString(R.string.characters))
             charRecycler.adapter = adapter

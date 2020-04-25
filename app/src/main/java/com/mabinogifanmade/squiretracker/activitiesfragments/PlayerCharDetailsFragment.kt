@@ -73,10 +73,10 @@ class PlayerCharDetailsFragment : BaseFragment() {
             onBoardingMode = args.isOnBoardingMode
             var playerChar: PlayerChar? = null
             if (editMode) {
-                playerChar = UserUtils.getCharPlayerAt(context!!, charPos)
+                playerChar = UserUtils.getCharPlayerAt(requireContext(), charPos)
             }
             ArrayAdapter.createFromResource(
-                context!!,
+                requireContext(),
                 R.array.servers_array,
                 android.R.layout.simple_spinner_item
             ).also { adapter ->
@@ -104,12 +104,12 @@ class PlayerCharDetailsFragment : BaseFragment() {
             if (editMode) {
                 squireProgress.visibility = View.GONE
                 if (playerChar != null) {
-                    playerInfo.charNameEdit.setText(playerChar!!.charName)
-                    setSelected(getPosFromAvatar(playerChar!!.avatar))
+                    playerInfo.charNameEdit.setText(playerChar.charName)
+                    setSelected(getPosFromAvatar(playerChar.avatar))
                     listener?.updateTitles(
                         getString(
                             R.string.edit_character,
-                            playerChar!!.charName
+                            playerChar.charName
                         )
                     )
                 }
@@ -137,11 +137,11 @@ class PlayerCharDetailsFragment : BaseFragment() {
         val server: String = playerInfo.serverSpinner.selectedItem.toString()
         val avatar: Int = getAvatarFromPos(avyPos)
         if (context != null) {
-            if (!UserUtils.characterExist(context!!, charPos, playerName, server)) {
-                UserUtils.editPlayerAt(context!!, charPos, playerName, server, avatar)
+            if (!UserUtils.characterExist(requireContext(), charPos, playerName, server)) {
+                UserUtils.editPlayerAt(requireContext(), charPos, playerName, server, avatar)
                 findNavController().popBackStack()
             } else {
-                Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), R.string.character_exist_error, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -204,16 +204,16 @@ class PlayerCharDetailsFragment : BaseFragment() {
             )
             if (context != null) {
                 if (!onBoardingMode) {
-                    if (!UserUtils.characterExist(context!!, newPlayer)) {
-                        UserUtils.saveNewPlayer(context!!, newPlayer)
+                    if (!UserUtils.characterExist(requireContext(), newPlayer)) {
+                        UserUtils.saveNewPlayer(requireContext(), newPlayer)
                         findNavController().popBackStack()
                     } else {
-                        Toast.makeText(context!!, R.string.character_exist_error, Toast.LENGTH_LONG)
+                        Toast.makeText(requireContext(), R.string.character_exist_error, Toast.LENGTH_LONG)
                             .show()
                     }
                 } else {
                     try {
-                        UserUtils.saveNewPlayerOnBoarding(context!!, newPlayer)
+                        UserUtils.saveNewPlayerOnBoarding(requireContext(), newPlayer)
                         val directions = PlayerCharDetailsFragmentDirections.navigateToMain()
                         findNavController().navigate(
                             directions,

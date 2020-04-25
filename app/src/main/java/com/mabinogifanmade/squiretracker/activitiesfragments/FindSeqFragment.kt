@@ -35,10 +35,11 @@ class FindSeqFragment : BaseFragment() {
         squire = args.squire
         listener?.updateTitles(getString(R.string.find_squire_progress,squire.squireName))
         squireNameTitle.setText(squire.squireName)
+        val seqList = getSpinnerList(squire.sequenceConvo)
         ArrayAdapter<String>(
-            context!!,
+            requireContext(),
             android.R.layout.simple_spinner_item,
-            getSpinnerList(squire.sequenceConvo)
+            seqList
         ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             seqSpinner1.adapter = it
@@ -54,6 +55,7 @@ class FindSeqFragment : BaseFragment() {
         setSpinnerListener(seqSpinner5)
         resetButton.setOnClickListener {
             if (results.visibility == View.GONE) {
+                UserUtils.saveCurrentCharSquireSearch(context,squire,null)
                 seqSpinner1.setSelection(0)
                 seqSpinner2.setSelection(0)
                 seqSpinner3.setSelection(0)
@@ -63,10 +65,12 @@ class FindSeqFragment : BaseFragment() {
         }
         saveButton.setOnClickListener {
             if (results.visibility == View.VISIBLE) {
-                UserUtils.setCurrentCharSquireProgress(context!!, squire, searchPos)
+                UserUtils.saveCurrentCharSquireSearch(context,squire,null)
+                UserUtils.setCurrentCharSquireProgress(requireContext(), squire, searchPos)
                 findNavController().popBackStack()
             }
         }
+        setSavedSearch(seqList)
     }
 
     private fun setSpinnerListener(spinner: Spinner?) {
@@ -99,6 +103,7 @@ class FindSeqFragment : BaseFragment() {
 
         if (canSearch) {
             val keySeq: String = getSeqSearchString(pos).replace("-","")
+            UserUtils.saveCurrentCharSquireSearch(context,squire,keySeq)
             val result: SearchResult =
                 ConversationUtils.searchOnSeq(
                     keySeq,
@@ -176,5 +181,24 @@ class FindSeqFragment : BaseFragment() {
             else -> ""
         }
     }
-
+    private fun getSeqSpinner(pos: Int): Spinner? {
+        return when (pos) {
+            1 -> seqSpinner1
+            2 -> seqSpinner2
+            3 -> seqSpinner3
+            4 -> seqSpinner4
+            5 -> seqSpinner5
+            else -> null
+        }
+    }
+    private fun setSavedSearch(
+        seqList: ArrayList<String>
+    ) {
+        val savedSeq = UserUtils.getCurrentCharSquireSearch(context,squire)
+        if (savedSeq!=null){
+            for (i in 0..savedSeq.length-1){
+                getSeqSpinner(i+1)?.setSelection(seqList.indexOf(ConversationUtils.translateAbv(savedSeq.get(i))))
+            }
+        }
+    }
 }

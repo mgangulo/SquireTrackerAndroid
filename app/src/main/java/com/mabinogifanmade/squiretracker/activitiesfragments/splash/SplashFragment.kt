@@ -39,7 +39,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (context!=null) {
-            val directions = when (ShrdPrfsUtils.userDataExist(context!!)) {
+            val directions = when (ShrdPrfsUtils.userDataExist(requireContext())) {
                 true -> SplashFragmentDirections.navigateToMain()
                 else -> SplashFragmentDirections.navigateToOnBoarding()
             }
@@ -47,6 +47,7 @@ class SplashFragment : Fragment() {
                 NavOptions.Builder()
                     .setPopUpTo(R.id.splashFragment,
                         true).build())
+            requireActivity().finish()
         }
     }
 }

@@ -41,10 +41,13 @@ class FindSeqHintFragment : BaseFragment() {
         squire = args.squire
         listener?.updateTitles(getString(R.string.find_squire_progress,squire.squireName))
         squireNameTitle.setText(squire.squireName)
+
+        val hintList = getSpinnerList(squire.sequenceHint)
+        val seqList = getSpinnerList(squire.sequenceConvo)
         ArrayAdapter<String>(
-            context!!,
+            requireContext(),
             android.R.layout.simple_spinner_item,
-            getSpinnerList(squire.sequenceHint)
+            hintList
         ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             hintSpinner1.adapter = it
@@ -54,9 +57,9 @@ class FindSeqHintFragment : BaseFragment() {
             hintSpinner5.adapter = it
         }
         ArrayAdapter<String>(
-            context!!,
+            requireContext(),
             android.R.layout.simple_spinner_item,
-            getSpinnerList(squire.sequenceConvo)
+            seqList
         ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             seqSpinner1.adapter = it
@@ -77,6 +80,7 @@ class FindSeqHintFragment : BaseFragment() {
         setSpinnerListener(seqSpinner5)
         resetButton.setOnClickListener {
             if (results.visibility == View.GONE) {
+                UserUtils.saveCurrentCharSquireSearchHint(context,squire,null,null)
                 hintSpinner1.setSelection(0)
                 hintSpinner2.setSelection(0)
                 hintSpinner3.setSelection(0)
@@ -91,8 +95,29 @@ class FindSeqHintFragment : BaseFragment() {
         }
         saveButton.setOnClickListener {
             if (results.visibility == View.VISIBLE) {
-                UserUtils.setCurrentCharSquireProgress(context!!, squire, searchPos)
+                UserUtils.saveCurrentCharSquireSearchHint(context,squire,null,null)
+                UserUtils.setCurrentCharSquireProgress(requireContext(), squire, searchPos)
                 findNavController().popBackStack()
+            }
+        }
+        setSavedSearch(hintList,seqList)
+    }
+
+    private fun setSavedSearch(
+        hintList: ArrayList<String>,
+        seqList: ArrayList<String>
+    ) {
+        val savedPair = UserUtils.getCurrentCharSquireSearchHint(context,squire)
+        val savedHint:String? = savedPair?.first
+        val savedSeq:String? = savedPair?.second
+        if (savedHint!=null){
+            for (i in 0..savedHint.length-1){
+                getHintSpinner(i+1)?.setSelection(hintList.indexOf(ConversationUtils.translateAbv(savedHint.get(i))))
+            }
+        }
+        if (savedSeq!=null){
+            for (i in 0..savedSeq.length-1){
+                getSeqSpinner(i+1)?.setSelection(seqList.indexOf(ConversationUtils.translateAbv(savedSeq.get(i))))
             }
         }
     }
@@ -158,6 +183,7 @@ class FindSeqHintFragment : BaseFragment() {
         if (canSearch) {
             val keyHint: String = getHintSearchString(pos).replace("-","")
             val keySeq: String = getSeqSearchString(pos).replace("-","")
+            UserUtils.saveCurrentCharSquireSearchHint(context,squire,keySeq,keyHint)
             val result: SearchResult =
                 ConversationUtils.searchOnSeqWithHint(
                     keySeq,
@@ -235,6 +261,28 @@ class FindSeqHintFragment : BaseFragment() {
             5 -> stringBuilder.append(getSeqSearchString(4))
                 .append(ConversationUtils.translateOption(seqSpinner5.selectedItem.toString())).toString()
             else -> ""
+        }
+    }
+
+    private fun getSeqSpinner(pos: Int): Spinner? {
+        return when (pos) {
+            1 -> seqSpinner1
+            2 -> seqSpinner2
+            3 -> seqSpinner3
+            4 -> seqSpinner4
+            5 -> seqSpinner5
+            else -> null
+        }
+    }
+
+    private fun getHintSpinner(pos: Int): Spinner? {
+        return when (pos) {
+            1 -> hintSpinner1
+            2 -> hintSpinner2
+            3 -> hintSpinner3
+            4 -> hintSpinner4
+            5 -> hintSpinner5
+            else -> null
         }
     }
 }
